@@ -26,17 +26,6 @@ EquipmentGearpack.destroy_all
 GearpacksTool.destroy_all
 
 
-#if no subrace we need to apply a defuault one with no modifiers
-BlankSubrace = Subrace.create(
-  name: 'None',
-  extra_languages: 0,
-  extra_spells: {
-
-  },
-  specific_spells: {},
-  custom_mods: {},
-)
-
 DwarvenRace = Race.create(
   name: 'Dwarf',
   asi: [0,0,2,0,0,0],
@@ -222,6 +211,18 @@ HumanRace = Race.create(
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
+)
+
+HumanRace.subraces.create(
+  name: 'None',
+  asi: [0,0,0,0,0,0],
+  features: [
+      ],
+  extra_languages: 0,
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {
+  },
 )
 
 DragonbornRace = Race.create(
@@ -579,6 +580,17 @@ HalfElfRace = Race.create(
     ],
   },
 )
+HalfElfRace.subraces.create(
+  name: 'None',
+  asi: [0,0,0,0,0,0],
+  features: [
+      ],
+  extra_languages: 0,
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {
+  },
+)
 
 HalfOrcRace = Race.create(
   name: 'Half Orc',
@@ -598,6 +610,18 @@ HalfOrcRace = Race.create(
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
+)
+
+HalfOrcRace.subraces.create(
+  name: 'None',
+  asi: [0,0,0,0,0,0],
+  features: [
+      ],
+  extra_languages: 0,
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {
+  },
 )
 
 TieflingRace = Race.create(
@@ -625,6 +649,17 @@ TieflingRace = Race.create(
   custom_mods: {},
 )
 
+TieflingRace.subraces.create(
+  name: 'None',
+  asi: [0,0,0,0,0,0],
+  features: [
+      ],
+  extra_languages: 0,
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {
+  },
+)
 
 Barbarian = PlayerClass.create(
   name: 'Barbarian',

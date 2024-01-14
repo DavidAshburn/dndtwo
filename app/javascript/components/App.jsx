@@ -11,11 +11,11 @@ export default function App() {
     classes: [],
     backgrounds: [],
   });
-  //dynamic dropdown content for subclass and subrace - useEffect hook fetches
+  //dynamic dropdown content for subclass and subrace - useEffect hook fetches these
   let [subclassLabels, setSubclassLabels] = useState(null);
   let [subraceLabels, setSubraceLabels] = useState(null);
 
-  //character traits, pull in full json from db as source of truth - onChange fetches and updates
+  //character traits, pull in full json from db as source of truth - onChange fetches and updates these
   let [stats, setStats] = useState([0, 0, 0, 0, 0, 0]);
   let [level, setLevel] = useState(1);
   let [race, setRace] = useState({});
@@ -24,13 +24,21 @@ export default function App() {
   let [subclass, setSubclass] = useState({});
   let [background, setBackground] = useState({});
 
+  //loads labels for dropdown options
   useEffect(() => {
+    function loadDropdownLabels(data) {
+      setLabels(data);
+      setSubclassLabels(data.classes[0][1]);
+      setSubraceLabels(data.races[0][1]);
+      initPC();
+    }
+
     fetch(`/labels/dropdowns`)
       .then((response) => response.json())
-      .then((data) => handleDropdownLabels(data));
+      .then((data) => loadDropdownLabels(data));
   }, []);
 
-  //once labels are pulled we can call the API for initial pc settings
+  //once labels are pulled we initialize the character to the first option in each dropdown
   function initPC() {
     function setInit(data) {
       setRace(data.pcrace);
@@ -45,43 +53,46 @@ export default function App() {
       .then((data) => setInit(data));
   }
 
-  //called from useEffect to load labels from fetch data
-  function handleDropdownLabels(data) {
-    setLabels(data);
-    setSubclassLabels(data.classes[0][1]);
-    setSubraceLabels(data.races[0][1]);
-    initPC();
+  //data fetching functions
+  function loadClass(name) {
+    fetch(`/player_classes/` + name)
+      .then((response) => response.json())
+      .then((data) => setPClass(data));
   }
 
-  function initSubclass(name) {
+  function loadSubclass(name) {
     fetch(`/subclasses/` + name)
       .then((response) => response.json())
       .then((data) => setSubclass(data));
   }
 
-  function initSubrace(name) {
+  function loadRace(name) {
+    fetch(`/races/` + name)
+      .then((response) => response.json())
+      .then((data) => setRace(data));
+  }
+
+  function loadSubrace(name) {
     fetch(`/subraces/` + name)
       .then((response) => response.json())
       .then((data) => setSubrace(data));
   }
 
-  function initBackground() {
-    let name = labels.backgrounds[0];
+  function loadBackground(name) {
     fetch(`/backgrounds/` + name)
       .then((response) => response.json())
       .then((data) => setBackground(data));
   }
 
+  //onChange functions for dropdowns
   function handleClassSelect(event) {
     let dex = event.target.value;
     setSubclassLabels(labels.classes[dex][1]);
 
-    let firstSubclassName = labels.classes[dex][1][0];
-    initSubclass(firstSubclassName);
+    loadClass(labels.classes[dex][0]);
 
-    fetch(`/player_classes/` + labels.classes[dex][0])
-      .then((response) => response.json())
-      .then((data) => setPClass(data));
+    let firstSubclassName = labels.classes[dex][1][0];
+    loadSubclass(firstSubclassName);
   }
 
   function handleSubclassSelect(event) {
@@ -94,12 +105,10 @@ export default function App() {
     let dex = event.target.value;
     setSubraceLabels(labels.races[dex][1]);
 
-    let firstSubraceName = labels.races[dex][1][0];
-    initSubrace(firstSubraceName);
+    loadRace(labels.races[dex][0]);
 
-    fetch(`/races/` + labels.races[dex][0])
-      .then((response) => response.json())
-      .then((data) => setRace(data));
+    let firstSubraceName = labels.races[dex][1][0];
+    loadSubrace(firstSubraceName);
   }
 
   function handleSubraceSelect(event) {
@@ -109,15 +118,14 @@ export default function App() {
   }
 
   function handleBackgroundSelect(event) {
-    fetch(`/backgrounds/` + event.target.value)
-      .then((response) => response.json())
-      .then((data) => setBackground(data));
+    loadBackground(event.target.value);
   }
 
   function updateLevel(event) {
     setLevel(event.target.value);
   }
 
+  //console.log debug information
   function runDebug(event) {
     console.log('--    Debug    --');
     console.log(race.name);
