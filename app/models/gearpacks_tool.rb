@@ -1,0 +1,2 @@
+class GearpacksTool < ApplicationRecord
+end

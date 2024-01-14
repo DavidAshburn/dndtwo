@@ -1,0 +1,2 @@
+class EquipmentGearpack < ApplicationRecord
+end

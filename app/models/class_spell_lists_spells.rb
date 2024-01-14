@@ -1,0 +1,2 @@
+class ClassSpellListsSpells< ApplicationRecord
+end
