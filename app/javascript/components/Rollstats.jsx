@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Rollselect from './Rollselect';
 
 function closeModal(event) {
   document.getElementById('rollstats').close();
@@ -43,29 +42,31 @@ export default function Rollstats() {
     false,
     false,
   ]);
+  let [prevtaken, setPrevTaken] = useState([99, 99, 99, 99, 99, 99]);
 
-  let names = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+  let [names, setNames] = useState([
+    'STR',
+    'DEX',
+    'CON',
+    'INT',
+    'WIS',
+    'CHA',
+  ]);
 
   useEffect(() => {
     let roll = rollStats();
-    setOpenValues(roll);
+    setRollValues(roll);
   }, []);
 
   function updateTaken(event) {
-    //cleanup
-    if (event.target.lastvalue != 99) {
-      let temp = taken;
-      temp[event.target.lastvalue] = false;
-      setTaken(temp);
+    let selects = document.getElementById('selectframe').children;
+    let takendex = event.target.value;
+
+    //cleanup tbw
+
+    for (let select of selects) {
+      select.children[parseInt(takendex) + 1].disabled = true;
     }
-    event.target.lastvalue = event.target.value;
-
-    //disable choice across Rollinputs
-    let dex = event.target.value;
-
-    let temp = taken;
-    temp[dex] = true;
-    setTaken(temp);
   }
 
   console.log('render');
@@ -76,18 +77,20 @@ export default function Rollstats() {
       id="rollstats"
     >
       <div className="grid grid-cols-6 gap-2 p-4" id="selectframe">
-        {names.map((name, i) => {
-          <Rollselect
-            key={i}
-            name={name}
-            onChange={updateTaken}
-            taken={taken}
-            values={rollvalues}
-            lastval={99}
-          />;
-        })}
+        {names.map((name, i) => (
+          <select name={name} onChange={updateTaken} key={i}>
+            <option value="none">---</option>
+            {rollvalues.map((val, i) => (
+              <option value={i} key={i} disabled={false}>
+                {val}
+              </option>
+            ))}
+          </select>
+        ))}
       </div>
-
+      <div className="grid">
+        <p>{names}</p>
+      </div>
       <div className="grid gap-2"></div>
       <button
         className="rounded-md bg-white border-2 border-blue-600 font-bold"
