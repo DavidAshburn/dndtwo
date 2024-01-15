@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Statframe from './Statframe';
+import Pointbuy from './Pointbuy';
+import Rollstats from './Rollstats';
 
 function getMod(stat) {
-  return stat + 2;
+  return Math.floor(stat / 2) - 5;
 }
 
 export default function App() {
@@ -16,7 +18,7 @@ export default function App() {
   let [subraceLabels, setSubraceLabels] = useState(null);
 
   //character traits, pull in full json from db as source of truth - onChange fetches and updates these
-  let [stats, setStats] = useState([0, 0, 0, 0, 0, 0]);
+  let [stats, setStats] = useState([8, 8, 8, 8, 8, 8]);
   let [level, setLevel] = useState(1);
   let [race, setRace] = useState({});
   let [subrace, setSubrace] = useState({});
@@ -53,7 +55,7 @@ export default function App() {
       .then((data) => setInit(data));
   }
 
-  //data fetching functions
+  //fetch data into state - called from onChange functions in dropdowns
   function loadClass(name) {
     fetch(`/player_classes/` + name)
       .then((response) => response.json())
@@ -84,7 +86,7 @@ export default function App() {
       .then((data) => setBackground(data));
   }
 
-  //onChange functions for dropdowns
+  //onChange functions in dropdowns
   function handleClassSelect(event) {
     let dex = event.target.value;
     setSubclassLabels(labels.classes[dex][1]);
@@ -125,14 +127,30 @@ export default function App() {
     setLevel(event.target.value);
   }
 
+  //different methods of setting base stats - onClick functions for Stat buttons
+  function randomStats(event) {
+    let stats = [];
+    for (let i = 0; i < 5; i++) {
+      stats.push(Math.floor(Math.random() * 13 + 8));
+    }
+    setStats(stats);
+  }
+
+  function openPointBuy(event) {
+    //show modal component
+    document.getElementById('pointbuy').showModal();
+  }
+
+  function openRollStats(event) {
+    document.getElementById('rollstats').showModal();
+  }
+
+  function flatStats(event) {
+    setStats([10, 10, 10, 10, 10, 10]);
+  }
   //console.log debug information
   function runDebug(event) {
     console.log('--    Debug    --');
-    console.log(race.name);
-    console.log(subrace.name);
-    console.log(pclass.name);
-    console.log(subclass.name);
-    console.log(background.name);
   }
 
   return (
@@ -221,6 +239,39 @@ export default function App() {
                 ))}
             </select>
             <p>Background</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-2">
+          <div className="col-span-full">Stats</div>
+          <div className="grid col-start-1">
+            <button
+              type="button"
+              onClick={randomStats}
+              className="bg-emerald-600 text-white font-bold"
+            >
+              Random
+            </button>
+            <button
+              type="button"
+              onClick={flatStats}
+              className="bg-emerald-600 text-white font-bold border-t border-b border-green-700"
+            >
+              Flat
+            </button>
+            <button
+              type="button"
+              onClick={openPointBuy}
+              className="bg-emerald-600 text-white font-bold"
+            >
+              Point Buy
+            </button>
+            <button
+              type="button"
+              onClick={openRollStats}
+              className="bg-emerald-600 text-white font-bold"
+            >
+              Roll Stats
+            </button>
           </div>
         </div>
       </div>
@@ -392,6 +443,8 @@ export default function App() {
           </div>
         </div>
       </div>
+      <Pointbuy />
+      <Rollstats />
     </section>
   );
 }
