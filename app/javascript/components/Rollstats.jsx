@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Rollselect from './Rollselect';
 
 function closeModal(event) {
   document.getElementById('rollstats').close();
@@ -33,7 +34,6 @@ export default function Rollstats() {
   let [wis, setWis] = useState('-');
   let [cha, setCha] = useState('-');
 
-  let [openvalues, setOpenValues] = useState([]);
   let [rollvalues, setRollValues] = useState([]);
   let [taken, setTaken] = useState([
     false,
@@ -48,29 +48,24 @@ export default function Rollstats() {
 
   useEffect(() => {
     let roll = rollStats();
-    setRollValues(roll);
     setOpenValues(roll);
   }, []);
 
-  function updateOpenValues(event) {
+  function updateTaken(event) {
+    //cleanup
+    if (event.target.lastvalue != 99) {
+      let temp = taken;
+      temp[event.target.lastvalue] = false;
+      setTaken(temp);
+    }
+    event.target.lastvalue = event.target.value;
+
+    //disable choice across Rollinputs
     let dex = event.target.value;
 
     let temp = taken;
     temp[dex] = true;
     setTaken(temp);
-
-    let tempopen = openvalues;
-    tempopen[dex] = '---';
-    setOpenValues(tempopen);
-
-    let boxes = document.getElementById('selectframe').children;
-
-    for (let box of boxes) {
-      box.children[parseInt(dex) + 1].disabled = true;
-    }
-
-    //console.log('taken: ' + taken);
-    //console.log('open : ' + openvalues);
   }
 
   console.log('render');
@@ -81,84 +76,16 @@ export default function Rollstats() {
       id="rollstats"
     >
       <div className="grid grid-cols-6 gap-2 p-4" id="selectframe">
-        <select
-          name="str"
-          id="rollstr"
-          dex={0}
-          onChange={updateOpenValues}
-        >
-          <option value="none">---</option>
-          {openvalues.map((val, i) => (
-            <option value={i} key={i} disabled={taken[i]}>
-              {val}
-            </option>
-          ))}
-        </select>
-        <select
-          name="dex"
-          id="rolldex"
-          dex={1}
-          onChange={updateOpenValues}
-        >
-          <option value="none">---</option>
-          {openvalues.map((val, i) => (
-            <option value={i} key={i}>
-              {val}
-            </option>
-          ))}
-        </select>
-        <select
-          name="con"
-          id="rollcon"
-          dex={2}
-          onChange={updateOpenValues}
-        >
-          <option value="none">---</option>
-          {openvalues.map((val, i) => (
-            <option value={i} key={i}>
-              {val}
-            </option>
-          ))}
-        </select>
-        <select
-          name="int"
-          id="rollint"
-          dex={3}
-          onChange={updateOpenValues}
-        >
-          <option value="none">---</option>
-          {openvalues.map((val, i) => (
-            <option value={i} key={i}>
-              {val}
-            </option>
-          ))}
-        </select>
-        <select
-          name="wis"
-          id="rollwis"
-          dex={4}
-          onChange={updateOpenValues}
-        >
-          <option value="none">---</option>
-          {openvalues.map((val, i) => (
-            <option value={i} key={i}>
-              {val}
-            </option>
-          ))}
-        </select>
-        <select
-          name="cha"
-          id="rollcha"
-          dex={5}
-          onChange={updateOpenValues}
-        >
-          <option value="none">---</option>
-          {openvalues.map((val, i) => (
-            <option value={i} key={i}>
-              {val}
-            </option>
-          ))}
-        </select>
+        {names.map((name, i) => {
+          <Rollselect
+            key={i}
+            name={name}
+            onChange={updateTaken}
+            taken={taken}
+            values={rollvalues}
+            lastval={99}
+          />;
+        })}
       </div>
 
       <div className="grid gap-2"></div>
