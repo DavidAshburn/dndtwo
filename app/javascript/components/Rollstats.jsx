@@ -62,34 +62,54 @@ export default function Rollstats() {
     let selects = document.getElementById('selectframe').children;
     let takendex = event.target.value;
 
-    //cleanup tbw
+    let prevdex = prevtaken[parseInt(event.target.dataset.dex)];
+
+    let temp = taken;
+    if (takendex != 99) temp[takendex] = true;
+    temp[prevdex] = false;
+    setTaken(temp);
+
+    let ptemp = prevtaken;
+    ptemp[parseInt(event.target.dataset.dex)] = event.target.value;
+    setPrevTaken(ptemp);
 
     for (let select of selects) {
-      select.children[parseInt(takendex) + 1].disabled = true;
+      let i = 0;
+      for (let child of select.children) {
+        if (i > 0) {
+          child.disabled = taken[i - 1];
+        }
+        i++;
+      }
     }
   }
-
-  console.log('render');
 
   return (
     <dialog
       className="border border-black rounded-md bg-gray-300 p-8"
       id="rollstats"
     >
-      <div className="grid grid-cols-6 gap-2 p-4" id="selectframe">
+      <div className="grid grid-cols-6 gap-2 px-4" id="selectframe">
         {names.map((name, i) => (
-          <select name={name} onChange={updateTaken} key={i}>
-            <option value="none">---</option>
-            {rollvalues.map((val, i) => (
-              <option value={i} key={i} disabled={false}>
+          <select
+            name={name}
+            onChange={updateTaken}
+            key={i}
+            data-dex={i}
+          >
+            <option value={99}>---</option>
+            {rollvalues.map((val, j) => (
+              <option value={parseInt(j)} key={j} disabled={false}>
                 {val}
               </option>
             ))}
           </select>
         ))}
       </div>
-      <div className="grid">
-        <p>{names}</p>
+      <div className="grid grid-cols-6 gap-2 px-4">
+        {names.map((name, k) => (
+          <p key={k}>{name}</p>
+        ))}
       </div>
       <div className="grid gap-2"></div>
       <button
