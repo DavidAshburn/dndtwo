@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function closeModal(event) {
+function closeModal() {
   document.getElementById('rollstats').close();
 }
 
@@ -26,13 +26,6 @@ function rollStats() {
 }
 
 export default function Rollstats(props) {
-  let [str, setStr] = useState('-');
-  let [dex, setDex] = useState('-');
-  let [con, setCon] = useState('-');
-  let [int, setInt] = useState('-');
-  let [wis, setWis] = useState('-');
-  let [cha, setCha] = useState('-');
-
   let [rollvalues, setRollValues] = useState([]);
   let [taken, setTaken] = useState([
     false,
@@ -84,7 +77,7 @@ export default function Rollstats(props) {
     }
   }
 
-  function submitStats(event) {
+  function submitStats() {
     let stats = [];
     let frame = document.getElementById('selectframe');
     for (let child of frame.children) {
@@ -93,7 +86,7 @@ export default function Rollstats(props) {
 
     if (stats.length == 6) {
       props.submit(stats);
-      closeModal(event);
+      closeModal();
     }
   }
 
