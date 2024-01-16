@@ -25,7 +25,7 @@ function rollStats() {
   return statlist;
 }
 
-export default function Rollstats() {
+export default function Rollstats(props) {
   let [str, setStr] = useState('-');
   let [dex, setDex] = useState('-');
   let [con, setCon] = useState('-');
@@ -84,6 +84,19 @@ export default function Rollstats() {
     }
   }
 
+  function submitStats(event) {
+    let stats = [];
+    let frame = document.getElementById('selectframe');
+    for (let child of frame.children) {
+      if (child.value != 99) stats.push(rollvalues[child.value]);
+    }
+
+    if (stats.length == 6) {
+      props.submit(stats);
+      closeModal(event);
+    }
+  }
+
   return (
     <dialog
       className="border border-black rounded-md bg-gray-300 p-8"
@@ -112,6 +125,12 @@ export default function Rollstats() {
         ))}
       </div>
       <div className="grid gap-2"></div>
+      <button
+        className="rounded-md bg-white border-2 border-blue-600 font-bold"
+        onClick={submitStats}
+      >
+        Submit
+      </button>
       <button
         className="rounded-md bg-white border-2 border-blue-600 font-bold"
         onClick={closeModal}

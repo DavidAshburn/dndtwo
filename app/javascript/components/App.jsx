@@ -148,6 +148,7 @@ export default function App() {
   function flatStats(event) {
     setStats([10, 10, 10, 10, 10, 10]);
   }
+
   //console.log debug information
   function runDebug(event) {
     console.log('--    Debug    --');
@@ -444,7 +445,7 @@ export default function App() {
         </div>
       </div>
       <Pointbuy />
-      <Rollstats />
+      <Rollstats submit={setStats} />
     </section>
   );
 }
