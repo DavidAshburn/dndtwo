@@ -444,7 +444,7 @@ export default function App() {
           </div>
         </div>
       </div>
-      <Pointbuy />
+      <Pointbuy submit={setStats} />
       <Rollstats submit={setStats} />
     </section>
   );

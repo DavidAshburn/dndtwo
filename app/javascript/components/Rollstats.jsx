@@ -37,14 +37,7 @@ export default function Rollstats(props) {
   ]);
   let [prevtaken, setPrevTaken] = useState([99, 99, 99, 99, 99, 99]);
 
-  let [names, setNames] = useState([
-    'STR',
-    'DEX',
-    'CON',
-    'INT',
-    'WIS',
-    'CHA',
-  ]);
+  let names = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
 
   useEffect(() => {
     let roll = rollStats();
@@ -117,7 +110,6 @@ export default function Rollstats(props) {
           <p key={k}>{name}</p>
         ))}
       </div>
-      <div className="grid gap-2"></div>
       <button
         className="rounded-md bg-white border-2 border-blue-600 font-bold"
         onClick={submitStats}
