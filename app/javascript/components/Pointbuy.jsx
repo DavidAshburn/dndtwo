@@ -61,7 +61,7 @@ export default function Pointbuy(props) {
         <p>Spent</p>
         <p>{pointsspent.reduce((sum, val) => sum + val, 0)}</p>
       </div>
-      <div className="grid grid-cols-6 gap-2 px-4" id="selectframe">
+      <div className="grid grid-cols-6 gap-2 px-4">
         {names.map((name, i) => (
           <div
             className="flex gap-2 p-2 text-center items-center rounded-lg border border-black"

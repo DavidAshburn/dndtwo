@@ -45,34 +45,30 @@ export default function Rollstats(props) {
   }, []);
 
   function updateTaken(event) {
-    let selects = document.getElementById('selectframe').children;
+    let selects = document.getElementById('rollselectframe').children;
     let takendex = event.target.value;
 
+    //dataset.dex tracks which stat the select is controlling
+    //that stat is used as the index for prevtaken which stores
+    //prevdex, the index of the previously selected option
     let prevdex = prevtaken[parseInt(event.target.dataset.dex)];
 
-    let temp = taken;
+    //we set the newly selected option as taken
+    //and mark the previous option as untaken
+    let temp = taken.map((x) => x);
     if (takendex != 99) temp[takendex] = true;
     temp[prevdex] = false;
     setTaken(temp);
 
-    let ptemp = prevtaken;
+    //update prevtaken at the current stat index with the current taken select option index
+    let ptemp = prevtaken.map((x) => x);
     ptemp[parseInt(event.target.dataset.dex)] = event.target.value;
     setPrevTaken(ptemp);
-
-    for (let select of selects) {
-      let i = 0;
-      for (let child of select.children) {
-        if (i > 0) {
-          child.disabled = taken[i - 1];
-        }
-        i++;
-      }
-    }
   }
 
   function submitStats() {
     let stats = [];
-    let frame = document.getElementById('selectframe');
+    let frame = document.getElementById('rollselectframe');
     for (let child of frame.children) {
       if (child.value != 99) stats.push(rollvalues[child.value]);
     }
@@ -88,7 +84,10 @@ export default function Rollstats(props) {
       className="border border-black rounded-md bg-gray-300 p-8"
       id="rollstats"
     >
-      <div className="grid grid-cols-6 gap-2 px-4" id="selectframe">
+      <div
+        className="grid grid-cols-6 gap-2 px-4"
+        id="rollselectframe"
+      >
         {names.map((name, i) => (
           <select
             name={name}
@@ -98,7 +97,7 @@ export default function Rollstats(props) {
           >
             <option value={99}>---</option>
             {rollvalues.map((val, j) => (
-              <option value={parseInt(j)} key={j} disabled={false}>
+              <option value={parseInt(j)} key={j} disabled={taken[j]}>
                 {val}
               </option>
             ))}
