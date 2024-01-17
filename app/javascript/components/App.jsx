@@ -181,7 +181,6 @@ export default function App() {
   }
 
   function openPointBuy(event) {
-    //show modal component
     document.getElementById('pointbuy').showModal();
   }
 
@@ -194,7 +193,7 @@ export default function App() {
   }
 
   //class features only, duplicates are not removed
-  function getFeatures(features, level) {
+  function getLeveledFeatures(features, level) {
     let levelfeats = [];
     let takendata = [];
 
@@ -208,12 +207,12 @@ export default function App() {
         //if the minimum level requirement is met
         for (let item of val) {
           if (item != 'Ability Score Increase:') {
-            //check for duplicates across features at this level
+            // skip ASI increases
+            //check for duplicates among existing features
             let name = item.split(':')[0];
-
             let check = names.indexOf(name);
             if (check > -1) {
-              levelfeats[check] = item; //replace features with their newer versions
+              levelfeats[check] = item; //replace duplicate features with their newer versions
             } else {
               levelfeats.push(item); //add features that have no duplicates to the end of the list
               names.push(name); //add the new names to the namelist
@@ -227,10 +226,10 @@ export default function App() {
     return levelfeats;
   }
 
-  //console.log debug information
   function runDebug(event) {
     console.log('--    Debug    --');
-    console.dir(pclass);
+    console.dir(race.features);
+    console.dir(pclass.features);
   }
 
   return (
@@ -539,13 +538,22 @@ export default function App() {
               pclass.weapons.map((x, i) => <p key={i}>{x}</p>)}
           </div>
           <div className="grid p-2 gap-2">
-            <p className="font-bold row-span-2">Class Features:</p>
-            {pclass.features &&
-              getFeatures(pclass.features, level).map((feat, i) => (
+            <p className="font-bold row-span-2">Racial Features:</p>
+            {race.features &&
+              race.features.map((feat, i) => (
                 <p key={i} className="text-start">
                   {feat}
                 </p>
               ))}
+            <p className="font-bold row-span-2">Class Features:</p>
+            {pclass.features &&
+              getLeveledFeatures(pclass.features, level).map(
+                (feat, i) => (
+                  <p key={i} className="text-start">
+                    {feat}
+                  </p>
+                )
+              )}
           </div>
         </div>
       </div>
