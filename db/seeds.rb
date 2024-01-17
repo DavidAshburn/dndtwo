@@ -689,7 +689,7 @@ Barbarian = PlayerClass.create(
   features: {
     1=>[
       'Rage: Advantage on STR checks and STR saves, Rage Damage bonus, resistance to bludgeoning, piercing and slashing damage.',
-      'Unarmored Defense: Without armor your AC is 10 + Dex modifier',
+      'Unarmored Defense: Without armor your AC is 10 + your DEX modifier + your CON modifier',
     ],
     2=>[
       'Reckless Attack: Advantage on your first melee STR attack roll and attacks against you until your next turn.',

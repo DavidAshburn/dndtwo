@@ -3,6 +3,8 @@ import Statframe from './Statframe';
 import Pointbuy from './Pointbuy';
 import Rollstats from './Rollstats';
 import Profpane from './Profpane';
+import Armor from './Armor';
+import Weapons from './Weapons';
 
 function getMod(stat) {
   return Math.floor(stat / 2) - 5;
@@ -222,18 +224,22 @@ export default function App() {
         }
       }
     }
-    console.log(names);
     return levelfeats;
   }
 
   function runDebug(event) {
     console.log('--    Debug    --');
-    console.dir(race.features);
-    console.dir(pclass.features);
+    console.dir(race);
+    console.dir(pclass);
+  }
+
+  function logIt(number) {
+    console.log('logit: ' + number);
+    return number;
   }
 
   return (
-    <section className="grid sm:grid-cols-2 md:grid-cols-3 border-2 border-black">
+    <section className="grid border-2 border-black sm:grid-cols-2 md:grid-cols-3">
       {/* Selectinput Row */}
       <div className="grid md:grid-cols-2 col-span-full">
         <div className="grid p-4">
@@ -241,11 +247,11 @@ export default function App() {
             type="text"
             name="pcname"
             defaultValue="---"
-            className="rounded border border-black w-full"
+            className="w-full border border-black rounded"
           />
           <p>Name</p>
         </div>
-        <div className="grid grid-cols-3 p-4 gap-2">
+        <div className="grid grid-cols-3 gap-2 p-4">
           <div className="grid">
             <select name="playerclass" onChange={handleClassSelect}>
               {labels &&
@@ -278,7 +284,7 @@ export default function App() {
               defaultValue="1"
               min="1"
               max="20"
-              className="rounded border border-black w-full"
+              className="w-full border border-black rounded"
               onChange={updateLevel}
             />
             <p>Level: {level}</p>
@@ -326,33 +332,33 @@ export default function App() {
             <button
               type="button"
               onClick={randomStats}
-              className="bg-emerald-600 text-white font-bold"
+              className="font-bold text-white bg-emerald-600"
             >
               Random
             </button>
             <button
               type="button"
               onClick={flatStats}
-              className="bg-emerald-600 text-white font-bold border-t border-b border-green-700"
+              className="font-bold text-white border-t border-b border-green-700 bg-emerald-600"
             >
               Flat
             </button>
             <button
               type="button"
               onClick={openPointBuy}
-              className="bg-emerald-600 text-white font-bold"
+              className="font-bold text-white bg-emerald-600"
             >
               Point Buy
             </button>
             <button
               type="button"
               onClick={openRollStats}
-              className="bg-emerald-600 text-white font-bold"
+              className="font-bold text-white bg-emerald-600"
             >
               Roll Stats
             </button>
             <button
-              className="text-white bg-emerald-600 font-bold rounded-md border border-blue-500"
+              className="font-bold text-white border border-blue-500 rounded-md bg-emerald-600"
               onClick={runDebug}
             >
               Debug
@@ -398,7 +404,7 @@ export default function App() {
                 </div>
               ))}
           </div>
-          <div className="row-span-8 bg-green-200">
+          <div className="bg-green-200 row-span-8">
             <p className="font-bold">Skill Proficiencies</p>
             {proficiency_data.map((pname, i) => (
               <Profpane
@@ -423,30 +429,30 @@ export default function App() {
       </div>
 
       {/* Attack Column */}
-      <div className="flex flex-col text-center gap-2">
+      <div className="flex flex-col gap-2 text-center">
         <div className="grid grid-cols-3">
-          <div className="border-2 border-blue-700 p-2 text-lg h-fit">
+          <div className="p-2 text-lg border-2 border-blue-700 h-fit">
             <p className="font-bold">{10 + getMod(stats[1])}</p>
             <p>AC</p>
           </div>
-          <div className="border-2 border-blue-700 p-2 text-lg h-fit">
+          <div className="p-2 text-lg border-2 border-blue-700 h-fit">
             <p className="font-bold">{getMod(stats[1])}</p>
             <p>Initiative</p>
           </div>
-          <div className="border-2 border-blue-700 p-2 text-lg h-fit">
+          <div className="p-2 text-lg border-2 border-blue-700 h-fit">
             <p className="font-bold">{race.speed}</p>
             <p>Speed</p>
           </div>
         </div>
         <div className="grid grid-cols-2">
-          <div className="border-2 border-blue-700 p-2 text-lg h-fit">
+          <div className="p-2 text-lg border-2 border-blue-700 h-fit">
             <p className="font-bold">
               {Math.floor(pclass.hit_die * 0.75) * level +
                 getMod(stats[2]) * level}
             </p>
             <p>HP</p>
           </div>
-          <div className="border-2 border-blue-700 p-2 text-lg h-fit">
+          <div className="p-2 text-lg border-2 border-blue-700 h-fit">
             <p className="font-bold"> d{pclass.hit_die}</p>
             <p>Hit Die</p>
           </div>
@@ -474,7 +480,7 @@ export default function App() {
             <div className="col-span-2 bg-gray-100">!</div>
           </div>
           <div className="flex justify-center min-h-[22rem] bg-blue-100">
-            <p className="font-bold text-sm self-end">
+            <p className="self-end text-sm font-bold">
               Attacks and Spellcasting
             </p>
           </div>
@@ -503,49 +509,43 @@ export default function App() {
             </div>
           </div>
           <div className="flex p-2"></div>
-          <p className="font-bold text-sm col-span-full">Equipment</p>
+          <p className="text-sm font-bold col-span-full">Equipment</p>
         </div>
       </div>
 
       {/* Features Column */}
-      <div className="grid sm:grid-cols-2 md:grid-cols-1 sm:col-span-full md:col-span-1 text-center gap-2">
+      <div className="grid gap-2 text-center sm:grid-cols-2 md:grid-cols-1 sm:col-span-full md:col-span-1">
         <div className="grid gap-2 min-h-[50vh] border border-red-300">
-          <div className="text-sm font-bold rounded-md border-2 border-blue-800">
+          <div className="text-sm font-bold border-2 border-blue-800 rounded-md">
             <p>Traits</p>
           </div>
-          <p className="text-sm font-bold rounded-md border-2 border-blue-800">
+          <p className="text-sm font-bold border-2 border-blue-800 rounded-md">
             Ideals
           </p>
-          <p className="text-sm font-bold rounded-md border-2 border-blue-800">
+          <p className="text-sm font-bold border-2 border-blue-800 rounded-md">
             Bonds
           </p>
-          <p className="text-sm font-bold rounded-md border-2 border-blue-800">
+          <p className="text-sm font-bold border-2 border-blue-800 rounded-md">
             Flaws
           </p>
         </div>
-        <div className="grid bg-emerald-100 justify-center">
-          <p className="text-sm font-bold self-end">
+        <div className="grid justify-center bg-emerald-100">
+          <p className="self-end text-sm font-bold">
             Features and Abilities
           </p>
-          <div className="grid grid-cols-4 gap-2">
-            <p className="font-bold row-span-2">Armor:</p>
-            {pclass.armor &&
-              pclass.armor.map((x, i) => <p key={i}>{x}</p>)}
-          </div>
-          <div className="grid grid-cols-4 gap-2">
-            <p className="font-bold row-span-2">Weapons:</p>
-            {pclass.weapons &&
-              pclass.weapons.map((x, i) => <p key={i}>{x}</p>)}
-          </div>
-          <div className="grid p-2 gap-2">
-            <p className="font-bold row-span-2">Racial Features:</p>
+
+          <Armor pclass={pclass} race={race} subclass={subclass} subrace={subrace} level={level} />
+          <Weapons pclass={pclass} race={race} subclass={subclass} subrace={subrace} level={level} />
+
+          <div className="grid gap-2 p-2">
+            <p className="row-span-2 font-bold">Racial Features:</p>
             {race.features &&
               race.features.map((feat, i) => (
                 <p key={i} className="text-start">
                   {feat}
                 </p>
               ))}
-            <p className="font-bold row-span-2">Class Features:</p>
+            <p className="row-span-2 font-bold">Class Features:</p>
             {pclass.features &&
               getLeveledFeatures(pclass.features, level).map(
                 (feat, i) => (
@@ -564,7 +564,7 @@ export default function App() {
           <p>?</p>
           <p>Spellcasting Class</p>
         </div>
-        <div className="grid grid-cols-3 p-4 gap-2">
+        <div className="grid grid-cols-3 gap-2 p-4">
           <div className="grid">
             <p>?</p>
             <p>Casting Ability</p>
