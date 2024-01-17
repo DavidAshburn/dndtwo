@@ -7,6 +7,18 @@ function getMod(stat) {
   return Math.floor(stat / 2) - 5;
 }
 
+function getFeatures(features, level) {
+  let levelfeats = [];
+  for (let [key, val] of Object.entries(features)) {
+    if (parseInt(key) <= level) {
+      val.forEach((x) => {
+        if (x != 'Ability Score Increase:') levelfeats.push(x);
+      });
+    }
+  }
+  return levelfeats;
+}
+
 export default function App() {
   let [labels, setLabels] = useState({
     races: [],
@@ -25,6 +37,15 @@ export default function App() {
   let [pclass, setPClass] = useState({});
   let [subclass, setSubclass] = useState({});
   let [background, setBackground] = useState({});
+
+  let statnames = [
+    'Strength',
+    'Dexterity',
+    'Constitution',
+    'Intelligence',
+    'Wisdom',
+    'Charisma',
+  ];
 
   //loads labels for dropdown options
   useEffect(() => {
@@ -152,6 +173,7 @@ export default function App() {
   //console.log debug information
   function runDebug(event) {
     console.log('--    Debug    --');
+    console.dir(pclass);
   }
 
   return (
@@ -273,6 +295,12 @@ export default function App() {
             >
               Roll Stats
             </button>
+            <button
+              className="text-white bg-emerald-600 font-bold rounded-md border border-blue-500"
+              onClick={runDebug}
+            >
+              Debug
+            </button>
           </div>
         </div>
       </div>
@@ -294,23 +322,24 @@ export default function App() {
         {/* Proficiencies */}
         <div className="grid gap-2 grid-rows-10">
           <div className="grid grid-cols-[1fr_3fr] border border-blue-800 rounded-md">
-            <button
-              className="text-white bg-emerald-600 font-bold rounded-md border border-blue-500"
-              onClick={runDebug}
-            >
-              Debug
-            </button>
+            <p>{Math.ceil(level * 0.25) + 1}</p>
             <p>Proficiency Bonus</p>
           </div>
-          <div className="row-span-3 bg-blue-200">
-            <p>Saving Throws</p>
+          <div className="row-span-2 bg-blue-200">
+            <p className="font-bold">Saving Throws</p>
+            {pclass.saving_throws &&
+              pclass.saving_throws.map((x, i) => (
+                <p key={i}>{statnames[x]}</p>
+              ))}
           </div>
-          <div className="row-span-7 bg-green-200">
-            <p>Skill Proficiencies</p>
+          <div className="row-span-8 bg-green-200">
+            <p className="font-bold">Skill Proficiencies</p>
           </div>
         </div>
         <div className="grid grid-cols-[1fr_3fr] col-span-2 border border-blue-800 rounded-md">
-          <p>?</p>
+          <p>
+            {10 + getMod(stats[4]) + (Math.ceil(level * 0.25) + 1)}
+          </p>
           <p>Passive Perception</p>
         </div>
         <div className="flex items-center justify-center col-span-2 min-h-[12rem] bg-red-100">
@@ -322,25 +351,28 @@ export default function App() {
       <div className="flex flex-col text-center gap-2">
         <div className="grid grid-cols-3">
           <div className="border-2 border-blue-700 p-2 text-lg h-fit">
-            <p className="font-bold">?</p>
+            <p className="font-bold">{10 + getMod(stats[1])}</p>
             <p>AC</p>
           </div>
           <div className="border-2 border-blue-700 p-2 text-lg h-fit">
-            <p className="font-bold">?</p>
+            <p className="font-bold">{getMod(stats[1])}</p>
             <p>Initiative</p>
           </div>
           <div className="border-2 border-blue-700 p-2 text-lg h-fit">
-            <p className="font-bold">?</p>
+            <p className="font-bold">{race.speed}</p>
             <p>Speed</p>
           </div>
         </div>
         <div className="grid grid-cols-2">
           <div className="border-2 border-blue-700 p-2 text-lg h-fit">
-            <p className="font-bold">?</p>
+            <p className="font-bold">
+              {Math.floor(pclass.hit_die * 0.75) * level +
+                getMod(stats[2]) * level}
+            </p>
             <p>HP</p>
           </div>
           <div className="border-2 border-blue-700 p-2 text-lg h-fit">
-            <p className="font-bold">?</p>
+            <p className="font-bold"> d{pclass.hit_die}</p>
             <p>Hit Die</p>
           </div>
         </div>
@@ -401,7 +433,7 @@ export default function App() {
       </div>
 
       {/* Features Column */}
-      <div className="flex flex-col text-center gap-2">
+      <div className="grid sm:grid-cols-2 md:grid-cols-1 sm:col-span-full md:col-span-1 text-center gap-2">
         <div className="grid gap-2 min-h-[50vh] border border-red-300">
           <div className="text-sm font-bold rounded-md border-2 border-blue-800">
             <p>Traits</p>
@@ -416,10 +448,27 @@ export default function App() {
             Flaws
           </p>
         </div>
-        <div className="flex bg-emerald-100 h-full justify-center">
+        <div className="grid bg-emerald-100 justify-center">
           <p className="text-sm font-bold self-end">
             Features and Abilities
           </p>
+          <div className="grid grid-cols-4 gap-2">
+            <p className="font-bold row-span-2">Armor:</p>
+            {pclass.armor &&
+              pclass.armor.map((x, i) => <p key={i}>{x}</p>)}
+          </div>
+          <div className="grid grid-cols-4 gap-2">
+            <p className="font-bold row-span-2">Weapons:</p>
+            {pclass.weapons &&
+              pclass.weapons.map((x, i) => <p key={i}>{x}</p>)}
+          </div>
+          <div className="grid p-2 gap-2">
+            <p className="font-bold row-span-2">Class Features:</p>
+            {pclass.features &&
+              getFeatures(pclass.features, level).map((feat, i) => (
+                <p key={i}>{feat}</p>
+              ))}
+          </div>
         </div>
       </div>
 

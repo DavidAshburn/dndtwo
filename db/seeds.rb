@@ -741,6 +741,16 @@ Barbarian = PlayerClass.create(
 )
 
 Barbarian.subclasses.create(
+  name: "None",
+  features: {},
+  custom: {},
+  equipment_choices: {},
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {},
+)
+
+Barbarian.subclasses.create(
   name: "Berserker",
   features: {
     3=> ['Frenzy: You can go into a frenzy when you rage. If you do so, for the duration of your rage, you can make a single melee weapon attack as a bonus action on each of your turns after this one. When your rage ends, you suffer one level of exhaustion.'],
@@ -901,6 +911,16 @@ Bard = PlayerClass.create(
 )
 
 Bard.subclasses.create(
+  name: "None",
+  features: {},
+  custom: {},
+  equipment_choices: {},
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {},
+)
+
+Bard.subclasses.create(
   name: "College of Lore",
   description: "Bards of the College of Lore know something about most things, collecting bits of knowledge from sources as diverse as scholarly tomes and peasant tales. Whether singing folk ballads in taverns or elaborate compositions in royal courts, these bards use their gifts to hold audiences spellbound.",
   features: {
@@ -1040,6 +1060,16 @@ Cleric = PlayerClass.create(
     ],
   },
   custom: {},
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {},
+)
+
+Cleric.subclasses.create(
+  name: "None",
+  features: {},
+  custom: {},
+  equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
@@ -1415,6 +1445,16 @@ Druid = PlayerClass.create(
     ],
   },
   custom: {},
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {},
+)
+
+Druid.subclasses.create(
+  name: "None",
+  features: {},
+  custom: {},
+  equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
@@ -1832,6 +1872,16 @@ Fighter = PlayerClass.create(
 )
 
 Fighter.subclasses.create(
+  name: "None",
+  features: {},
+  custom: {},
+  equipment_choices: {},
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {},
+)
+
+Fighter.subclasses.create(
   name: "Champion",
   description: "The archetypal Champion focuses on the development of raw physical power honed to deadly perfection. Those who model themselves on this archetype combine rigorous training with physical excellence to deal devastating blows.",
   custom: {
@@ -2192,6 +2242,16 @@ Monk = PlayerClass.create(
 )
 
 Monk.subclasses.create(
+  name: "None",
+  features: {},
+  custom: {},
+  equipment_choices: {},
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {},
+)
+
+Monk.subclasses.create(
   name: "Way of the Open Hand",
   description: "Monks of the Way of the Open Hand are the ultimate masters of martial arts combat, whether armed or unarmed. They learn techniques to push and trip their opponents, manipulate ki to heal damage to their bodies, and practice advanced meditation that can protect them from harm.",
   custom: {},
@@ -2317,7 +2377,7 @@ Monk.subclasses.create(
 )
 
 Paladin = PlayerClass.create(
-  name: 'Ranger',
+  name: 'Paladin',
   hit_die: 10,
   starting_hp: 10,
   primary_abilities: [0,5],
@@ -2430,6 +2490,16 @@ Paladin = PlayerClass.create(
       "Tunnel Fighter: As a bonus action, you can enter a defensive stance that lasts until the start of your next turn. While in your defensive stance, you can make opportunity attacks without using your reaction, and you can use your reaction to make a melee attack against a creature that moves more than 5 feet while within your reach.",
     ]
   },
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {},
+)
+
+Paladin.subclasses.create(
+  name: "None",
+  features: {},
+  custom: {},
+  equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
@@ -2732,6 +2802,16 @@ Ranger = PlayerClass.create(
 )
 
 Ranger.subclasses.create(
+  name: "None",
+  features: {},
+  custom: {},
+  equipment_choices: {},
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {},
+)
+
+Ranger.subclasses.create(
   name: "Hunter",
   description: "Emulating the Hunter archetype means accepting your place as a bulwark between civilization and the terrors of the wilderness. As you walk the Hunter's path, you learn specialized techniques for fighting the threats you face, from rampaging ogres and hordes of orcs to towering giants and terrifying dragons.",
   custom: {
@@ -2885,6 +2965,16 @@ Rogue = PlayerClass.create(
     [0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0],
   ],
+)
+
+Rogue.subclasses.create(
+  name: "None",
+  features: {},
+  custom: {},
+  equipment_choices: {},
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {},
 )
 
 Rogue.subclasses.create(
@@ -3066,6 +3156,16 @@ Sorceror = PlayerClass.create(
     ]
   },
   custom: {},
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {},
+)
+
+Sorceror.subclasses.create(
+  name: "None",
+  features: {},
+  custom: {},
+  equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
@@ -3364,6 +3464,16 @@ Warlock = PlayerClass.create(
 )
 
 Warlock.subclasses.create(
+  name: "None",
+  features: {},
+  custom: {},
+  equipment_choices: {},
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {},
+)
+
+Warlock.subclasses.create(
   name: "The Archfey",
   description: "Your patron is a lord or lady of the fey, a creature of legend who holds secrets that were forgotten before the mortal races were born. This being's motivations are often inscrutable, and sometimes whimsical, and might involve a striving for greater magical power or the settling of age-old grudges.",
   features: {
@@ -3574,6 +3684,16 @@ Wizard = PlayerClass.create(
     ]
   },
   custom: {},
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {},
+)
+
+Wizard.subclasses.create(
+  name: "None",
+  features: {},
+  custom: {},
+  equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
