@@ -15,12 +15,17 @@ export default function Weapons(props) {
     }
   }
   if(props.subrace.weapons) {
-    for(let item of props.race.weapons) {
+    for(let item of props.subrace.weapons) {
       obj[item] = 1;
     }
   }
   if(props.subclass.weapons) {
-    for(let item of props.race.weapons) {
+    for(let item of props.subclass.weapons) {
+      obj[item] = 1;
+    }
+  }
+  if(props.background.weapons) {
+    for(let item of props.background.weapons) {
       obj[item] = 1;
     }
   }

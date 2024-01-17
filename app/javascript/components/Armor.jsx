@@ -15,12 +15,17 @@ export default function Armor(props) {
     }
   }
   if(props.subrace.armor) {
-    for(let item of props.race.armor) {
+    for(let item of props.subrace.armor) {
       obj[item] = 1;
     }
   }
   if(props.subclass.armor) {
-    for(let item of props.race.armor) {
+    for(let item of props.subclass.armor) {
+      obj[item] = 1;
+    }
+  }
+  if(props.background.armor) {
+    for(let item of props.background.armor) {
       obj[item] = 1;
     }
   }

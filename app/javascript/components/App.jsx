@@ -195,38 +195,7 @@ export default function App() {
     setStats([10, 10, 10, 10, 10, 10]);
   }
 
-  //class features only, duplicates are not removed
-  function getLeveledFeatures(features, level) {
-    let levelfeats = [];
-    let takendata = [];
-
-    let namedex = 0;
-    let names = [];
-    let nameindexes = [];
-
-    for (let [key, val] of Object.entries(features)) {
-      //in all features
-      if (parseInt(key) <= level) {
-        //if the minimum level requirement is met
-        for (let item of val) {
-          if (item != 'Ability Score Increase:') {
-            // skip ASI increases
-            //check for duplicates among existing features
-            let name = item.split(':')[0];
-            let check = names.indexOf(name);
-            if (check > -1) {
-              levelfeats[check] = item; //replace duplicate features with their newer versions
-            } else {
-              levelfeats.push(item); //add features that have no duplicates to the end of the list
-              names.push(name); //add the new names to the namelist
-            }
-            namedex++;
-          }
-        }
-      }
-    }
-    return levelfeats;
-  }
+  
 
   function runDebug(event) {
     console.log('--    Debug    --');
@@ -535,9 +504,9 @@ export default function App() {
             Features and Abilities
           </p>
 
-          <Armor pclass={pclass} race={race} subclass={subclass} subrace={subrace} level={level} />
-          <Weapons pclass={pclass} race={race} subclass={subclass} subrace={subrace} level={level} />
-          <Features pclass={pclass} race={race} callback={getLeveledFeatures} level={level}/>
+          <Armor pclass={pclass} race={race} subclass={subclass} subrace={subrace} background={background} level={level} />
+          <Weapons pclass={pclass} race={race} subclass={subclass} subrace={subrace} background={background} level={level} />
+          <Features pclass={pclass} race={race} subclass={subclass} subrace={subrace} background={background} level={level}/>
 
           
         </div>
