@@ -2,21 +2,15 @@ import React, { useState, useEffect } from 'react';
 import Statframe from './Statframe';
 import Pointbuy from './Pointbuy';
 import Rollstats from './Rollstats';
+import Profpane from './Profpane';
 
 function getMod(stat) {
   return Math.floor(stat / 2) - 5;
 }
 
-function getFeatures(features, level) {
-  let levelfeats = [];
-  for (let [key, val] of Object.entries(features)) {
-    if (parseInt(key) <= level) {
-      val.forEach((x) => {
-        if (x != 'Ability Score Increase:') levelfeats.push(x);
-      });
-    }
-  }
-  return levelfeats;
+function signed(number) {
+  if (number > 0) return '+' + number;
+  return number;
 }
 
 export default function App() {
@@ -38,6 +32,12 @@ export default function App() {
   let [subclass, setSubclass] = useState({});
   let [background, setBackground] = useState({});
 
+  //PC state variable storage
+  let [proficiencies, setProficiencies] = useState([
+    0, 1, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  ]);
+
+  //data resources
   let statnames = [
     'Strength',
     'Dexterity',
@@ -46,6 +46,29 @@ export default function App() {
     'Wisdom',
     'Charisma',
   ];
+
+  let proficiency_data = [
+    ['Acrobatics', 1],
+    ['Animal Handling', 4],
+    ['Arcana', 3],
+    ['Athletics', 0],
+    ['Deception', 5],
+    ['History', 3],
+    ['Insight', 4],
+    ['Intimidation', 5],
+    ['Investigation', 3],
+    ['Medicine', 4],
+    ['Nature', 3],
+    ['Perception', 4],
+    ['Performance', 5],
+    ['Persuasion', 5],
+    ['Religion', 3],
+    ['Sleight of Hand', 1],
+    ['Stealth', 1],
+    ['Survival', 4],
+  ];
+
+  //------------------------------------------------------------------//
 
   //loads labels for dropdown options
   useEffect(() => {
@@ -151,7 +174,7 @@ export default function App() {
   //different methods of setting base stats - onClick functions for Stat buttons
   function randomStats(event) {
     let stats = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
       stats.push(Math.floor(Math.random() * 13 + 8));
     }
     setStats(stats);
@@ -170,6 +193,40 @@ export default function App() {
     setStats([10, 10, 10, 10, 10, 10]);
   }
 
+  //class features only, duplicates are not removed
+  function getFeatures(features, level) {
+    let levelfeats = [];
+    let takendata = [];
+
+    let namedex = 0;
+    let names = [];
+    let nameindexes = [];
+
+    for (let [key, val] of Object.entries(features)) {
+      //in all features
+      if (parseInt(key) <= level) {
+        //if the minimum level requirement is met
+        for (let item of val) {
+          if (item != 'Ability Score Increase:') {
+            //check for duplicates across features at this level
+            let name = item.split(':')[0];
+
+            let check = names.indexOf(name);
+            if (check > -1) {
+              levelfeats[check] = item; //replace features with their newer versions
+            } else {
+              levelfeats.push(item); //add features that have no duplicates to the end of the list
+              names.push(name); //add the new names to the namelist
+            }
+            namedex++;
+          }
+        }
+      }
+    }
+    console.log(names);
+    return levelfeats;
+  }
+
   //console.log debug information
   function runDebug(event) {
     console.log('--    Debug    --');
@@ -178,7 +235,7 @@ export default function App() {
 
   return (
     <section className="grid sm:grid-cols-2 md:grid-cols-3 border-2 border-black">
-      {/* NAME AND BASICS */}
+      {/* Selectinput Row */}
       <div className="grid md:grid-cols-2 col-span-full">
         <div className="grid p-4">
           <input
@@ -329,11 +386,30 @@ export default function App() {
             <p className="font-bold">Saving Throws</p>
             {pclass.saving_throws &&
               pclass.saving_throws.map((x, i) => (
-                <p key={i}>{statnames[x]}</p>
+                <div
+                  key={i}
+                  className="grid grid-cols-[1fr_3rem] text-center px-2 gap-2"
+                >
+                  <p>{statnames[x]}</p>
+                  <p>
+                    {signed(
+                      getMod(stats[x]) + Math.ceil(level * 0.25) + 1
+                    )}
+                  </p>
+                </div>
               ))}
           </div>
           <div className="row-span-8 bg-green-200">
             <p className="font-bold">Skill Proficiencies</p>
+            {proficiency_data.map((pname, i) => (
+              <Profpane
+                name={pname[0]}
+                key={i}
+                profmod={Math.ceil(level * 0.25) + 1}
+                statmod={getMod(stats[pname[1]])}
+                proficient={proficiencies[i]}
+              />
+            ))}
           </div>
         </div>
         <div className="grid grid-cols-[1fr_3fr] col-span-2 border border-blue-800 rounded-md">
@@ -466,7 +542,9 @@ export default function App() {
             <p className="font-bold row-span-2">Class Features:</p>
             {pclass.features &&
               getFeatures(pclass.features, level).map((feat, i) => (
-                <p key={i}>{feat}</p>
+                <p key={i} className="text-start">
+                  {feat}
+                </p>
               ))}
           </div>
         </div>
