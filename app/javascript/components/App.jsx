@@ -5,6 +5,7 @@ import Rollstats from './Rollstats';
 import Profpane from './Profpane';
 import Armor from './Armor';
 import Weapons from './Weapons';
+import Features from './Features';
 
 function getMod(stat) {
   return Math.floor(stat / 2) - 5;
@@ -536,25 +537,9 @@ export default function App() {
 
           <Armor pclass={pclass} race={race} subclass={subclass} subrace={subrace} level={level} />
           <Weapons pclass={pclass} race={race} subclass={subclass} subrace={subrace} level={level} />
+          <Features pclass={pclass} race={race} callback={getLeveledFeatures} level={level}/>
 
-          <div className="grid gap-2 p-2">
-            <p className="row-span-2 font-bold">Racial Features:</p>
-            {race.features &&
-              race.features.map((feat, i) => (
-                <p key={i} className="text-start">
-                  {feat}
-                </p>
-              ))}
-            <p className="row-span-2 font-bold">Class Features:</p>
-            {pclass.features &&
-              getLeveledFeatures(pclass.features, level).map(
-                (feat, i) => (
-                  <p key={i} className="text-start">
-                    {feat}
-                  </p>
-                )
-              )}
-          </div>
+          
         </div>
       </div>
 
