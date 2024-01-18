@@ -27,6 +27,9 @@ export default function App() {
 
   //character traits, pull in full json from db as source of truth - onChange fetches and updates these
   let [stats, setStats] = useState([8, 8, 8, 8, 8, 8]);
+  //use modstats to calculate modifiers on base stats, use these for most calculations and all displays
+  let [modstats, setModStats] = useState([8, 8, 8, 8, 8, 8]);
+
   let [level, setLevel] = useState(1);
   let [race, setRace] = useState({});
   let [subrace, setSubrace] = useState({});
@@ -70,6 +73,19 @@ export default function App() {
   ];
 
   //------------------------------------------------------------------//
+  // Stat modifiers
+  //combined setter function so we can track base and modified stats
+  function setAllStats(stats) {
+    setStats(stats);
+    let output = stats;
+    if (race.asi) {
+      //ASI
+      output = stats.map((x, i) => x + race.asi[i]);
+    }
+    setModStats(output);
+  }
+
+  //------------------------------------------------------------------//
 
   //loads labels for dropdown options
   useEffect(() => {
@@ -93,6 +109,10 @@ export default function App() {
       setPClass(data.pclass);
       setSubclass(data.subclass);
       setBackground(data.background);
+
+      //ASI
+      let output = stats.map((x, i) => x + data.pcrace.asi[i]);
+      setModStats(output);
     }
 
     fetch(`/labels/initPC`)
@@ -114,7 +134,12 @@ export default function App() {
   function loadRace(name) {
     fetch(`/races/` + name)
       .then((response) => response.json())
-      .then((data) => setRace(data));
+      .then((data) => {
+        setRace(data);
+        //ASI
+        let output = stats.map((x, i) => x + data.asi[i]);
+        setModStats(output);
+      });
   }
   function loadSubrace(name) {
     fetch(`/subraces/` + name)
@@ -161,23 +186,13 @@ export default function App() {
     setLevel(event.target.value);
   }
 
-  //universal stat modifier
-  function statMod(stats) {
-    let out = [];
-    stats.forEach((stat, i) => {
-      out.push(stat + race.asi[i]);
-    });
-
-    return out;
-  }
   //different methods of setting base stats - onClick functions for Stat buttons
   function randomStats(event) {
     let stats = [];
     for (let i = 0; i < 6; i++) {
       stats.push(Math.floor(Math.random() * 13 + 8));
     }
-    let out = statMod(stats);
-    setStats(out);
+    setAllStats(stats);
   }
   function openPointBuy(event) {
     document.getElementById('pointbuy').showModal();
@@ -187,18 +202,16 @@ export default function App() {
   }
   function flatStats(event) {
     let stats = [10, 10, 10, 10, 10, 10];
-    let out = statMod(stats);
-    setStats(out);
+    setAllStats(stats);
   }
 
   //Debug Methods
   function runDebug(event) {
     console.log('--    Debug    --');
-    console.dir(race);
-    console.dir(pclass);
+    console.dir(race.asi);
   }
   function logIt(number) {
-    console.log('logit: ' + number);
+    console.log('logit: ' + race.asi);
     return number;
   }
 
@@ -334,12 +347,13 @@ export default function App() {
       <div className="grid grid-cols-[1fr_2fr] text-center gap-2">
         {/* Base Stats */}
         <div className="grid gap-2 bg-gray-100">
-          {stats.map((stat, i) => (
+          {modstats.map((stat, i) => (
             <Statframe
               stat={stat}
               key={i}
               mod={getMod(stat)}
               dex={i}
+              race={race}
             />
           ))}
         </div>
@@ -562,8 +576,8 @@ export default function App() {
           </div>
         </div>
       </div>
-      <Pointbuy submit={setStats} race={race} />
-      <Rollstats submit={setStats} race={race} />
+      <Pointbuy submit={setAllStats} />
+      <Rollstats submit={setAllStats} />
     </section>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 let list = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+
 export default function Statframe(props) {
   return (
     <div className="grid grid-rows-[2fr_1fr] border border-blue-700">
