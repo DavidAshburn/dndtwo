@@ -11,9 +11,14 @@ function closeModal() {
 export default function Extralanguages(props) {
   function getLanguages() {
     let obj = [];
-    for (let i = 0; i < props.givenlanguages.length; i++) {
-      for (let j = 0; j < props.givenlanguages.length; j++) {
-        obj[props.givenlanguages[j]] = 1;
+
+    if (props.givenlanguages[0]) {
+      for (let item of props.givenlanguages) {
+        if (item.length > 0) {
+          for (let lang of item) {
+            obj[lang] = 1;
+          }
+        }
       }
     }
 
