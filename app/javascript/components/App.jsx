@@ -423,16 +423,10 @@ export default function App() {
               race.languages,
               subrace.languages,
               subclass.languages,
+              extralanguages,
             ]}
             name="Languages"
           />
-          {/*<Languages
-            pclass={pclass}
-            race={race}
-            subclass={subclass}
-            subrace={subrace}
-            background={background}
-            />*/}
         </div>
       </div>
 

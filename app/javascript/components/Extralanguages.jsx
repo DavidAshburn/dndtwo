@@ -1,7 +1,7 @@
 import React from 'react';
 
 function closeModal() {
-  document.getElementById('extralang').close();
+  document.getElementById('extralanguages').close();
 }
 
 //props
@@ -11,7 +11,6 @@ function closeModal() {
 export default function Extralanguages(props) {
   function getLanguages() {
     let obj = [];
-
     if (props.givenlanguages[0]) {
       for (let item of props.givenlanguages) {
         if (item.length > 0) {
@@ -21,7 +20,6 @@ export default function Extralanguages(props) {
         }
       }
     }
-
     return Object.keys(obj);
   }
 
@@ -63,15 +61,30 @@ export default function Extralanguages(props) {
     for (let i = 0; i < limit; i++) {
       output.push(1);
     }
-    return output.map((x, i) => (
-      <select key={i}>
-        {openlanguages.map((x, i) => (
-          <option value="x" key={i}>
-            {x}
-          </option>
+    return (
+      <div className="grid grid-cols-2" id="languageselects">
+        {output.map((x, i) => (
+          <select key={i}>
+            {openlanguages.map((x, i) => (
+              <option value={x} key={i}>
+                {x}
+              </option>
+            ))}
+          </select>
         ))}
-      </select>
-    ));
+      </div>
+    );
+  }
+
+  function submitLangs() {
+    let output = [];
+    let frame = document.getElementById('languageselects');
+    for (let item of frame.children) {
+      output.push(item.value);
+    }
+    console.log(output);
+    props.submit(output);
+    closeModal();
   }
 
   let taken_langs = getLanguages();
@@ -88,6 +101,13 @@ export default function Extralanguages(props) {
 
       <p>Extra Languages</p>
       {extraSelects(taken_langs, props.extralanguages)}
+
+      <button
+        className="rounded-md bg-white border-2 border-blue-600 font-bold"
+        onClick={submitLangs}
+      >
+        Submit
+      </button>
     </dialog>
   );
 }
