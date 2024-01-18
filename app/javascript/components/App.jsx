@@ -39,14 +39,15 @@ export default function App() {
   let [background, setBackground] = useState({});
 
   //PC state variable storage
+  //0 - none, 1 - proficient, 2 - expertise
   let [proficiencies, setProficiencies] = useState([
-    0, 1, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   ]);
   let [extralanguages, setExtraLanguages] = useState([]);
   //extratools is unused right now, tool data is spread out and complex
   let [extratools, setExtraTools] = useState([]);
 
-  //data resources
+  //data resources-----------------------------------------------------//
   let statnames = [
     'Strength',
     'Dexterity',
@@ -55,6 +56,7 @@ export default function App() {
     'Wisdom',
     'Charisma',
   ];
+  //matches proficiency to their source stat for base modifier values
   let proficiency_data = [
     ['Acrobatics', 1],
     ['Animal Handling', 4],
@@ -75,10 +77,9 @@ export default function App() {
     ['Stealth', 1],
     ['Survival', 4],
   ];
-
   //------------------------------------------------------------------//
-  // Stat modifiers
-  //combined setter function so we can track base and modified stats
+
+  //combined stat setter function so we can track base and modified stats
   function setAllStats(stats) {
     setStats(stats);
     let output = stats;
@@ -88,8 +89,6 @@ export default function App() {
     }
     setModStats(output);
   }
-
-  //------------------------------------------------------------------//
 
   //loads labels for dropdown options
   useEffect(() => {
