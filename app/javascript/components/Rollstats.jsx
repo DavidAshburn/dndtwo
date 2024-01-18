@@ -66,6 +66,15 @@ export default function Rollstats(props) {
     setPrevTaken(ptemp);
   }
 
+  function statMod(statin) {
+    let out = [];
+    statin.forEach((stat, i) => {
+      out.push(stat + props.race.asi[i]);
+    });
+
+    return out;
+  }
+
   function submitStats() {
     let stats = [];
     let frame = document.getElementById('rollselectframe');
@@ -74,7 +83,7 @@ export default function Rollstats(props) {
     }
 
     if (stats.length == 6) {
-      props.submit(stats);
+      props.submit(statMod(stats));
       closeModal();
     }
   }

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 export default function Features(props) {
-
   //class features only
-  function getLeveledFeatures(features, level) {
+  function getLeveledFeatures(features, level, asi) {
     let levelfeats = [];
     let takendata = [];
 
@@ -32,6 +31,15 @@ export default function Features(props) {
         }
       }
     }
+
+    let statnames = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+
+    asi.forEach((val, i) => {
+      if (val > 0) {
+        levelfeats.push('+' + val + ' to ' + statnames[i]);
+      }
+    });
+
     return levelfeats;
   }
 
@@ -46,13 +54,15 @@ export default function Features(props) {
         ))}
       <p className="row-span-2 font-bold">Class Features:</p>
       {props.pclass.features &&
-        getLeveledFeatures(props.pclass.features, props.level).map(
-          (feat, i) => (
-            <p key={i} className="text-start">
-              {feat}
-            </p>
-          )
-        )}
+        getLeveledFeatures(
+          props.pclass.features,
+          props.level,
+          props.race.asi
+        ).map((feat, i) => (
+          <p key={i} className="text-start">
+            {feat}
+          </p>
+        ))}
     </div>
-  )
+  );
 }

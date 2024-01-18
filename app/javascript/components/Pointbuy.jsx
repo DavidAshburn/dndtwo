@@ -44,9 +44,19 @@ export default function Pointbuy(props) {
     setStats(temp);
   }
 
+  function statMod(statin) {
+    let out = [];
+    statin.forEach((stat, i) => {
+      out.push(stat + props.race.asi[i]);
+    });
+
+    return out;
+  }
+
   function submitStats() {
     if (points > 0) return;
-    props.submit(stats);
+
+    props.submit(statMod(stats));
     closeModal();
   }
 

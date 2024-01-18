@@ -48,7 +48,6 @@ export default function App() {
     'Wisdom',
     'Charisma',
   ];
-
   let proficiency_data = [
     ['Acrobatics', 1],
     ['Animal Handling', 4],
@@ -107,25 +106,21 @@ export default function App() {
       .then((response) => response.json())
       .then((data) => setPClass(data));
   }
-
   function loadSubclass(name) {
     fetch(`/subclasses/` + name)
       .then((response) => response.json())
       .then((data) => setSubclass(data));
   }
-
   function loadRace(name) {
     fetch(`/races/` + name)
       .then((response) => response.json())
       .then((data) => setRace(data));
   }
-
   function loadSubrace(name) {
     fetch(`/subraces/` + name)
       .then((response) => response.json())
       .then((data) => setSubrace(data));
   }
-
   function loadBackground(name) {
     fetch(`/backgrounds/` + name)
       .then((response) => response.json())
@@ -142,68 +137,74 @@ export default function App() {
     let firstSubclassName = labels.classes[dex][1][0];
     loadSubclass(firstSubclassName);
   }
-
   function handleSubclassSelect(event) {
     fetch(`/subclasses/` + event.target.value)
       .then((response) => response.json())
       .then((data) => setSubclass(data));
   }
-
   function handleRaceSelect(event) {
     let dex = event.target.value;
     setSubraceLabels(labels.races[dex][1]);
-
     loadRace(labels.races[dex][0]);
-
     let firstSubraceName = labels.races[dex][1][0];
     loadSubrace(firstSubraceName);
   }
-
   function handleSubraceSelect(event) {
     fetch(`/subraces/` + event.target.value)
       .then((response) => response.json())
       .then((data) => setSubrace(data));
   }
-
   function handleBackgroundSelect(event) {
     loadBackground(event.target.value);
   }
-
   function updateLevel(event) {
     setLevel(event.target.value);
   }
 
+  //universal stat modifier
+  function statMod(stats) {
+    let out = [];
+    stats.forEach((stat, i) => {
+      out.push(stat + race.asi[i]);
+    });
+
+    return out;
+  }
   //different methods of setting base stats - onClick functions for Stat buttons
   function randomStats(event) {
     let stats = [];
     for (let i = 0; i < 6; i++) {
       stats.push(Math.floor(Math.random() * 13 + 8));
     }
-    setStats(stats);
+    let out = statMod(stats);
+    setStats(out);
   }
-
   function openPointBuy(event) {
     document.getElementById('pointbuy').showModal();
   }
-
   function openRollStats(event) {
     document.getElementById('rollstats').showModal();
   }
-
   function flatStats(event) {
-    setStats([10, 10, 10, 10, 10, 10]);
+    let stats = [10, 10, 10, 10, 10, 10];
+    let out = statMod(stats);
+    setStats(out);
   }
 
+  //Debug Methods
   function runDebug(event) {
     console.log('--    Debug    --');
     console.dir(race);
     console.dir(pclass);
   }
-
   function logIt(number) {
     console.log('logit: ' + number);
     return number;
   }
+
+  //----------------------------Util methods for PC Calculations------//
+
+  //----------------------------PC Calculations-----------------------//
 
   return (
     <section className="grid border-2 border-black sm:grid-cols-2 md:grid-cols-3">
@@ -221,12 +222,11 @@ export default function App() {
         <div className="grid grid-cols-3 gap-2 p-4">
           <div className="grid">
             <select name="playerclass" onChange={handleClassSelect}>
-              {labels &&
-                labels.classes.map((pclass, i) => (
-                  <option value={i} key={i}>
-                    {pclass[0]}
-                  </option>
-                ))}
+              {labels.classes?.map((pclass, i) => (
+                <option value={i} key={i}>
+                  {pclass[0]}
+                </option>
+              ))}
             </select>
             <p>Class</p>
           </div>
@@ -235,12 +235,11 @@ export default function App() {
               name="playersubclass"
               onChange={handleSubclassSelect}
             >
-              {subclassLabels &&
-                subclassLabels.map((sub, i) => (
-                  <option value={sub} key={i}>
-                    {sub}
-                  </option>
-                ))}
+              {subclassLabels?.map((sub, i) => (
+                <option value={sub} key={i}>
+                  {sub}
+                </option>
+              ))}
             </select>
             <p>Subclass</p>
           </div>
@@ -258,12 +257,11 @@ export default function App() {
           </div>
           <div className="grid">
             <select name="playerrace" onChange={handleRaceSelect}>
-              {labels &&
-                labels.races.map((prace, i) => (
-                  <option value={i} key={i}>
-                    {prace[0]}
-                  </option>
-                ))}
+              {labels.races?.map((prace, i) => (
+                <option value={i} key={i}>
+                  {prace[0]}
+                </option>
+              ))}
             </select>
             <p>Race</p>
           </div>
@@ -272,23 +270,21 @@ export default function App() {
               name="playersubrace"
               onChange={handleSubraceSelect}
             >
-              {subraceLabels &&
-                subraceLabels.map((sub, i) => (
-                  <option value={sub} key={i}>
-                    {sub}
-                  </option>
-                ))}
+              {subraceLabels?.map((sub, i) => (
+                <option value={sub} key={i}>
+                  {sub}
+                </option>
+              ))}
             </select>
             <p>Subrace</p>
           </div>
           <div className="grid">
             <select name="playerbg" onChange={handleBackgroundSelect}>
-              {labels &&
-                labels.backgrounds.map((pbg, i) => (
-                  <option value={pbg} key={i}>
-                    {pbg}
-                  </option>
-                ))}
+              {labels.backgrounds?.map((pbg, i) => (
+                <option value={pbg} key={i}>
+                  {pbg}
+                </option>
+              ))}
             </select>
             <p>Background</p>
           </div>
@@ -356,20 +352,19 @@ export default function App() {
           </div>
           <div className="row-span-2 bg-blue-200">
             <p className="font-bold">Saving Throws</p>
-            {pclass.saving_throws &&
-              pclass.saving_throws.map((x, i) => (
-                <div
-                  key={i}
-                  className="grid grid-cols-[1fr_3rem] text-center px-2 gap-2"
-                >
-                  <p>{statnames[x]}</p>
-                  <p>
-                    {signed(
-                      getMod(stats[x]) + Math.ceil(level * 0.25) + 1
-                    )}
-                  </p>
-                </div>
-              ))}
+            {pclass.saving_throws?.map((x, i) => (
+              <div
+                key={i}
+                className="grid grid-cols-[1fr_3rem] text-center px-2 gap-2"
+              >
+                <p>{statnames[x]}</p>
+                <p>
+                  {signed(
+                    getMod(stats[x]) + Math.ceil(level * 0.25) + 1
+                  )}
+                </p>
+              </div>
+            ))}
           </div>
           <div className="bg-green-200 row-span-8">
             <p className="font-bold">Skill Proficiencies</p>
@@ -567,8 +562,8 @@ export default function App() {
           </div>
         </div>
       </div>
-      <Pointbuy submit={setStats} />
-      <Rollstats submit={setStats} />
+      <Pointbuy submit={setStats} race={race} />
+      <Rollstats submit={setStats} race={race} />
     </section>
   );
 }
