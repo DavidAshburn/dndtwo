@@ -6,6 +6,8 @@ import Profpane from './Profpane';
 import Armor from './Armor';
 import Weapons from './Weapons';
 import Features from './Features';
+import Languages from './Languages';
+import Collecttatics from './Collectstatics';
 
 function getMod(stat) {
   return Math.floor(stat / 2) - 5;
@@ -194,8 +196,6 @@ export default function App() {
   function flatStats(event) {
     setStats([10, 10, 10, 10, 10, 10]);
   }
-
-  
 
   function runDebug(event) {
     console.log('--    Debug    --');
@@ -393,8 +393,23 @@ export default function App() {
           </p>
           <p>Passive Perception</p>
         </div>
-        <div className="flex items-center justify-center col-span-2 min-h-[12rem] bg-red-100">
+        <div className="grid items-center justify-center col-span-2 min-h-[12rem] bg-red-100">
           <p>Other Skills and Languages</p>
+          <Collecttatics
+            data={[
+              race.languages,
+              subrace.languages,
+              subclass.languages,
+            ]}
+            name="Languages"
+          />
+          {/*<Languages
+            pclass={pclass}
+            race={race}
+            subclass={subclass}
+            subrace={subrace}
+            background={background}
+            />*/}
         </div>
       </div>
 
@@ -503,12 +518,30 @@ export default function App() {
           <p className="self-end text-sm font-bold">
             Features and Abilities
           </p>
-
-          <Armor pclass={pclass} race={race} subclass={subclass} subrace={subrace} background={background} level={level} />
-          <Weapons pclass={pclass} race={race} subclass={subclass} subrace={subrace} background={background} level={level} />
-          <Features pclass={pclass} race={race} subclass={subclass} subrace={subrace} background={background} level={level}/>
-
-          
+          <Armor
+            pclass={pclass}
+            race={race}
+            subclass={subclass}
+            subrace={subrace}
+            background={background}
+            level={level}
+          />
+          <Weapons
+            pclass={pclass}
+            race={race}
+            subclass={subclass}
+            subrace={subrace}
+            background={background}
+            level={level}
+          />
+          <Features
+            pclass={pclass}
+            race={race}
+            subclass={subclass}
+            subrace={subrace}
+            background={background}
+            level={level}
+          />
         </div>
       </div>
 

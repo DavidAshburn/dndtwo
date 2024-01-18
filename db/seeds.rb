@@ -4026,6 +4026,64 @@ Acolyte = Background.create(
   custom_mods: {},
 )
 
+Bacolyte = Background.create(
+  name: "Bacolyte",
+  description: 'You have spent your life in the service of a temple. You act as an intermediary between the realm of the holy and the mortal world.',
+  skills: ['Insight', 'Religion'],
+  extra_languages: 2,
+  equipment_choices: {
+    'choices'=>[['Longsword#1','martial#1']],
+    'default'=>[
+      'Holy Emblem#1',
+      'Prayer Book#1',
+      'Incense#5',
+      'Clothes, sacred vestments#1',
+      'Clothes, common#1',
+    ],
+  },
+  gold: 15,
+  traits: [
+    'I idolize a particular hero of my faith, and constantly refer to that person`s deeds and example.',
+    'I can find common ground between the fiercest enemies, empathizing with them and always working toward peace.',
+    'I see omens in every event and action. The gods try to speak to us, we just need to listen.',
+    'Nothing can shake my optimistic attitude.',
+    'I quote (or misquote) sacred texts and proverbs in almost every situation.',
+    'I am tolerant (or intolerant) of other faiths and respect (or condemn) the worship of other gods.',
+    'I’ve enjoyed fine food, drink, and high society among my temple’s elite. Rough living grates on me.',
+    'I’ve spent so long in the temple that I have little practical experience dealing with people in the outside world.',
+  ],
+  ideals: [
+    'Tradition. The ancient traditions of worship and sacrifice must be preserved and upheld. (Lawful)',
+    'Charity. I always try to help those in need, no matter what the personal cost. (Good)',
+    'Change. We must help bring about the changes the gods are constantly working in the world. (Chaotic)',
+    'Power. I hope to one day rise to the top of my faith’s religious hierarchy. (Lawful)',
+    'Faith. I trust that my deity will guide my actions. I have faith that if I work hard, things will go well. (Lawful)',
+    'Aspiration. I seek to prove myself worthy of my god’s favor by matching my actions against his or her teachings. (Any)',
+  ],
+  bonds: [
+    'I would die to recover an ancient relic of my faith that was lost long ago.',
+    'I will someday get revenge on the corrupt temple hierarchy who branded me a heretic.',
+    'I owe my life to the priest who took me in when my parents died.',
+    'Everything I do is for the common people.',
+    'I will do anything to protect the temple where I served.',
+    'I seek to preserve a sacred text that my enemies consider heretical and seek to destroy.',
+  ],
+  flaws: [
+    'I judge others harshly, and myself even more severely.',
+    'I put too much trust in those who wield power within my temple’s hierarchy.',
+    'My piety sometimes leads me to blindly trust those that profess faith in my god.',
+    'I am inflexible in my thinking.',
+    'I am suspicious of strangers and expect the worst of them.',
+    'Once I pick a goal, I become obsessed with it to the detriment of everything else in my life.',
+  ],
+  features: [
+      'Shelter of the Faithful: You command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your party can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you at a modest lifestyle. You might have ties to a specific temple where you have a residence and the priests can be called upon for non-hazardous assistance near there.',
+    ],
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {},
+)
+
 Feat_alert = Feat.create(
   name: 'Alert',
   description: 'Always on the lookout for danger, you won`t be fooled by just anyone.',
