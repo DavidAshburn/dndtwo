@@ -42,7 +42,9 @@ export default function App() {
   let [proficiencies, setProficiencies] = useState([
     0, 1, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   ]);
-  let [extralanguages, setExtraLanguages] = useState([0]);
+  let [extralanguages, setExtraLanguages] = useState([]);
+  //extratools is unused right now, tool data is spread out and complex
+  let [extratools, setExtraTools] = useState([]);
 
   //data resources
   let statnames = [
@@ -209,8 +211,11 @@ export default function App() {
   }
 
   //Menu modal buttons
-  function openExtraLanguages(event) {
+  function openExtraLanguages() {
     document.getElementById('extralanguages').showModal();
+  }
+  function openExtraTools() {
+    document.getElementById('extratools').showModal();
   }
 
   //Debug Methods
@@ -418,6 +423,16 @@ export default function App() {
         </div>
         <div className="grid items-center justify-center col-span-2 min-h-[12rem] bg-red-100">
           <p>Other Skills and Languages</p>
+          <Collectstatics
+            data={[
+              race.tools,
+              subrace.tools,
+              pclass.tools,
+              subclass.tools,
+              extratools,
+            ]}
+            name="Tools"
+          />
           <Collectstatics
             data={[
               race.languages,

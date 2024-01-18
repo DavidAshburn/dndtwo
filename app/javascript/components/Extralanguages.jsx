@@ -82,7 +82,6 @@ export default function Extralanguages(props) {
     for (let item of frame.children) {
       output.push(item.value);
     }
-    console.log(output);
     props.submit(output);
     closeModal();
   }
