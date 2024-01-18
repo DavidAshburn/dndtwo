@@ -58,7 +58,6 @@ DwarvenRace.subraces.create(
   features: [
         'Dwarven Toughness: Your level is added to your hit point maximum.',
       ],
-  extra_languages: 0,
   extra_spells: {},
   specific_spells: {},
   custom_mods: {
@@ -71,7 +70,6 @@ DwarvenRace.subraces.create(
   asi: [2,0,0,0,0,0],
   features: ['Dwarven Armor Training'],
   armor: ['Light','Medium'],
-  extra_languages: 0,
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
@@ -218,7 +216,6 @@ HumanRace.subraces.create(
   asi: [0,0,0,0,0,0],
   features: [
       ],
-  extra_languages: 0,
   extra_spells: {},
   specific_spells: {},
   custom_mods: {
@@ -585,7 +582,7 @@ HalfElfRace.subraces.create(
   asi: [0,0,0,0,0,0],
   features: [
       ],
-  extra_languages: 0,
+
   extra_spells: {},
   specific_spells: {},
   custom_mods: {
@@ -617,7 +614,7 @@ HalfOrcRace.subraces.create(
   asi: [0,0,0,0,0,0],
   features: [
       ],
-  extra_languages: 0,
+
   extra_spells: {},
   specific_spells: {},
   custom_mods: {
@@ -654,7 +651,7 @@ TieflingRace.subraces.create(
   asi: [0,0,0,0,0,0],
   features: [
       ],
-  extra_languages: 0,
+
   extra_spells: {},
   specific_spells: {},
   custom_mods: {

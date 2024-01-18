@@ -26,7 +26,7 @@ function rollStats() {
 }
 
 export default function Rollstats(props) {
-  let [rollvalues, setRollValues] = useState([]);
+  let [rollvalues, setRollValues] = useState(rollStats());
   let [taken, setTaken] = useState([
     false,
     false,
@@ -38,11 +38,6 @@ export default function Rollstats(props) {
   let [prevtaken, setPrevTaken] = useState([99, 99, 99, 99, 99, 99]);
 
   let names = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
-
-  useEffect(() => {
-    let roll = rollStats();
-    setRollValues(roll);
-  }, []);
 
   function updateTaken(event) {
     let selects = document.getElementById('rollselectframe').children;

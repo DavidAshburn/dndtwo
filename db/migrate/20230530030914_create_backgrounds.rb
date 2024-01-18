@@ -7,7 +7,7 @@ class CreateBackgrounds < ActiveRecord::Migration[7.0]
       t.string :weapons, array: true, default: []
       t.string :armor, array: true, default: []
       t.string :tools, array: true, default: []
-      t.string :extra_languages, default: 0
+      t.integer :extra_languages, default: 0
       t.text :equipment_choices, default: "{}"
       t.string :features, array: true, default: []
       t.string :traits, array: true, default: []

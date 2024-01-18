@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_194224) do
     t.string "weapons", default: [], array: true
     t.string "armor", default: [], array: true
     t.string "tools", default: [], array: true
-    t.string "extra_languages", default: "0"
+    t.integer "extra_languages", default: 0
     t.text "equipment_choices", default: "{}"
     t.string "features", default: [], array: true
     t.string "traits", default: [], array: true
@@ -181,7 +181,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_194224) do
     t.string "heightlow", default: "4'6\""
     t.string "heighthigh", default: "7\"6"
     t.string "languages", default: [], array: true
-    t.string "extra_languages", default: "0"
+    t.integer "extra_languages", default: 0
     t.string "weapons", default: [], array: true
     t.string "armor", default: [], array: true
     t.string "tools", default: [], array: true
@@ -229,7 +229,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_194224) do
     t.string "armor", default: [], array: true
     t.string "tools", default: [], array: true
     t.string "languages", default: [], array: true
-    t.string "extra_languages", default: "0"
+    t.integer "extra_languages", default: 0
     t.string "description", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -240,7 +240,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_194224) do
     t.string "name"
     t.integer "asi", default: [], array: true
     t.string "languages", default: [], array: true
-    t.string "extra_languages", default: "0"
+    t.integer "extra_languages", default: 0
     t.string "weapons", default: [], array: true
     t.string "armor", default: [], array: true
     t.string "tools", default: [], array: true

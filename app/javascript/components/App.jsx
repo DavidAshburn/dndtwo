@@ -5,6 +5,7 @@ import Rollstats from './Rollstats';
 import Profpane from './Profpane';
 import Features from './Features';
 import Collectstatics from './Collectstatics';
+import Extralanguages from './Extralanguages';
 
 function getMod(stat) {
   return Math.floor(stat / 2) - 5;
@@ -41,6 +42,7 @@ export default function App() {
   let [proficiencies, setProficiencies] = useState([
     0, 1, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   ]);
+  let [extralanguages, setExtraLanguages] = useState([0]);
 
   //data resources
   let statnames = [
@@ -139,6 +141,7 @@ export default function App() {
         //ASI
         let output = stats.map((x, i) => x + data.asi[i]);
         setModStats(output);
+        ``;
       });
   }
   function loadSubrace(name) {
@@ -194,10 +197,10 @@ export default function App() {
     }
     setAllStats(stats);
   }
-  function openPointBuy(event) {
+  function openPointBuy() {
     document.getElementById('pointbuy').showModal();
   }
-  function openRollStats(event) {
+  function openRollStats() {
     document.getElementById('rollstats').showModal();
   }
   function flatStats(event) {
@@ -205,10 +208,15 @@ export default function App() {
     setAllStats(stats);
   }
 
+  //Menu modal buttons
+  function openExtraLanguages(event) {
+    document.getElementById('extralanguages').showModal();
+  }
+
   //Debug Methods
   function runDebug(event) {
     console.log('--    Debug    --');
-    console.dir(race.asi);
+    console.dir(race);
   }
   function logIt(number) {
     console.log('logit: ' + race.asi);
@@ -338,6 +346,15 @@ export default function App() {
               onClick={runDebug}
             >
               Debug
+            </button>
+          </div>
+          <div className="grid">
+            <button
+              type="button"
+              onClick={openExtraLanguages}
+              className="font-bold text-white bg-emerald-600"
+            >
+              Extra Languages
             </button>
           </div>
         </div>
@@ -578,6 +595,20 @@ export default function App() {
       </div>
       <Pointbuy submit={setAllStats} />
       <Rollstats submit={setAllStats} />
+      <Extralanguages
+        submit={setExtraLanguages}
+        givenlanguages={[
+          race.languages,
+          subrace.languages,
+          subclass.languages,
+        ]}
+        extralanguages={[
+          race.extra_languages,
+          subrace.extra_languages,
+          subclass.extra_languages,
+          background.extra_languages,
+        ].reduce((sum, curr) => sum + curr, 0)}
+      />
     </section>
   );
 }
