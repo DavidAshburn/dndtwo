@@ -3,11 +3,8 @@ import Statframe from './Statframe';
 import Pointbuy from './Pointbuy';
 import Rollstats from './Rollstats';
 import Profpane from './Profpane';
-import Armor from './Armor';
-import Weapons from './Weapons';
 import Features from './Features';
-import Languages from './Languages';
-import Collecttatics from './Collectstatics';
+import Collectstatics from './Collectstatics';
 
 function getMod(stat) {
   return Math.floor(stat / 2) - 5;
@@ -395,7 +392,7 @@ export default function App() {
         </div>
         <div className="grid items-center justify-center col-span-2 min-h-[12rem] bg-red-100">
           <p>Other Skills and Languages</p>
-          <Collecttatics
+          <Collectstatics
             data={[
               race.languages,
               subrace.languages,
@@ -518,21 +515,25 @@ export default function App() {
           <p className="self-end text-sm font-bold">
             Features and Abilities
           </p>
-          <Armor
-            pclass={pclass}
-            race={race}
-            subclass={subclass}
-            subrace={subrace}
-            background={background}
-            level={level}
+          <Collectstatics
+            data={[
+              pclass.armor,
+              race.armor,
+              subclass.armor,
+              subrace.armor,
+              background.armor,
+            ]}
+            name="Armor"
           />
-          <Weapons
-            pclass={pclass}
-            race={race}
-            subclass={subclass}
-            subrace={subrace}
-            background={background}
-            level={level}
+          <Collectstatics
+            data={[
+              pclass.weapons,
+              race.weapons,
+              subclass.weapons,
+              subrace.weapons,
+              background.weapons,
+            ]}
+            name="Weapons"
           />
           <Features
             pclass={pclass}
