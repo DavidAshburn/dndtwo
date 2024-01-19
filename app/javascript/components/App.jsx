@@ -5,7 +5,7 @@ import Rollstats from './Rollstats';
 import Profpane from './Profpane';
 import Features from './Features';
 import Collectstatics from './Collectstatics';
-import Extralanguages from './Extralanguages';
+import Racialfeatures from './Racialfeatures';
 
 function getMod(stat) {
   return Math.floor(stat / 2) - 5;
@@ -210,12 +210,15 @@ export default function App() {
   }
 
   //Menu modal buttons
-  function openExtraLanguages() {
-    document.getElementById('extralanguages').showModal();
+  function openRacialFeatures() {
+    document.getElementById('racialfeatures').showModal();
   }
-  function openExtraTools() {
-    document.getElementById('extratools').showModal();
+
+  //Modal Submit Handlers
+  function handleRacialFeatures(event) {
+    document.getElementById('racialfeatures').close();
   }
+
 
   //Debug Methods
   function runDebug(event) {
@@ -226,10 +229,6 @@ export default function App() {
     console.log('logit: ' + race.asi);
     return number;
   }
-
-  //----------------------------Util methods for PC Calculations------//
-
-  //----------------------------PC Calculations-----------------------//
 
   return (
     <section className="grid border-2 border-black sm:grid-cols-2 md:grid-cols-3">
@@ -355,10 +354,16 @@ export default function App() {
           <div className="grid">
             <button
               type="button"
-              onClick={openExtraLanguages}
+              onClick={openRacialFeatures}
               className="font-bold text-white bg-emerald-600"
             >
-              Extra Languages
+              Racial Features
+            </button>
+            <button
+              type="button"
+              className="font-bold text-white bg-emerald-600"
+            >
+              Class Features
             </button>
           </div>
         </div>
@@ -395,7 +400,7 @@ export default function App() {
                 <p>{statnames[x]}</p>
                 <p>
                   {signed(
-                    getMod(stats[x]) + Math.ceil(level * 0.25) + 1
+                    getMod(modstats[x]) + Math.ceil(level * 0.25) + 1
                   )}
                 </p>
               </div>
@@ -408,7 +413,7 @@ export default function App() {
                 name={pname[0]}
                 key={i}
                 profmod={Math.ceil(level * 0.25) + 1}
-                statmod={getMod(stats[pname[1]])}
+                statmod={getMod(modstats[pname[1]])}
                 proficient={proficiencies[i]}
               />
             ))}
@@ -416,7 +421,7 @@ export default function App() {
         </div>
         <div className="grid grid-cols-[1fr_3fr] col-span-2 border border-blue-800 rounded-md">
           <p>
-            {10 + getMod(stats[4]) + (Math.ceil(level * 0.25) + 1)}
+            {10 + getMod(modstats[4]) + (Math.ceil(level * 0.25) + 1)}
           </p>
           <p>Passive Perception</p>
         </div>
@@ -448,11 +453,11 @@ export default function App() {
       <div className="flex flex-col gap-2 text-center">
         <div className="grid grid-cols-3">
           <div className="p-2 text-lg border-2 border-blue-700 h-fit">
-            <p className="font-bold">{10 + getMod(stats[1])}</p>
+            <p className="font-bold">{10 + getMod(modstats[1])}</p>
             <p>AC</p>
           </div>
           <div className="p-2 text-lg border-2 border-blue-700 h-fit">
-            <p className="font-bold">{getMod(stats[1])}</p>
+            <p className="font-bold">{getMod(modstats[1])}</p>
             <p>Initiative</p>
           </div>
           <div className="p-2 text-lg border-2 border-blue-700 h-fit">
@@ -463,8 +468,8 @@ export default function App() {
         <div className="grid grid-cols-2">
           <div className="p-2 text-lg border-2 border-blue-700 h-fit">
             <p className="font-bold">
-              {Math.floor(pclass.hit_die * 0.75) * level +
-                getMod(stats[2]) * level}
+              {Math.floor((pclass.hit_die || 10)* 0.75) * level +
+                getMod(modstats[2]) * level}
             </p>
             <p>HP</p>
           </div>
@@ -603,20 +608,7 @@ export default function App() {
       </div>
       <Pointbuy submit={setAllStats} />
       <Rollstats submit={setAllStats} />
-      <Extralanguages
-        submit={setExtraLanguages}
-        givenlanguages={[
-          race.languages,
-          subrace.languages,
-          subclass.languages,
-        ]}
-        extralanguages={[
-          race.extra_languages,
-          subrace.extra_languages,
-          subclass.extra_languages,
-          background.extra_languages,
-        ].reduce((sum, curr) => sum + curr, 0)}
-      />
+      <Racialfeatures race={race} submit={handleRacialFeatures}/>
     </section>
   );
 }
