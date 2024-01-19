@@ -219,11 +219,10 @@ export default function App() {
     document.getElementById('racialfeatures').close();
   }
 
-
   //Debug Methods
   function runDebug(event) {
     console.log('--    Debug    --');
-    console.dir(race);
+    console.dir(background.features);
   }
   function logIt(number) {
     console.log('logit: ' + race.asi);
@@ -468,7 +467,7 @@ export default function App() {
         <div className="grid grid-cols-2">
           <div className="p-2 text-lg border-2 border-blue-700 h-fit">
             <p className="font-bold">
-              {Math.floor((pclass.hit_die || 10)* 0.75) * level +
+              {Math.floor((pclass.hit_die || 10) * 0.75) * level +
                 getMod(modstats[2]) * level}
             </p>
             <p>HP</p>
@@ -608,7 +607,11 @@ export default function App() {
       </div>
       <Pointbuy submit={setAllStats} />
       <Rollstats submit={setAllStats} />
-      <Racialfeatures race={race} submit={handleRacialFeatures}/>
+      <Racialfeatures
+        race={race}
+        subrace={subrace}
+        submit={handleRacialFeatures}
+      />
     </section>
   );
 }

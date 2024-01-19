@@ -18,7 +18,7 @@ class LabelsController < ApplicationController
     pcraces = Race.all.sort { |a,b| a.name <=> b.name }
     subraces = pcraces.first.subraces.all.sort { |a,b| a.name <=> b.name }
     pclasses = PlayerClass.all.sort { |a,b| a.name <=> b.name }
-    subclasses = pclasses.first.subclasses.all.sort { |a,b| a.name <=> b.name }
+    subclasses = pclasses.first.subclasses.all.select{ |item| item.name == "None"}
     backgrounds = Background.all.sort { |a,b| a.name <=> b.name }
 
     @initial = { pcrace: pcraces[0], subrace: subraces[0], pclass: pclasses[0], subclass: subclasses[0], background: backgrounds[0] }

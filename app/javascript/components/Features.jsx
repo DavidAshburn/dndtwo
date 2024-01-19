@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Expanditem from './Expanditem';
 
 export default function Features(props) {
   //class features only
@@ -34,35 +35,58 @@ export default function Features(props) {
 
     let statnames = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
 
-    asi.forEach((val, i) => {
-      if (val > 0) {
-        levelfeats.push('+' + val + ' to ' + statnames[i]);
-      }
-    });
+    if (asi != -1) {
+      asi.forEach((val, i) => {
+        if (val > 0) {
+          levelfeats.push('+' + val + ' to ' + statnames[i]);
+        }
+      });
+    }
 
     return levelfeats;
   }
 
   return (
-    <div className="grid gap-2 p-2">
+    <div className="grid gap-2 p-2 text-start">
       <p className="row-span-2 font-bold">Racial Features:</p>
-      {props.race.features &&
-        props.race.features.map((feat, i) => (
-          <p key={i} className="text-start">
-            {feat}
-          </p>
-        ))}
+      <div className="grid gap-2 pl-2">
+        {props.race.features &&
+          props.race.features.map((feat, i) => (
+            <Expanditem feature={feat} key={i} />
+          ))}
+      </div>
+      <p className="row-span-2 font-bold">Subrace Features:</p>
+      <div className="grid gap-2 pl-2">
+        {props.subrace.features &&
+          props.subrace.features.map((feat, i) => (
+            <Expanditem feature={feat} key={i} />
+          ))}
+      </div>
       <p className="row-span-2 font-bold">Class Features:</p>
-      {props.pclass.features &&
-        getLeveledFeatures(
-          props.pclass.features,
-          props.level,
-          props.race.asi
-        ).map((feat, i) => (
-          <p key={i} className="text-start">
-            {feat}
-          </p>
-        ))}
+      <div className="grid gap-2 pl-2">
+        {props.pclass.features &&
+          getLeveledFeatures(
+            props.pclass.features,
+            props.level,
+            props.race.asi
+          ).map((feat, i) => <Expanditem feature={feat} key={i} />)}
+      </div>
+      <p className="row-span-2 font-bold">Subclass Features:</p>
+      <div className="grid gap-2 pl-2">
+        {props.subclass.features &&
+          getLeveledFeatures(
+            props.subclass.features,
+            props.level,
+            -1
+          ).map((feat, i) => <Expanditem feature={feat} key={i} />)}
+      </div>
+      <p className="row-span-2 font-bold">Background Features:</p>
+      <div className="grid gap-2 pl-2">
+        {props.background.features &&
+          props.background.features.map((feat, i) => (
+            <Expanditem feature={feat} key={i} />
+          ))}
+      </div>
     </div>
   );
 }
