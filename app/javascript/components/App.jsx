@@ -428,6 +428,26 @@ export default function App() {
           <p>Other Skills and Languages</p>
           <Collectstatics
             data={[
+              pclass.armor,
+              race.armor,
+              subclass.armor,
+              subrace.armor,
+              background.armor,
+            ]}
+            name="Armor"
+          />
+          <Collectstatics
+            data={[
+              pclass.weapons,
+              race.weapons,
+              subclass.weapons,
+              subrace.weapons,
+              background.weapons,
+            ]}
+            name="Weapons"
+          />
+          <Collectstatics
+            data={[
               race.tools,
               subrace.tools,
               pclass.tools,
@@ -553,26 +573,6 @@ export default function App() {
           <p className="self-end text-sm font-bold">
             Features and Abilities
           </p>
-          <Collectstatics
-            data={[
-              pclass.armor,
-              race.armor,
-              subclass.armor,
-              subrace.armor,
-              background.armor,
-            ]}
-            name="Armor"
-          />
-          <Collectstatics
-            data={[
-              pclass.weapons,
-              race.weapons,
-              subclass.weapons,
-              subrace.weapons,
-              background.weapons,
-            ]}
-            name="Weapons"
-          />
           <Features
             pclass={pclass}
             race={race}

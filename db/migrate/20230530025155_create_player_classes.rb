@@ -4,7 +4,6 @@ class CreatePlayerClasses < ActiveRecord::Migration[7.0]
       t.string :name
       t.integer :hit_die
       t.integer :starting_hp
-      t.integer :primary_abilities, array: true, default: []
       t.integer :saving_throws, array: true, default: []
       t.string :armor, array: true, default: []
       t.string :weapons, array: true, default: []
