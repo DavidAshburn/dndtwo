@@ -216,13 +216,28 @@ export default function App() {
 
   //Modal Submit Handlers
   function handleRacialFeatures(event) {
-    document.getElementById('racialfeatures').close();
+    let modalframe = document.getElementById('racialfeatures');
+    let langframe = document.getElementById(
+      'raciallanguageselectframe'
+    );
+    let takenlangs = [];
+    for (let item of langframe.children) {
+      takenlangs.push(item.value);
+    }
+
+    setExtraLanguages(takenlangs);
+    modalframe.close();
   }
 
   //Debug Methods
   function runDebug(event) {
     console.log('--    Debug    --');
-    console.dir(background.features);
+    console.log(pclass.tools);
+    console.log(subclass.tools);
+    console.log(subrace.tools);
+    console.log(race.tools);
+    console.log(background.tools);
+    console.log(race.tool_choice);
   }
   function logIt(number) {
     console.log('logit: ' + race.asi);
@@ -605,12 +620,17 @@ export default function App() {
           </div>
         </div>
       </div>
+
+      {/* Modal Components */}
       <Pointbuy submit={setAllStats} />
       <Rollstats submit={setAllStats} />
       <Racialfeatures
         race={race}
         subrace={subrace}
-        submit={handleRacialFeatures}
+        pclass={pclass}
+        subclass={subclass}
+        background={background}
+        submitFunc={handleRacialFeatures}
       />
     </section>
   );

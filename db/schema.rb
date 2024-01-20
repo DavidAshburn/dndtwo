@@ -167,7 +167,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_194224) do
     t.integer "wealth_die", default: 2
     t.integer "wealth_mult", default: 10
     t.text "features", default: "{}"
-    t.text "custom", default: "{}"
+    t.text "leveled_choice", default: "{}"
     t.text "custom_mods", default: "{}"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -218,7 +218,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_194224) do
     t.integer "player_class_id"
     t.string "name"
     t.text "features", default: "{}"
-    t.text "custom", default: "{}"
+    t.text "leveled_choice", default: "{}"
     t.text "extra_spells", default: "{}"
     t.text "custom_mods", default: "{}"
     t.text "specific_spells", default: "{}"
