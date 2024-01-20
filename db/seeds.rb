@@ -730,7 +730,7 @@ Barbarian = PlayerClass.create(
     [0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0],
   ],
-  custom: {},
+  leveled_choice: {},
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
@@ -739,7 +739,7 @@ Barbarian = PlayerClass.create(
 Barbarian.subclasses.create(
   name: "None",
   features: {},
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -754,7 +754,7 @@ Barbarian.subclasses.create(
     10=> ['Intimidating Presence: You can use your action to frighten someone with your menacing presence. Choose one creature you can see within 30 feet, if it can see or hear you it must succeed on a WIS save with DC of 8 plus your proficiency bonus plus your CHA modifier, or be frightened of you until the end of your next turn. On subsequent turns you can use your action to extend this effect another turn. The effect ends if the creature ends its turn out of line of sight or more than 60 feet away. If they successfully save, you can`t use this on them again for 24 hours.'],
     14=> ['Retaliation: When you take damage from a creature within 5 feet of you, you can use your reaction to make a melee weapon attack against that creature.']
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -769,7 +769,7 @@ Barbarian.subclasses.create(
     10=> ['Spirit Walker: You can cast the Commune With Nature spell as a ritual. When you do, a spiritual version of one of your totem animals appears to you to convey the information you seek.'],
     14=> ['Totemic Attunement: You gain a magical benefit based on the totem animal of your choice.']
   },
-  custom: {
+  leveled_choice: {
     3=> [
       'Bear: While raging, you have resistance to all damage except psychic damage. The spirit of the bear makes you tough enough to stand up to any punishment.',
       'Eagle: While you`re ragina and aren`t wearing heavy armor, other creatures have disadvantage on opportunity attack rolls against you, and you can use the Dash action as a bonus action on your turn. The spirit of the eagle makes you into a predator who can weave through the gray with ease.',
@@ -887,7 +887,7 @@ Bard = PlayerClass.create(
       "Superior Inspiration: When you roll initiative and have no uses of Bardic Inspiration left, you regain one use."
     ],
   },
-  custom: {},
+  leveled_choice: {},
   extra_spells: {
     'Any'=> {
       'source'=> 'Magical Secrets',
@@ -908,7 +908,7 @@ Bard = PlayerClass.create(
 Bard.subclasses.create(
   name: "None",
   features: {},
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -930,7 +930,7 @@ Bard.subclasses.create(
       "Peerless Skill: When you make an ability check, you can expend one use of Bardic Inspiration. Roll a Bardic Inspiration die and add the number rolled to your ability check. You can choose to do so after you roll the die for the ability check, but before the DM tells you whether you succeed or fail.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {
     'Any'=> {
@@ -966,7 +966,7 @@ Bard.subclasses.create(
       "Battle Magic: You have mastered the art of weaving spellcasting and weapon use into a single harmonious act. When you use your action to cast a bard spell, you can make one weapon attack as a bonus action.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   armor: ['Medium','Shields'],
   weapons: ['Martial'],
@@ -1053,7 +1053,7 @@ Cleric = PlayerClass.create(
       "Command the Gods: Your call for Diving Intervention succeeds automatically.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
@@ -1062,7 +1062,7 @@ Cleric = PlayerClass.create(
 Cleric.subclasses.create(
   name: "None",
   features: {},
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -1094,7 +1094,7 @@ Cleric.subclasses.create(
     ],
   },
   extra_languages: 2,
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {
@@ -1136,7 +1136,7 @@ Cleric.subclasses.create(
     ],
   },
   armor: ["Heavy"],
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {
@@ -1176,7 +1176,7 @@ Cleric.subclasses.create(
       "Corona of Light: You can use your action to activate an aura of sunlight that lasts for 1 minute or until you dismiss it using another action. You emit bright light in a 60-foot radius and dim light 30 feet beyond that. Your enemies in the bright light have disadvantage on saving throws against any spell that deals fire or radiant damage.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {
@@ -1215,7 +1215,7 @@ Cleric.subclasses.create(
     ],
   },
   armor: ["Heavy"],
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {
     'Druid'=> {
@@ -1265,7 +1265,7 @@ Cleric.subclasses.create(
   },
   weapons: ["Martial"],
   armor: ["Heavy"],
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {
@@ -1306,7 +1306,7 @@ Cleric.subclasses.create(
       "Improved Duplicity: You can create up to four duplicates of yourself, instead of one, when you use Invoke Duplicity. As a bonus action on your turn, you can move any number of them up to 30 feet, to a maximum range of 120 feet.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {
@@ -1346,7 +1346,7 @@ Cleric.subclasses.create(
   },
   weapons: ["Martial"],
   armor: ["Heavy"],
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {
@@ -1437,7 +1437,7 @@ Druid = PlayerClass.create(
       Additionally, you can ignore the verbal and somatic components of your druid spells, as well as any material components that lack a cost and aren't consumed by a spell. You gain this benefit in both your normal shape and your beast shape from Wild Shape.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
@@ -1446,7 +1446,7 @@ Druid = PlayerClass.create(
 Druid.subclasses.create(
   name: "None",
   features: {},
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -1475,7 +1475,7 @@ Druid.subclasses.create(
       "Thousand Forms: You have learned to use magic to alter your physical form in more subtle ways. You can cast the Alter Self spell at will."
     ]
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {
@@ -1506,7 +1506,7 @@ Druid.subclasses.create(
       The creature is aware of this effect before it makes its attack against you.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {
@@ -1540,7 +1540,7 @@ Druid.subclasses.create(
       The creature is aware of this effect before it makes its attack against you.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {
@@ -1574,7 +1574,7 @@ Druid.subclasses.create(
       The creature is aware of this effect before it makes its attack against you.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {
@@ -1608,7 +1608,7 @@ Druid.subclasses.create(
       The creature is aware of this effect before it makes its attack against you.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {
@@ -1642,7 +1642,7 @@ Druid.subclasses.create(
       The creature is aware of this effect before it makes its attack against you.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {
@@ -1676,7 +1676,7 @@ Druid.subclasses.create(
       The creature is aware of this effect before it makes its attack against you.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {
@@ -1710,7 +1710,7 @@ Druid.subclasses.create(
       The creature is aware of this effect before it makes its attack against you.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {
@@ -1744,7 +1744,7 @@ Druid.subclasses.create(
       The creature is aware of this effect before it makes its attack against you.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {
@@ -1827,7 +1827,7 @@ Fighter = PlayerClass.create(
       "Tetra-Strike: You can attack four times when you take the Attack action on your turn.",
     ],
   },
-  custom: {
+  leveled_choice: {
     1=> [
       "Archery: You gain a +2 bonus to attack rolls you make with ranged weapons.",
       "Defense: While you are wearing armor, you gain a +1 bonus to AC.",
@@ -1866,7 +1866,7 @@ Fighter = PlayerClass.create(
 Fighter.subclasses.create(
   name: "None",
   features: {},
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -1876,7 +1876,7 @@ Fighter.subclasses.create(
 Fighter.subclasses.create(
   name: "Champion",
   description: "The archetypal Champion focuses on the development of raw physical power honed to deadly perfection. Those who model themselves on this archetype combine rigorous training with physical excellence to deal devastating blows.",
-  custom: {
+  leveled_choice: {
     10=>[
       "Archery: You gain a +2 bonus to attack rolls you make with ranged weapons.",
       "Defense: While you are wearing armor, you gain a +1 bonus to AC.",
@@ -1911,7 +1911,7 @@ Fighter.subclasses.create(
 Fighter.subclasses.create(
   name: "Battle Master",
   description: "Those who emulate the archetypal Battle Master employ martial techniques passed down through generations. To a Battle Master, combat is an academic field, sometimes including subjects beyond battle such as weaponsmithing and calligraphy. Not every fighter absorbs the lessons of history, theory, and artistry that are reflected in the Battle Master archetype, but those who do are well-rounded fighters of great skill and knowledge.",
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {
     'choices' => [
       ['artisan#1'],
@@ -2007,7 +2007,7 @@ Fighter.subclasses.create(
 Fighter.subclasses.create(
   name: "Eldritch Knight",
   description: "The archetypal Eldritch Knight combines the martial mastery common to all fighters with a careful study of magic. Eldritch Knights use magical techniques similar to those practiced by wizards. They focus their study on two of the eight schools of magic: abjuration and evocation. Abjuration spells grant an Eldritch Knight additional protection in battle, and evocation spells deal damage to many foes at once, extending the fighter's reach in combat. These knights learn a comparatively small number of spells, committing them to memory instead of keeping them in a spellbook.",
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   features: {
     3=> [
@@ -2166,7 +2166,7 @@ Monk = PlayerClass.create(
       "Perfect Self: When you roll for initiative and have no ki points remaining, you regain 4 ki points.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   custom_mods: {
     'dice'=> [
       {
@@ -2236,7 +2236,7 @@ Monk = PlayerClass.create(
 Monk.subclasses.create(
   name: "None",
   features: {},
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -2246,7 +2246,7 @@ Monk.subclasses.create(
 Monk.subclasses.create(
   name: "Way of the Open Hand",
   description: "Monks of the Way of the Open Hand are the ultimate masters of martial arts combat, whether armed or unarmed. They learn techniques to push and trip their opponents, manipulate ki to heal damage to their bodies, and practice advanced meditation that can protect them from harm.",
-  custom: {},
+  leveled_choice: {},
   features: {
     3=> [
       "Way of the Open Hand: You can manipulate your enemy’s ki when you harness your own. Whenever you hit a creature with one of the attacks granted by your Flurry of Blows, you can impose one of the following effects on that target:
@@ -2274,7 +2274,7 @@ Monk.subclasses.create(
 Monk.subclasses.create(
   name: "Way of the Four Elements",
   description: "You follow a monastic tradition that teaches you to harness the elements. When you focus your ki, you can align yourself with the forces of creation and bend the four elements to your will, using them as an extension of your body. Some members of this tradition dedicate themselves to a single element, but others weave the elements together.",
-  custom: {},
+  leveled_choice: {},
   features: {
     3=> [
       "Way of the Four Elements: you learn magical disciplines that harness the power of the four elements. A discipline requires you to spend ki points each time you use it.
@@ -2337,7 +2337,7 @@ Monk.subclasses.create(
 Monk.subclasses.create(
   name: "Way of Shadow",
   description: "Monks of the Way of Shadow follow a tradition that values stealth and subterfuge. These monks might be called ninjas or shadowdancers, and they serve as spies and assassins. Sometimes the members of a ninja monastery are family members, forming a clan sworn to secrecy about their arts and missions. Other monasteries are more like thieves' guilds, hiring out their services to nobles, rich merchants, or anyone else who can pay their fees.",
-  custom: {},
+  leveled_choice: {},
   features: {
     3=> [
       "Shadow Arts: You can use your ki to duplicate the effects of certain spells. As an action, you can spend 2 ki points to cast darkness, darkvision, pass without trace, or silence, without providing material components. Additionally, you gain the minor illusion cantrip if you don't already know it.",
@@ -2471,7 +2471,7 @@ Paladin = PlayerClass.create(
       "Ability Score Increase:"
     ],
   },
-  custom: {
+  leveled_choice: {
     2=> [
       "Blind Fighting: You have blindsight with a range of 10 feet. Within that range, you can effectively see anything that isn't behind total cover, even if you're blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you.",
       "Defense: While you are wearing armor, you gain a +1 bonus to AC.",
@@ -2489,7 +2489,7 @@ Paladin = PlayerClass.create(
 Paladin.subclasses.create(
   name: "None",
   features: {},
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -2499,7 +2499,7 @@ Paladin.subclasses.create(
 Paladin.subclasses.create(
   name: "Oath of the Ancients",
   description: "The Oath of the Ancients is as old as the race of elves and the rituals of the druids. Sometimes called fey knights, green knights, or horned knights, paladins who swear this oath cast their lot with the side of the light in the cosmic struggle against darkness because they love the beautiful and life-giving things of the world, not necessarily because they believe in principles of honor, courage, and justice. They adorn their armor and clothing with images of growing things-leaves, antlers, or flowers-to reflect their commitment to preserving life and light in the world.",
-  custom: {
+  leveled_choice: {
     3=>[
       "Nature's Wrath: You can use your Channel Divinity to invoke primeval forces to ensnare a foe. As an action, you can cause spectral vines to spring up and reach for a creature within 10 feet of you that you can see. The creature must succeed on a Strength or Dexterity saving throw (its choice) or be restrained. While restrained by the vines, the creature repeats the saving throw at the end of each of its turns. On a success, it frees itself and the vines vanish.",
       "Turn the Faithless: You can use your Channel Divinity to utter ancient words that are painful for fey and fiends to hear. As an action, you present your holy symbol, and each fey or fiend within 30 feet of you that can hear you must make a Wisdom saving throw. On a failed save, the creature is turned for 1 minute or until it takes damage.
@@ -2561,7 +2561,7 @@ Paladin.subclasses.create(
 Paladin.subclasses.create(
   name: "Oath of Devotion",
   description: "The Oath of Devotion binds a paladin to the loftiest ideals of justice, virtue, and order. Sometimes called cavaliers, white knights, or holy warriors, these paladins meet the ideal of the knight in shining armor, acting with honor in pursuit of justice and the greater good. They hold themselves to the highest standards of conduct, and some, for better or worse, hold the rest of the world to the same standards. Many who swear this oath are devoted to gods of law and good and use their gods' tenets as the measure of their devotion.",
-  custom: {
+  leveled_choice: {
     3=>[
       "Sacred Weapon: As an action, you can imbue one weapon that you are holding with positive energy, using your Channel Divinity. For 1 minute, you add your Charisma modifier to attack rolls made with that weapon (with a minimum bonus of +1). The weapon also emits bright light in a 20-foot radius and dim light 20 feet beyond that. If the weapon is not already magical, it becomes magical for the duration.
 
@@ -2620,7 +2620,7 @@ Paladin.subclasses.create(
 Paladin.subclasses.create(
   name: "Oath of Vengeance",
   description: "The Oath of Vengeance is a solemn commitment to punish those who have committed a grievous sin. When evil forces slaughter helpless villagers, when an entire people turns against the will of the gods, when a thieves' guild grows too violent and powerful, when a dragon rampages through the countryside – at times like these, paladins arise and swear an Oath of Vengeance to set right that which has gone wrong. To these paladins – sometimes called avengers or dark knights – their own purity is not as important as delivering justice.",
-  custom: {
+  leveled_choice: {
     3=>[
       "Abjure Enemy: As an action, you present your holy symbol and speak a prayer of denunciation, using your Channel Divinity. Choose one creature within 60 feet of you that you can see. That creature must make a Wisdom saving throw, unless it is immune to being frightened. Fiends and undead have disadvantage on this saving throw.
 
@@ -2778,7 +2778,7 @@ Ranger = PlayerClass.create(
       "Foe Slayer: You become an unparalleled hunter of your enemies. Once on each of your turns, you can add your Wisdom modifier to the attack roll or the damage roll of an attack you make against one of your favored enemies. You can choose to use this feature before or after the roll, but before any effects of the roll are applied."
     ],
   },
-  custom: {
+  leveled_choice: {
     2=>[
       "Archery: You gain a +2 bonus to attack rolls you make with ranged weapons.",
       "Defense: While you are wearing armor, you gain a +1 bonus to AC.",
@@ -2794,7 +2794,7 @@ Ranger = PlayerClass.create(
 Ranger.subclasses.create(
   name: "None",
   features: {},
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -2804,7 +2804,7 @@ Ranger.subclasses.create(
 Ranger.subclasses.create(
   name: "Hunter",
   description: "Emulating the Hunter archetype means accepting your place as a bulwark between civilization and the terrors of the wilderness. As you walk the Hunter's path, you learn specialized techniques for fighting the threats you face, from rampaging ogres and hordes of orcs to towering giants and terrifying dragons.",
-  custom: {
+  leveled_choice: {
     3=>[
       "Colossus Slayer: Your tenacity can wear down the most potent foes. When you hit a creaure wih a weapon attack, the creature akes an exra 1d8 damage if it's below its hit point maximum. You can deal this extra damage only oce per turn.",
       "Giant Killer: When a Large or larger creature within 5 feet of you hits or misses you with an attck, you can use your reaction to attack that creature immediately after its attack, provided that you can see the creature.",
@@ -2844,7 +2844,7 @@ Ranger.subclasses.create(
     11=>["When you command your beast companion to take the Attack action, the beast can make two attcks, or it can take the Multiattack action if it has that action."],
     15=>["When you cast a spell targeting yourself, you can also affect your beast companion with the spell if the beast is within 30 feet of you."],
     },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -2927,7 +2927,7 @@ Rogue = PlayerClass.create(
       Once you use this feature, you can't use it again until you finish a short or long rest.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
@@ -2959,7 +2959,7 @@ Rogue = PlayerClass.create(
 Rogue.subclasses.create(
   name: "None",
   features: {},
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -2986,7 +2986,7 @@ Rogue.subclasses.create(
 
       Once you use this feature, you can't use it again until you finish a long rest."],
     },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {
@@ -3036,7 +3036,7 @@ Rogue.subclasses.create(
     17=>["Death Strike: You become a master of instant death. When you attack and hit a creature that is surprised, it must make a Constitution saving throw (DC 8 + your Dexterity modifier + your proficiency bonus). On a failed save, double the damage of your attack against the creature."],
     },
   tools: ["Disguise Kit","Poisoner's Kit"],
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -3057,7 +3057,7 @@ Rogue.subclasses.create(
     13=>["Use Magic Device: You have learned enough about the workings of magic that you can improvise the use of items even when they are not intended for you. You ignore all class, race, and level requirements on the use of magic items."],
     17=>["Thief's Reflexes: You have become adept at laying ambushes and quickly escaping danger. You can take two turns during the first round of any combat. You take your first turn at your normal initiative and your second turn at your initiative minus 10. You can't use this feature when you are surprised."],
     },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -3143,7 +3143,7 @@ Sorceror = PlayerClass.create(
       "Sorcerous Restoration: You regain 4 expended sorcery points whenever you finish a short rest.",
     ]
   },
-  custom: {},
+  leveled_choice: {},
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
@@ -3152,7 +3152,7 @@ Sorceror = PlayerClass.create(
 Sorceror.subclasses.create(
   name: "None",
   features: {},
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -3181,7 +3181,7 @@ Sorceror.subclasses.create(
       "Draconic Presence: You can channel the dread presence of your dragon ancestor, causing those around you to become awestruck or frightened. As an action, you can spend 5 sorcery points to draw on this power and exude an aura of awe or fear (your choice) to a distance of 60 feet. For 1 minute or until you lose your concentration (as if you were casting a concentration spell), each hostile creature that starts its turn in this aura must succeed on a Wisdom saving throw or be charmed (if you chose awe) or frightened (if you chose fear) until the aura ends. A creature that succeeds on this saving throw is immune to your aura for 24 hours.",
     ],
   },
-  custom: {
+  leveled_choice: {
     1=> [
       "Black: Acid Damage",
       "Blue: Lightning Damage",
@@ -3222,7 +3222,7 @@ Sorceror.subclasses.create(
       "Spell Bombardment: The harmful energy of your spells intensifies. When you roll damage for a spell and roll the highest number possible on any of the dice, choose one of those dice, roll it again and add that roll to the damage. You can use the feature only once per turn.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -3311,7 +3311,7 @@ Warlock = PlayerClass.create(
       "Eldritch Master: You can draw on your inner reserve of mystical power while entreating your patron to regain expended spell slots. You can spend 1 minute entreating your patron for aid to regain all your expended spell slots from your Pact Magic feature. Once you regain spell slots with this feature, you must finish a long rest before you can do so again.",
     ]
   },
-  custom: {
+  leveled_choice: {
     3=>[
       "Pact of the Chain: You learn the find familiar spell and can cast it as a ritual. The spell doesn’t count against your number of spells known.
 
@@ -3453,7 +3453,7 @@ Warlock = PlayerClass.create(
 Warlock.subclasses.create(
   name: "None",
   features: {},
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -3485,7 +3485,7 @@ Warlock.subclasses.create(
       You must finish a short or long rest before you can use this feature again.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -3528,7 +3528,7 @@ Warlock.subclasses.create(
       Once you use this feature, you can’t use it again until you finish a long rest.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -3569,7 +3569,7 @@ Warlock.subclasses.create(
       You can communicate telepathically with the charmed creature as long as the two of you are on the same plane of existence.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -3669,7 +3669,7 @@ Wizard = PlayerClass.create(
       If you want to cast either spell at a higher level, you must expend a spell slot as normal.",
     ]
   },
-  custom: {},
+  leveled_choice: {},
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
@@ -3678,7 +3678,7 @@ Wizard = PlayerClass.create(
 Wizard.subclasses.create(
   name: "None",
   features: {},
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -3711,7 +3711,7 @@ Wizard.subclasses.create(
       Furthermore, you have resistance against the damage of spells.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -3740,7 +3740,7 @@ Wizard.subclasses.create(
       "Durable Summons: Any creature that you summon or create with a conjuration spell has 30 temporary hit points.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -3775,7 +3775,7 @@ Wizard.subclasses.create(
       "Greater Portent: The visions in your dreams intensify and paint a more accurate picture in your mind of what is to come. You roll three d20s for your Portent feature, rather than two.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -3810,7 +3810,7 @@ Wizard.subclasses.create(
       Additionally, once before the spell expires, you can use your action to try to make the chosen creature forget some of the time it spent charmed. The creature must succeed on an Intelligence saving throw against your wizard spell save DC or lose a number of hours of its memories equal to 1 + your Charisma modifier (minimum 1). You can make the creature forget less time, and the amount of time can't exceed the duration of your enchantment spell.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -3837,7 +3837,7 @@ Wizard.subclasses.create(
       The first time you do so, you suffer no adverse effect. If you use this feature again before you finish a long rest, you take 2d12 necrotic damage for each level of the spell, immediately after you cast it. Each time you use this feature again before finishing a long rest, the necrotic damage per spell level increases by 1d12. This damage ignores resistance and immunity.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -3868,7 +3868,7 @@ Wizard.subclasses.create(
       The object can't deal damage or otherwise directly harm anyone.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -3902,7 +3902,7 @@ Wizard.subclasses.create(
       Intelligent undead are harder to control in this way. If the target has an Intelligence of 8 or higher, it has advantage on the saving throw. If it fails the saving throw and has an Intelligence of 12 or higher, it can repeat the saving throw at the end of every hour until it succeeds and breaks free.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},
@@ -3947,7 +3947,7 @@ Wizard.subclasses.create(
       Restore Youth. You touch the transmuter's stone to a willing creature, and that creature's apparent age is reduced by 3d10 years, to a minimum of 13 years. This effect doesn't extend the creature's lifespan.",
     ],
   },
-  custom: {},
+  leveled_choice: {},
   equipment_choices: {},
   extra_spells: {},
   specific_spells: {},

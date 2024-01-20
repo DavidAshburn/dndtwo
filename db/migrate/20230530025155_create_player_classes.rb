@@ -19,7 +19,7 @@ class CreatePlayerClasses < ActiveRecord::Migration[7.0]
       t.integer :wealth_die, default: 2
       t.integer :wealth_mult, default: 10
       t.text :features, default: "{}"
-      t.text :custom, default: "{}"
+      t.text :leveled_choice, default: "{}"
       t.text :custom_mods, default: "{}"
 
       t.timestamps

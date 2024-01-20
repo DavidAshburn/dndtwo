@@ -153,7 +153,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_194224) do
     t.string "name"
     t.integer "hit_die"
     t.integer "starting_hp"
-    t.integer "primary_abilities", default: [], array: true
     t.integer "saving_throws", default: [], array: true
     t.string "armor", default: [], array: true
     t.string "weapons", default: [], array: true

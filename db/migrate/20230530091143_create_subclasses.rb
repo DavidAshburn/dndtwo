@@ -4,7 +4,7 @@ class CreateSubclasses < ActiveRecord::Migration[7.0]
       t.integer :player_class_id
       t.string :name
       t.text :features, default: "{}"
-      t.text :custom, default: "{}"
+      t.text :leveled_choice, default: "{}"
       t.text :extra_spells, default: "{}"
       t.text :custom_mods, default: "{}"
       t.text :specific_spells, default: "{}"
