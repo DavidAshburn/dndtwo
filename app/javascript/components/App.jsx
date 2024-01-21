@@ -28,8 +28,9 @@ export default function App() {
 
   //set by stat methods
   let [stats, setStats] = useState([8, 8, 8, 8, 8, 8]);
-  //store stat modifiers here and add to stats in displays
-  let [modstats, setModStats] = useState([0, 0, 0, 0, 0, 0]);
+  let [rasi, setRASI] = useState([0, 0, 0, 0, 0, 0]);
+  let [srasi, setSRASI] = useState([0, 0, 0, 0, 0, 0]);
+  let [casi, setCASI] = useState([0, 0, 0, 0, 0, 0]);
 
   let [level, setLevel] = useState(1);
   let [race, setRace] = useState({});
@@ -144,9 +145,8 @@ export default function App() {
       .then((response) => response.json())
       .then((data) => {
         setRace(data);
-        //ASI adjustent to modstats
-        let output = modstats.map((x, i) => x + data.asi[i]);
-        setModStats(output);
+        //ASI adjustent to rasi
+        setRASI(data.asi);
         //racial skills
         let indexes = [];
         data.skills.forEach((skill) => {
@@ -164,9 +164,8 @@ export default function App() {
       .then((response) => response.json())
       .then((data) => {
         setSubrace(data);
-        //ASI adjustment to modstats
-        let output = modstats.map((x, i) => x + data.asi[i]);
-        setModStats(output);
+        //ASI adjustment to srasi
+        setSRASI(data.asi);
         //subrace skills
         let indexes = [];
         data.skills.forEach((skill) => {
@@ -286,9 +285,9 @@ export default function App() {
       if (i > 0) takenasi[item.value] += 1;
       i++;
     }
-    //ASI adjustment to modstats
-    let output = modstats.map((x, i) => x + takenasi[i]);
-    setModStats(output);
+    console.log('takenasi: ' + takenasi);
+    //ASI adjustment
+    setCASI(takenasi);
 
     let skillframe = document.getElementById(
       'racialskillselectframe'
@@ -299,13 +298,10 @@ export default function App() {
       if (i > 0) takenskills.push(item.value);
       i++;
     }
-    console.log(takenskills);
-    console.log(proficiencies);
     let newprofs = proficiencies;
     for (let val of takenskills) {
       if (newprofs[val] == 0) newprofs[val]++;
     }
-    console.log(newprofs);
     setProficiencies(newprofs);
     //update proficiencies state
 
@@ -315,9 +311,11 @@ export default function App() {
   //Debug Methods
   function runDebug(event) {
     console.log('--    Debug    --');
-    fetch(`/subclasses/index`)
+    /*fetch(`/subclasses/index`)
       .then((response) => response.json())
       .then((data) => debugData(data));
+      */
+    console.log(stats);
   }
 
   function debugData(data) {
@@ -477,13 +475,11 @@ export default function App() {
       <div className="grid grid-cols-[1fr_2fr] text-center gap-2">
         {/* Base Stats */}
         <div className="grid gap-2 bg-gray-100">
-          {modstats.map((stat, i) => (
+          {stats.map((stat, i) => (
             <Statframe
-              stat={stat + stats[i]}
-              key={i}
-              mod={getMod(stat + stats[i])}
+              stat={stats[i] + casi[i] + rasi[i] + srasi[i]}
               dex={i}
-              race={race}
+              key={i}
             />
           ))}
         </div>
@@ -504,7 +500,7 @@ export default function App() {
                 <p>{statnames[x]}</p>
                 <p>
                   {signed(
-                    getMod(modstats[x] + stats[x]) +
+                    getMod(stats[i] + casi[i] + rasi[i] + srasi[i]) +
                       Math.ceil(level * 0.25) +
                       1
                   )}
@@ -519,7 +515,12 @@ export default function App() {
                 name={pname[0]}
                 key={i}
                 profmod={Math.ceil(level * 0.25) + 1}
-                statmod={getMod(modstats[pname[1]] + stats[pname[1]])}
+                statmod={getMod(
+                  stats[pname[1]] +
+                    casi[pname[1]] +
+                    rasi[pname[1]] +
+                    srasi[pname[1]]
+                )}
                 proficient={proficiencies[i]}
               />
             ))}
@@ -528,7 +529,7 @@ export default function App() {
         <div className="grid grid-cols-[1fr_3fr] col-span-2 border border-blue-800 rounded-md">
           <p>
             {10 +
-              getMod(modstats[4] + stats[4]) +
+              getMod(stats[4] + casi[4] + rasi[4] + srasi[4]) +
               (Math.ceil(level * 0.25) + 1)}
           </p>
           <p>Passive Perception</p>
@@ -582,13 +583,13 @@ export default function App() {
         <div className="grid grid-cols-3">
           <div className="p-2 text-lg border-2 border-blue-700 h-fit">
             <p className="font-bold">
-              {10 + getMod(modstats[1] + stats[1])}
+              {10 + getMod(stats[1] + casi[1] + rasi[1] + srasi[1])}
             </p>
             <p>AC</p>
           </div>
           <div className="p-2 text-lg border-2 border-blue-700 h-fit">
             <p className="font-bold">
-              {getMod(modstats[1] + stats[1])}
+              {getMod(stats[1] + casi[1] + rasi[1] + srasi[1])}
             </p>
             <p>Initiative</p>
           </div>
@@ -601,7 +602,8 @@ export default function App() {
           <div className="p-2 text-lg border-2 border-blue-700 h-fit">
             <p className="font-bold">
               {Math.floor((pclass.hit_die || 10) * 0.75) * level +
-                getMod(modstats[2] + stats[2]) * level}
+                getMod(stats[2] + casi[2] + rasi[2] + srasi[2]) *
+                  level}
             </p>
             <p>HP</p>
           </div>
