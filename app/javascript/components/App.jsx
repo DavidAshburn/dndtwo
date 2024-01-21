@@ -6,6 +6,7 @@ import Profpane from './Profpane';
 import Features from './Features';
 import Collectstatics from './Collectstatics';
 import Racialfeatures from './Racialfeatures';
+import Classfeatures from './Classfeatures';
 
 function getMod(stat) {
   return Math.floor(stat / 2) - 5;
@@ -45,8 +46,8 @@ export default function App() {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   ]);
   let [extralanguages, setExtraLanguages] = useState([]);
-  //extratools is unused right now, tool data is spread out and complex
   let [extratools, setExtraTools] = useState([]);
+  let [classskills, setClassSkills] = useState([]);
 
   //data resources-----------------------------------------------------//
   const statnames = [
@@ -253,6 +254,9 @@ export default function App() {
   function openRacialFeatures() {
     document.getElementById('racialfeatures').showModal();
   }
+  function openClassFeatures() {
+    document.getElementById('classfeatures').showModal();
+  }
 
   //Modal Submit Handlers
   function handleRacialFeatures(event) {
@@ -285,7 +289,6 @@ export default function App() {
       if (i > 0) takenasi[item.value] += 1;
       i++;
     }
-    console.log('takenasi: ' + takenasi);
     //ASI adjustment
     setCASI(takenasi);
 
@@ -308,6 +311,19 @@ export default function App() {
     modalframe.close();
   }
 
+  function handleClassFeatures(event) {
+    let modalframe = document.getElementById('classfeatures');
+    //languages
+    let skillframe = document.getElementById('classskillselectframe');
+    let takenskills = [];
+    let i = 0;
+    for (let item of langframe.children) {
+      if (i > 0) takenlangs.push(item.value);
+      i++;
+    }
+    setClassSkills(takenskills);
+  }
+
   //Debug Methods
   function runDebug(event) {
     console.log('--    Debug    --');
@@ -315,7 +331,7 @@ export default function App() {
       .then((response) => response.json())
       .then((data) => debugData(data));
       */
-    console.log(stats);
+    console.log(pclass);
   }
 
   function debugData(data) {
@@ -463,6 +479,7 @@ export default function App() {
             </button>
             <button
               type="button"
+              onClick={openClassFeatures}
               className="font-bold text-white bg-emerald-600"
             >
               Class Features
@@ -731,6 +748,12 @@ export default function App() {
         subclass={subclass}
         background={background}
         submitFunc={handleRacialFeatures}
+      />
+      <Classfeatures
+        pclass={pclass}
+        subclass={subclass}
+        proficiencies={proficiencies}
+        submitFunc={handleClassFeatures}
       />
     </section>
   );
