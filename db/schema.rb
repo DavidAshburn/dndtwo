@@ -181,6 +181,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_194224) do
     t.string "heighthigh", default: "7\"6"
     t.string "languages", default: [], array: true
     t.integer "extra_languages", default: 0
+    t.integer "extra_skills", default: 0
+    t.integer "extra_asi", default: 0
     t.string "weapons", default: [], array: true
     t.string "armor", default: [], array: true
     t.string "tools", default: [], array: true

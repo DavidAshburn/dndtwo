@@ -90,6 +90,70 @@ function toolSelects(choices, takentools) {
   }
 }
 
+function asiSelects(extra_asi) {
+  let statnames = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+
+  let counter = [];
+  for (let i = 0; i < extra_asi; i++) {
+    counter.push(1);
+  }
+
+  if (extra_asi > 0) {
+    return counter.map((x, i) => (
+      <select key={i}>
+        {statnames.map((name, j) => (
+          <option value={j} key={j}>
+            {name}
+          </option>
+        ))}
+      </select>
+    ));
+  } else {
+    return null;
+  }
+}
+
+//
+function skillSelects(extra_skills) {
+  if (extra_skills < 1) return null;
+
+  let profnames = [
+    'Acrobatics',
+    'Animal Handling',
+    'Arcana',
+    'Athletics',
+    'Deception',
+    'History',
+    'Insight',
+    'Intimidation',
+    'Investigation',
+    'Medicine',
+    'Nature',
+    'Perception',
+    'Performance',
+    'Persuasion',
+    'Religion',
+    'Sleight of Hand',
+    'Stealth',
+    'Survival',
+  ];
+
+  let counter = [];
+  for (let i = 0; i < extra_skills; i++) {
+    counter.push(1);
+  }
+
+  return counter.map((x, i) => (
+    <select key={i}>
+      {profnames.map((name, j) => (
+        <option value={j} key={j}>
+          {name}
+        </option>
+      ))}
+    </select>
+  ));
+}
+
 function debugFunc() {
   console.log('debug');
 }
@@ -102,18 +166,21 @@ export default function Racialfeatures({
   background,
   submitFunc,
 }) {
-  let extralangs =
-    race.extra_languages + subrace.extra_languages || 0;
+  let extralangs = race.extra_languages + subrace.extra_languages;
 
   let toolsets = [
-    race.tools || [],
-    subrace.tools || [],
-    pclass.tools || [],
-    subclass.tools || [],
-    background.tools || [],
+    race.tools,
+    subrace.tools,
+    pclass.tools,
+    subclass.tools,
+    background.tools,
   ];
-  let basetools = sumArrays(toolsets);
+
+  let takentools = sumArrays(toolsets);
   let choices = race.tool_choice || [];
+
+  let extra_asi = race.extra_asi;
+  let extra_skills = race.extra_skills;
 
   return (
     <dialog
@@ -136,7 +203,19 @@ export default function Racialfeatures({
           className="grid grid-cols-3 p-2 gap-2"
           id="racialtoolselectframe"
         >
-          {toolSelects(choices, basetools)}
+          {toolSelects(choices, takentools)}
+        </div>
+        <div
+          className="grid grid-cols-3 p-2 gap-2"
+          id="racialasiselectframe"
+        >
+          {asiSelects(extra_asi)}
+        </div>
+        <div
+          className="grid grid-cols-3 p-2 gap-2"
+          id="racialskillselectframe"
+        >
+          {skillSelects(extra_skills)}
         </div>
       </div>
 
