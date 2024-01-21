@@ -254,6 +254,7 @@ export default function App() {
     return number;
   }
 
+  console.log('render');
   return (
     <section className="grid border-2 border-black sm:grid-cols-2 md:grid-cols-3">
       {/* Selectinput Row */}

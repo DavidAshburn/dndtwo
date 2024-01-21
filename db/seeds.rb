@@ -48,7 +48,6 @@ DwarvenRace = Race.create(
   ],
   extra_spells: {},
   specific_spells: {},
-  custom_mods: {},
 )
 
 DwarvenRace.subraces.create(
@@ -92,7 +91,6 @@ ElvenRace = Race.create(
   skills: ['Perception'],
   extra_spells: {},
   specific_spells: {},
-  custom_mods: {},
 )
 
 ElvenRace.subraces.create(
@@ -170,7 +168,6 @@ HalflingRace = Race.create(
   ],
   extra_spells: {},
   specific_spells: {},
-  custom_mods: {},
 )
 
 HalflingRace.subraces.create(
@@ -206,7 +203,6 @@ HumanRace = Race.create(
   speed: 30,
   extra_spells: {},
   specific_spells: {},
-  custom_mods: {},
 )
 
 HumanRace.subraces.create(
@@ -231,7 +227,6 @@ DragonbornRace = Race.create(
   features: [],
   extra_spells: {},
   specific_spells: {},
-  custom_mods: {},
 )
 
 DragonbornRace.subraces.create(
@@ -518,7 +513,6 @@ GnomeRace = Race.create(
   ],
   extra_spells: {},
   specific_spells: {},
-  custom_mods: {},
 )
 
 GnomeRace.subraces.create(
@@ -569,7 +563,6 @@ HalfElfRace = Race.create(
   ],
   extra_spells: {},
   specific_spells: {},
-  custom_mods: {},
 )
 HalfElfRace.subraces.create(
   name: 'None',
@@ -601,7 +594,6 @@ HalfOrcRace = Race.create(
   ],
   extra_spells: {},
   specific_spells: {},
-  custom_mods: {},
 )
 
 HalfOrcRace.subraces.create(
@@ -639,7 +631,6 @@ TieflingRace = Race.create(
     'stat'=> 'Charisma',
     'source'=> 'Infernal Legacy',
   },
-  custom_mods: {},
 )
 
 TieflingRace.subraces.create(

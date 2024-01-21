@@ -20,7 +20,6 @@ class CreateRaces < ActiveRecord::Migration[7.0]
       t.string :features, array: true, default: []
       t.text :extra_spells, default: "{}"
       t.text :specific_spells, default: "{}"
-      t.text :custom_mods, default: "{}"
 
       #all extra spells formatted the same way
       #extra_spell_lists = {
