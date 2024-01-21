@@ -1874,41 +1874,6 @@ Fighter.subclasses.create(
 )
 
 Fighter.subclasses.create(
-  name: "Champion",
-  description: "The archetypal Champion focuses on the development of raw physical power honed to deadly perfection. Those who model themselves on this archetype combine rigorous training with physical excellence to deal devastating blows.",
-  leveled_choice: {
-    10=>[
-      "Archery: You gain a +2 bonus to attack rolls you make with ranged weapons.",
-      "Defense: While you are wearing armor, you gain a +1 bonus to AC.",
-      "Dueling: When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.",
-      "Two-Weapon Fighting: When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.",
-    ],
-  },
-  features: {
-    3=> [
-      "Improved Critical: Your weapon attacks score a critical hit on a roll of 19 or 20.",
-    ],
-    7=> [
-      "Remarkable Athlete: You can add half your proficiency bonus (round up) to any Strength, Dexterity, or Constitution check you make that doesn’t already use your proficiency bonus.
-      In addition, when you make a running long jump, the distance you can cover increases by a number of feet equal to your Strength modifier.",
-    ],
-    10=> [
-      "Fighting Style: You may choose a second option from the Fighting Style class feature.",
-    ],
-    15=> [
-      "Superior Critical: Your weapon attacks score a critical hit on a roll of 18 or higher.",
-    ],
-    18=> [
-      "Survivor: You attain the pinnacle of resilience in battle. At the start of each of your turns, you regain hit points equal to 5 + your Constitution modifier if you have no more than half of your hit points left. You don’t gain this benefit if you have 0 hit points.",
-    ]
-  },
-  equipment_choices: {},
-  extra_spells: {},
-  specific_spells: {},
-  custom_mods: {},
-)
-
-Fighter.subclasses.create(
   name: "Battle Master",
   description: "Those who emulate the archetypal Battle Master employ martial techniques passed down through generations. To a Battle Master, combat is an academic field, sometimes including subjects beyond battle such as weaponsmithing and calligraphy. Not every fighter absorbs the lessons of history, theory, and artistry that are reflected in the Battle Master archetype, but those who do are well-rounded fighters of great skill and knowledge.",
   leveled_choice: {},
@@ -2002,6 +1967,41 @@ Fighter.subclasses.create(
       },
     ],
   },
+)
+
+Fighter.subclasses.create(
+  name: "Champion",
+  description: "The archetypal Champion focuses on the development of raw physical power honed to deadly perfection. Those who model themselves on this archetype combine rigorous training with physical excellence to deal devastating blows.",
+  leveled_choice: {
+    10=>[
+      "Archery: You gain a +2 bonus to attack rolls you make with ranged weapons.",
+      "Defense: While you are wearing armor, you gain a +1 bonus to AC.",
+      "Dueling: When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.",
+      "Two-Weapon Fighting: When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.",
+    ],
+  },
+  features: {
+    3=> [
+      "Improved Critical: Your weapon attacks score a critical hit on a roll of 19 or 20.",
+    ],
+    7=> [
+      "Remarkable Athlete: You can add half your proficiency bonus (round up) to any Strength, Dexterity, or Constitution check you make that doesn’t already use your proficiency bonus.
+      In addition, when you make a running long jump, the distance you can cover increases by a number of feet equal to your Strength modifier.",
+    ],
+    10=> [
+      "Fighting Style: You may choose a second option from the Fighting Style class feature.",
+    ],
+    15=> [
+      "Superior Critical: Your weapon attacks score a critical hit on a roll of 18 or higher.",
+    ],
+    18=> [
+      "Survivor: You attain the pinnacle of resilience in battle. At the start of each of your turns, you regain hit points equal to 5 + your Constitution modifier if you have no more than half of your hit points left. You don’t gain this benefit if you have 0 hit points.",
+    ]
+  },
+  equipment_choices: {},
+  extra_spells: {},
+  specific_spells: {},
+  custom_mods: {},
 )
 
 Fighter.subclasses.create(

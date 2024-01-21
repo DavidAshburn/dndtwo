@@ -1,8 +1,8 @@
 class LabelsController < ApplicationController
   def dropdowns
-    @races = Race.all.map{|race| [race.name, race.subraces.map{|sub| sub.name}]}.sort { |a, b| a[0] <=> b[0]}
-    @classes = PlayerClass.all.map{|pclass| [pclass.name, pclass.subclasses.map{|sub| sub.name}]}.sort { |a, b| a[0] <=> b[0]}
-    @bgs = Background.all.map{|bg| bg.name}.sort { |a, b| a[0] <=> b[0]}
+    @races = Race.order(:name).map{|race| [race.name, race.subraces.order(:id).map{|sub| sub.name}]}
+    @classes = PlayerClass.order(:name).map{|pclass| [pclass.name, pclass.subclasses.order(:id).map{|sub| sub.name}]}
+    @bgs = Background.order(:name).map{|bg| bg.name}
 
     @labels = {
       :races => @races,

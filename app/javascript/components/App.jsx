@@ -160,11 +160,12 @@ export default function App() {
   function handleClassSelect(event) {
     let dex = event.target.value;
     setSubclassLabels(labels.classes[dex][1]);
+    console.log(labels.classes[dex][1]);
 
     loadClass(labels.classes[dex][0]);
 
-    let firstSubclassName = labels.classes[dex][1][0];
-    loadSubclass(firstSubclassName);
+    loadSubclass('None');
+    document.getElementById('subclassselect').value = 'None';
   }
   function handleSubclassSelect(event) {
     fetch(`/subclasses/` + event.target.value)
@@ -177,6 +178,7 @@ export default function App() {
     loadRace(labels.races[dex][0]);
     let firstSubraceName = labels.races[dex][1][0];
     loadSubrace(firstSubraceName);
+    document.getElementById('subraceselect').value = firstSubraceName;
   }
   function handleSubraceSelect(event) {
     fetch(`/subraces/` + event.target.value)
@@ -232,12 +234,7 @@ export default function App() {
   //Debug Methods
   function runDebug(event) {
     console.log('--    Debug    --');
-    console.log(pclass.tools);
-    console.log(subclass.tools);
-    console.log(subrace.tools);
-    console.log(race.tools);
-    console.log(background.tools);
-    console.log(race.tool_choice);
+    console.log(subclass.name);
   }
   function logIt(number) {
     console.log('logit: ' + race.asi);
@@ -272,6 +269,7 @@ export default function App() {
             <select
               name="playersubclass"
               onChange={handleSubclassSelect}
+              id="subclassselect"
             >
               {subclassLabels?.map((sub, i) => (
                 <option value={sub} key={i}>
@@ -307,6 +305,7 @@ export default function App() {
             <select
               name="playersubrace"
               onChange={handleSubraceSelect}
+              id="subraceselect"
             >
               {subraceLabels?.map((sub, i) => (
                 <option value={sub} key={i}>
