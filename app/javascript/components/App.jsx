@@ -48,7 +48,7 @@ export default function App() {
   let [extratools, setExtraTools] = useState([]);
 
   //data resources-----------------------------------------------------//
-  let statnames = [
+  const statnames = [
     'Strength',
     'Dexterity',
     'Constitution',
@@ -57,7 +57,7 @@ export default function App() {
     'Charisma',
   ];
   //matches proficiency to their source stat for base modifier values
-  let proficiency_data = [
+  const proficiency_data = [
     ['Acrobatics', 1],
     ['Animal Handling', 4],
     ['Arcana', 3],
@@ -76,6 +76,26 @@ export default function App() {
     ['Sleight of Hand', 1],
     ['Stealth', 1],
     ['Survival', 4],
+  ];
+  const skillnames = [
+    'Acrobatics',
+    'Animal Handling',
+    'Arcana',
+    'Athletics',
+    'Deception',
+    'History',
+    'Insight',
+    'Intimidation',
+    'Investigation',
+    'Medicine',
+    'Nature',
+    'Perception',
+    'Performance',
+    'Persuasion',
+    'Religion',
+    'Sleight of Hand',
+    'Stealth',
+    'Survival',
   ];
   //------------------------------------------------------------------//
 
@@ -142,18 +162,54 @@ export default function App() {
         //ASI
         let output = stats.map((x, i) => x + data.asi[i]);
         setModStats(output);
-        ``;
+        //racial skills
+        let indexes = [];
+        data.skills.forEach((skill) => {
+          indexes.push(skillnames.indexOf(skill));
+        });
+        let base = proficiencies;
+        for (let item of indexes) {
+          if (base[item] < 1) base[item] += 1;
+        }
+        setProficiencies(base);
       });
   }
   function loadSubrace(name) {
     fetch(`/subraces/` + name)
       .then((response) => response.json())
-      .then((data) => setSubrace(data));
+      .then((data) => {
+        setSubrace(data);
+        //ASI
+        let output = stats.map((x, i) => x + data.asi[i]);
+        setModStats(output);
+        //subrace skills
+        let indexes = [];
+        data.skills.forEach((skill) => {
+          indexes.push(skillnames.indexOf(skill));
+        });
+        let base = proficiencies;
+        for (let item of indexes) {
+          if (base[item] < 1) base[item] += 1;
+        }
+        setProficiencies(base);
+      });
   }
   function loadBackground(name) {
     fetch(`/backgrounds/` + name)
       .then((response) => response.json())
-      .then((data) => setBackground(data));
+      .then((data) => {
+        setBackground(data);
+        //background skills
+        let indexes = [];
+        data.skills.forEach((skill) => {
+          indexes.push(skillnames.indexOf(skill));
+        });
+        let base = proficiencies;
+        for (let item of indexes) {
+          if (base[item] < 1) base[item] += 1;
+        }
+        setProficiencies(base);
+      });
   }
 
   //onChange functions in dropdowns
@@ -232,7 +288,7 @@ export default function App() {
   //Debug Methods
   function runDebug(event) {
     console.log('--    Debug    --');
-    fetch(`/races/index`)
+    fetch(`/subclasses/index`)
       .then((response) => response.json())
       .then((data) => debugData(data));
   }
@@ -240,9 +296,9 @@ export default function App() {
   function debugData(data) {
     let customs = [];
     for (let dat of data) {
-      customs.push([dat.name, dat.custom_mods]);
+      customs.push([dat.name, dat.skills]);
     }
-
+    console.log('subclass skills');
     for (let item of customs) {
       console.log(item[0]);
       console.log(item[1]);
@@ -254,7 +310,6 @@ export default function App() {
     return number;
   }
 
-  console.log('render');
   return (
     <section className="grid border-2 border-black sm:grid-cols-2 md:grid-cols-3">
       {/* Selectinput Row */}

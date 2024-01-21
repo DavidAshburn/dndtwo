@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get 'labels/initPC'
   get 'races/index'
   get 'subraces/index'
+  get 'playerclasses/index'
+  get 'subclasses/index'
+  get 'backgrounds/index'
 
   resources :characters
   resources :races, param: :name, only: [ :show ]

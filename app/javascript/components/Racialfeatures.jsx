@@ -113,7 +113,6 @@ function asiSelects(extra_asi) {
   }
 }
 
-//
 function skillSelects(extra_skills) {
   if (extra_skills < 1) return null;
 
@@ -192,6 +191,7 @@ export default function Racialfeatures({
           className="grid grid-cols-3 p-2 gap-2"
           id="raciallanguageselectframe"
         >
+          {extralangs ? <p>Extra Languages:</p> : <></>}
           {languageSelects(
             extralangs,
             race.languages,
@@ -203,18 +203,21 @@ export default function Racialfeatures({
           className="grid grid-cols-3 p-2 gap-2"
           id="racialtoolselectframe"
         >
+          {choices ? <p>Extra Tools:</p> : <></>}
           {toolSelects(choices, takentools)}
         </div>
         <div
           className="grid grid-cols-3 p-2 gap-2"
           id="racialasiselectframe"
         >
+          {extra_asi ? <p>+1 to Stats:</p> : <></>}
           {asiSelects(extra_asi)}
         </div>
         <div
           className="grid grid-cols-3 p-2 gap-2"
           id="racialskillselectframe"
         >
+          {extra_skills ? <p>Extra Skills:</p> : <></>}
           {skillSelects(extra_skills)}
         </div>
       </div>
@@ -224,12 +227,6 @@ export default function Racialfeatures({
         onClick={submitFunc}
       >
         Submit
-      </button>
-      <button
-        className="font-bold bg-white border-2 border-blue-600 rounded-md ml-4"
-        onClick={debugFunc}
-      >
-        Test
       </button>
     </dialog>
   );

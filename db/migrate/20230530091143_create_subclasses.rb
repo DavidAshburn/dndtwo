@@ -9,7 +9,6 @@ class CreateSubclasses < ActiveRecord::Migration[7.0]
       t.text :custom_mods, default: "{}"
       t.text :specific_spells, default: "{}"
       t.text :equipment_choices, default: "{}"
-      t.string :skills, array: true, default: []
       t.string :weapons, array: true, default: []
       t.string :armor, array: true, default: []
       t.string :tools, array: true, default: []

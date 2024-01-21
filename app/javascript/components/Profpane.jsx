@@ -10,7 +10,7 @@ export default function Profpane(props) {
   function getStatus(code) {
     if (parseInt(code) == 1) return 'P';
     if (parseInt(code) == 2) return 'E';
-    return '';
+    return '-';
   }
 
   let status = getStatus(props.proficient);
