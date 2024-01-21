@@ -231,3 +231,8 @@ export default function Racialfeatures({
     </dialog>
   );
 }
+
+//may want to set a flag on the submit button that resets when menu items change
+//if there are no changes, rerun submit function whenever stats are changed
+
+//alternatively, think about when we should call different setStat methods around the app
