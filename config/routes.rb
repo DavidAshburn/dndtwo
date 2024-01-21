@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'labels/dropdowns'
   get 'labels/initPC'
+  get 'races/index'
 
   resources :characters
   resources :races, param: :name, only: [ :show ]

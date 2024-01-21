@@ -8,6 +8,8 @@ class CreateRaces < ActiveRecord::Migration[7.0]
       t.string :heighthigh, default: "7\"6"
       t.string :languages, array: true, default: []
       t.integer :extra_languages, default: 0
+      t.integer :extra_skills, default: 0
+      t.integer :extra_asi, default: 0
       t.string :weapons, array: true, default: []
       t.string :armor, array: true, default: []
       t.string :tools, array: true, default: []
@@ -16,7 +18,6 @@ class CreateRaces < ActiveRecord::Migration[7.0]
       t.string :size, default: 'medium'
       t.integer :speed, default: 15
       t.string :features, array: true, default: []
-      t.integer :sub_count, default: 0
       t.text :extra_spells, default: "{}"
       t.text :specific_spells, default: "{}"
       t.text :custom_mods, default: "{}"

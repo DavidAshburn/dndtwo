@@ -189,7 +189,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_194224) do
     t.string "size", default: "medium"
     t.integer "speed", default: 15
     t.string "features", default: [], array: true
-    t.integer "sub_count", default: 0
     t.text "extra_spells", default: "{}"
     t.text "specific_spells", default: "{}"
     t.text "custom_mods", default: "{}"

@@ -46,7 +46,6 @@ DwarvenRace = Race.create(
     'Dwarven Resilience: Advantage on Poison saves and resistance to Poison damage.',
     'Stonecunning: Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.',
   ],
-  sub_count: 2,
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
@@ -88,9 +87,9 @@ ElvenRace = Race.create(
     'Keen Senses: You have proficiency in Perception.',
     'Fey Ancestry: You have advantage on saving throws against being charmed, and can\'t be put to sleep magically.',
     'Trance: Elves don\'t need to sleep. Instead they meditate deeply for 4 hours a day.',
+    'Proficiency: Perception',
     ],
   skills: ['Perception'],
-  sub_count: 3,
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
@@ -169,7 +168,6 @@ HalflingRace = Race.create(
     'Brave: You have advantage on saving throws against being frightened.',
     'Halfling Nimbleness: You can move through the space of any creature that is of a size larger than yours.',
   ],
-  sub_count: 2,
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
@@ -518,7 +516,6 @@ GnomeRace = Race.create(
     'Darkvision: You can see in dim light within 60 feet of you as if it were brightly lit, and in darkness as if it were dim light, but you can\'t discern color.',
     'Gnome Cunning: You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.',
   ],
-  sub_count: 2,
   extra_spells: {},
   specific_spells: {},
   custom_mods: {},
@@ -561,6 +558,8 @@ HalfElfRace = Race.create(
   heighthigh: "6'",
   languages: ['Common','Elvish'],
   extra_languages: 1,
+  extra_skills: 2,
+  extra_asi: 2,
   speed: 30,
   features: [
     'Adaptable: Choose two ability scores to increase by one.',
@@ -570,12 +569,7 @@ HalfElfRace = Race.create(
   ],
   extra_spells: {},
   specific_spells: {},
-  custom_mods: {
-    'extra_asi'=> 2,
-    'extra_profs'=> [
-      [1,2],
-    ],
-  },
+  custom_mods: {},
 )
 HalfElfRace.subraces.create(
   name: 'None',
@@ -603,6 +597,7 @@ HalfOrcRace = Race.create(
     'Menacing: You have proficiency in Intimidation.',
     'Relentless Endurance: When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead once per long rest.',
     'Savage Attacks: When you score a critical hit with a melee weapon attack, you can roll one of the weapon\'s damage dice one additional time and add it to the extra damage.',
+    'Proficiency: Intimidation',
   ],
   extra_spells: {},
   specific_spells: {},
@@ -634,6 +629,7 @@ TieflingRace = Race.create(
     'Darkvision: You can see in dim light within 60 feet of you as if it were brightly lit, and in darkness as if it were dim light, but you can\'t discern color.',
     'Hellish Resistance: You have resistance to fire damage.',
     'Infernal Legacy: You know the thaumaturgy cantrip. At 3rd level, you can cast hellish rebuke as a 2nd level spell once per long rest. At 5th level you can cast darkness once per long rest. Charisma is your spellcasting ability for these spells.',
+    'Proficiency: Intimidation',
   ],
   extra_spells: {},
   specific_spells: {
@@ -4006,6 +4002,7 @@ Acolyte = Background.create(
   ],
   features: [
       'Shelter of the Faithful: You command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your party can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you at a modest lifestyle. You might have ties to a specific temple where you have a residence and the priests can be called upon for non-hazardous assistance near there.',
+      'Proficiencies: Insight and Religion',
     ],
   extra_spells: {},
   specific_spells: {},
@@ -4064,6 +4061,7 @@ Bacolyte = Background.create(
   ],
   features: [
       'Shelter of the Faithful: You command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your party can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you at a modest lifestyle. You might have ties to a specific temple where you have a residence and the priests can be called upon for non-hazardous assistance near there.',
+      'Proficiencies: Insight and Religion',
     ],
   extra_spells: {},
   specific_spells: {},

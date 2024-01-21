@@ -160,10 +160,8 @@ export default function App() {
   function handleClassSelect(event) {
     let dex = event.target.value;
     setSubclassLabels(labels.classes[dex][1]);
-    console.log(labels.classes[dex][1]);
 
     loadClass(labels.classes[dex][0]);
-
     loadSubclass('None');
     document.getElementById('subclassselect').value = 'None';
   }
@@ -234,8 +232,23 @@ export default function App() {
   //Debug Methods
   function runDebug(event) {
     console.log('--    Debug    --');
-    console.log(subclass.name);
+    fetch(`/races/index`)
+      .then((response) => response.json())
+      .then((data) => debugData(data));
   }
+
+  function debugData(data) {
+    let customs = [];
+    for (let dat of data) {
+      customs.push([dat.name, dat.custom_mods]);
+    }
+
+    for (let item of customs) {
+      console.log(item[0]);
+      console.log(item[1]);
+    }
+  }
+
   function logIt(number) {
     console.log('logit: ' + race.asi);
     return number;
