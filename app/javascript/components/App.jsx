@@ -127,15 +127,11 @@ export default function App() {
   //once labels are pulled we initialize the character to the first option in each dropdown
   function initPC() {
     function setInit(data) {
-      setRace(data.pcrace);
-      setSubrace(data.subrace);
-      setPClass(data.pclass);
-      setSubclass(data.subclass);
-      setBackground(data.background);
-
-      //ASI
-      let output = stats.map((x, i) => x + data.pcrace.asi[i]);
-      setModStats(output);
+      loadRace(data.pcrace);
+      loadSubrace(data.subrace);
+      loadClass(data.pclass);
+      loadSubclass(data.subclass);
+      loadBackground(data.background);
     }
 
     fetch(`/labels/initPC`)

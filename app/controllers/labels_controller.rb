@@ -15,13 +15,13 @@ class LabelsController < ApplicationController
   end
 
   def initPC
-    pcraces = Race.all.sort { |a,b| a.name <=> b.name }
-    subraces = pcraces.first.subraces.all.sort { |a,b| a.name <=> b.name }
-    pclasses = PlayerClass.all.sort { |a,b| a.name <=> b.name }
-    subclasses = pclasses.first.subclasses.all.select{ |item| item.name == "None"}
-    backgrounds = Background.all.sort { |a,b| a.name <=> b.name }
+    pcrace = Race.order(:name)[0]
+    subrace = pcrace.subraces.order(:name)[0].name
+    pclass = PlayerClass.order(:name)[0]
+    subclass = pclass.subclasses.order(:name)[0].name
+    background = Background.order(:name)[0].name
 
-    @initial = { pcrace: pcraces[0], subrace: subraces[0], pclass: pclasses[0], subclass: subclasses[0], background: backgrounds[0] }
+    @initial = { pcrace: pcrace.name, subrace: subrace, pclass: pclass.name, subclass: subclass, background: background }
 
     respond_to do |format|
       format.json { render json: @initial}
