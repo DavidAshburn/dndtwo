@@ -124,7 +124,7 @@ export default function App() {
       .then((data) => loadDropdownLabels(data));
   }, []);
 
-  //once labels are pulled we initialize the character to the first option in each dropdown
+  //once labels are pulled we initialize the character with load functions to capture modifications
   function initPC() {
     function setInit(data) {
       loadRace(data.pcrace);
@@ -269,15 +269,56 @@ export default function App() {
   //Modal Submit Handlers
   function handleRacialFeatures(event) {
     let modalframe = document.getElementById('racialfeatures');
+    //languages
     let langframe = document.getElementById(
       'raciallanguageselectframe'
     );
     let takenlangs = [];
+    let i = 0;
     for (let item of langframe.children) {
-      takenlangs.push(item.value);
+      if (i > 0) takenlangs.push(item.value);
+      i++;
     }
-
     setExtraLanguages(takenlangs);
+
+    let toolframe = document.getElementById('racialtoolselectframe');
+    let takentools = [];
+    i = 0;
+    for (let item of toolframe.children) {
+      if (i > 0) takentools.push(item.value);
+      i++;
+    }
+    setExtraTools(takentools);
+
+    let asiframe = document.getElementById('racialasiselectframe');
+    let takenasi = [0, 0, 0, 0, 0, 0];
+    i = 0;
+    for (let item of asiframe.children) {
+      if (i > 0) takenasi[item.value] += 1;
+      i++;
+    }
+    let newstats = modstats.map((x, i) => x + takenasi[i]);
+    setModStats(newstats);
+
+    let skillframe = document.getElementById(
+      'racialskillselectframe'
+    );
+    let takenskills = [];
+    i = 0;
+    for (let item of skillframe.children) {
+      if (i > 0) takenskills.push(item.value);
+      i++;
+    }
+    console.log(takenskills);
+    console.log(proficiencies);
+    let newprofs = proficiencies;
+    for (let val of takenskills) {
+      if (newprofs[val] == 0) newprofs[val]++;
+    }
+    console.log(newprofs);
+    setProficiencies(newprofs);
+    //update proficiencies state
+
     modalframe.close();
   }
 
@@ -299,11 +340,6 @@ export default function App() {
       console.log(item[0]);
       console.log(item[1]);
     }
-  }
-
-  function logIt(number) {
-    console.log('logit: ' + race.asi);
-    return number;
   }
 
   return (

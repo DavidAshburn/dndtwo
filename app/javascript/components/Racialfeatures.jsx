@@ -100,7 +100,7 @@ function asiSelects(extra_asi) {
 
   if (extra_asi > 0) {
     return counter.map((x, i) => (
-      <select key={i}>
+      <select key={i} defaultValue={i}>
         {statnames.map((name, j) => (
           <option value={j} key={j}>
             {name}
@@ -203,7 +203,7 @@ export default function Racialfeatures({
           className="grid grid-cols-3 p-2 gap-2"
           id="racialtoolselectframe"
         >
-          {choices ? <p>Extra Tools:</p> : <></>}
+          {choices.length > 0 ? <p>Extra Tools:</p> : <></>}
           {toolSelects(choices, takentools)}
         </div>
         <div
