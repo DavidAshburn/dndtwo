@@ -232,7 +232,7 @@ export default function Racialfeatures({
   );
 }
 
-//may want to set a flag on the submit button that resets when menu items change
-//if there are no changes, rerun submit function whenever stats are changed
-
-//alternatively, think about when we should call different setStat methods around the app
+//reworked modstats, racial asi not preserved when rerolling,
+//though asi racial selections are preserved
+//i think i need some function to collect all statmods together and
+//run it when stats are recalculated for any reason

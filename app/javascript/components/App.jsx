@@ -26,10 +26,10 @@ export default function App() {
   let [subclassLabels, setSubclassLabels] = useState(null);
   let [subraceLabels, setSubraceLabels] = useState(null);
 
-  //character traits, pull in full json from db as source of truth - onChange fetches and updates these
+  //set by stat methods
   let [stats, setStats] = useState([8, 8, 8, 8, 8, 8]);
-  //use modstats to calculate modifiers on base stats, use these for most calculations and all displays
-  let [modstats, setModStats] = useState([8, 8, 8, 8, 8, 8]);
+  //store stat modifiers here and add to stats in displays
+  let [modstats, setModStats] = useState([0, 0, 0, 0, 0, 0]);
 
   let [level, setLevel] = useState(1);
   let [race, setRace] = useState({});
@@ -99,17 +99,6 @@ export default function App() {
   ];
   //------------------------------------------------------------------//
 
-  //combined stat setter function so we can track base and modified stats
-  function setAllStats(stats) {
-    setStats(stats);
-    let output = stats;
-    if (race.asi) {
-      //ASI
-      output = stats.map((x, i) => x + race.asi[i]);
-    }
-    setModStats(output);
-  }
-
   //loads labels for dropdown options
   useEffect(() => {
     function loadDropdownLabels(data) {
@@ -155,8 +144,8 @@ export default function App() {
       .then((response) => response.json())
       .then((data) => {
         setRace(data);
-        //ASI
-        let output = stats.map((x, i) => x + data.asi[i]);
+        //ASI adjustent to modstats
+        let output = modstats.map((x, i) => x + data.asi[i]);
         setModStats(output);
         //racial skills
         let indexes = [];
@@ -175,8 +164,8 @@ export default function App() {
       .then((response) => response.json())
       .then((data) => {
         setSubrace(data);
-        //ASI
-        let output = stats.map((x, i) => x + data.asi[i]);
+        //ASI adjustment to modstats
+        let output = modstats.map((x, i) => x + data.asi[i]);
         setModStats(output);
         //subrace skills
         let indexes = [];
@@ -248,7 +237,7 @@ export default function App() {
     for (let i = 0; i < 6; i++) {
       stats.push(Math.floor(Math.random() * 13 + 8));
     }
-    setAllStats(stats);
+    setStats(stats);
   }
   function openPointBuy() {
     document.getElementById('pointbuy').showModal();
@@ -258,7 +247,7 @@ export default function App() {
   }
   function flatStats(event) {
     let stats = [10, 10, 10, 10, 10, 10];
-    setAllStats(stats);
+    setStats(stats);
   }
 
   //Menu modal buttons
@@ -297,8 +286,9 @@ export default function App() {
       if (i > 0) takenasi[item.value] += 1;
       i++;
     }
-    let newstats = modstats.map((x, i) => x + takenasi[i]);
-    setModStats(newstats);
+    //ASI adjustment to modstats
+    let output = modstats.map((x, i) => x + takenasi[i]);
+    setModStats(output);
 
     let skillframe = document.getElementById(
       'racialskillselectframe'
@@ -489,9 +479,9 @@ export default function App() {
         <div className="grid gap-2 bg-gray-100">
           {modstats.map((stat, i) => (
             <Statframe
-              stat={stat}
+              stat={stat + stats[i]}
               key={i}
-              mod={getMod(stat)}
+              mod={getMod(stat + stats[i])}
               dex={i}
               race={race}
             />
@@ -514,7 +504,9 @@ export default function App() {
                 <p>{statnames[x]}</p>
                 <p>
                   {signed(
-                    getMod(modstats[x]) + Math.ceil(level * 0.25) + 1
+                    getMod(modstats[x] + stats[x]) +
+                      Math.ceil(level * 0.25) +
+                      1
                   )}
                 </p>
               </div>
@@ -527,7 +519,7 @@ export default function App() {
                 name={pname[0]}
                 key={i}
                 profmod={Math.ceil(level * 0.25) + 1}
-                statmod={getMod(modstats[pname[1]])}
+                statmod={getMod(modstats[pname[1]] + stats[pname[1]])}
                 proficient={proficiencies[i]}
               />
             ))}
@@ -535,7 +527,9 @@ export default function App() {
         </div>
         <div className="grid grid-cols-[1fr_3fr] col-span-2 border border-blue-800 rounded-md">
           <p>
-            {10 + getMod(modstats[4]) + (Math.ceil(level * 0.25) + 1)}
+            {10 +
+              getMod(modstats[4] + stats[4]) +
+              (Math.ceil(level * 0.25) + 1)}
           </p>
           <p>Passive Perception</p>
         </div>
@@ -587,11 +581,15 @@ export default function App() {
       <div className="flex flex-col gap-2 text-center">
         <div className="grid grid-cols-3">
           <div className="p-2 text-lg border-2 border-blue-700 h-fit">
-            <p className="font-bold">{10 + getMod(modstats[1])}</p>
+            <p className="font-bold">
+              {10 + getMod(modstats[1] + stats[1])}
+            </p>
             <p>AC</p>
           </div>
           <div className="p-2 text-lg border-2 border-blue-700 h-fit">
-            <p className="font-bold">{getMod(modstats[1])}</p>
+            <p className="font-bold">
+              {getMod(modstats[1] + stats[1])}
+            </p>
             <p>Initiative</p>
           </div>
           <div className="p-2 text-lg border-2 border-blue-700 h-fit">
@@ -603,7 +601,7 @@ export default function App() {
           <div className="p-2 text-lg border-2 border-blue-700 h-fit">
             <p className="font-bold">
               {Math.floor((pclass.hit_die || 10) * 0.75) * level +
-                getMod(modstats[2]) * level}
+                getMod(modstats[2] + stats[2]) * level}
             </p>
             <p>HP</p>
           </div>
@@ -722,8 +720,8 @@ export default function App() {
       </div>
 
       {/* Modal Components */}
-      <Pointbuy submit={setAllStats} />
-      <Rollstats submit={setAllStats} />
+      <Pointbuy submit={setStats} />
+      <Rollstats submit={setStats} />
       <Racialfeatures
         race={race}
         subrace={subrace}
