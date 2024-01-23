@@ -46,6 +46,16 @@ export default function App() {
   let [proficiencies, setProficiencies] = useState([
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   ]);
+  let [raceproficiencies, setRaceProficiencies] = useState([
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  ]);
+  let [classproficiencies, setClassProficiencies] = useState([
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  ]);
+  let [bgproficiencies, setBGProficiencies] = useState([
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  ]);
+
   let [extralanguages, setExtraLanguages] = useState([]);
   let [extratools, setExtraTools] = useState([]);
   let [classskills, setClassSkills] = useState([]);
@@ -135,7 +145,14 @@ export default function App() {
   function loadClass(name) {
     fetch(`/player_classes/` + name)
       .then((response) => response.json())
-      .then((data) => setPClass(data));
+      .then((data) => {
+        setPClass(data);
+        //reset skills
+
+        setClassProficiencies([
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        ]);
+      })
   }
   function loadSubclass(name) {
     fetch(`/subclasses/` + name)
@@ -154,11 +171,13 @@ export default function App() {
         data.skills.forEach((skill) => {
           indexes.push(skillnames.indexOf(skill));
         });
-        let base = proficiencies;
+        let base = [
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        ];
         for (let item of indexes) {
-          if (base[item] < 1) base[item] += 1;
+          base[item] += 1;
         }
-        setProficiencies(base);
+        setRaceProficiencies(base);
       });
   }
   function loadSubrace(name) {
@@ -168,16 +187,6 @@ export default function App() {
         setSubrace(data);
         //ASI adjustment to srasi
         setSRASI(data.asi);
-        //subrace skills
-        let indexes = [];
-        data.skills.forEach((skill) => {
-          indexes.push(skillnames.indexOf(skill));
-        });
-        let base = proficiencies;
-        for (let item of indexes) {
-          if (base[item] < 1) base[item] += 1;
-        }
-        setProficiencies(base);
       });
   }
   function loadBackground(name) {
@@ -190,11 +199,13 @@ export default function App() {
         data.skills.forEach((skill) => {
           indexes.push(skillnames.indexOf(skill));
         });
-        let base = proficiencies;
+        let base = [
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        ];
         for (let item of indexes) {
-          if (base[item] < 1) base[item] += 1;
+          base[item] += 1;
         }
-        setProficiencies(base);
+        setBGProficiencies(base);
       });
   }
 
@@ -302,12 +313,13 @@ export default function App() {
       if (i > 0) takenskills.push(item.value);
       i++;
     }
-    let newprofs = proficiencies;
+    let newprofs = [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    ];
     for (let val of takenskills) {
       if (newprofs[val] == 0) newprofs[val]++;
     }
-    setProficiencies(newprofs);
-    //update proficiencies state
+    setRaceProficiencies(newprofs);
 
     modalframe.close();
   }
@@ -319,34 +331,34 @@ export default function App() {
     console.log('submit cfeatures');
 
     //class skills
-    let skillframe = document.getElementById('classskillselectframe');
+    let skillframe = document.getElementById(
+      'classskillselectframe'
+    );
     let takenskills = [];
     i = 0;
     for (let item of skillframe.children) {
       if (i > 0) takenskills.push(item.value);
       i++;
     }
-    let newprofs = proficiencies;
+    let newprofs = [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    ];
     for (let val of takenskills) {
       if (newprofs[val] == 0) newprofs[val]++;
     }
-    console.log('old profs : ' + proficiencies);
-    setProficiencies(newprofs);
+    setClassProficiencies(newprofs);
 
-    console.log('takenskills: ' + takenskills);
-    console.log('profs : ' + proficiencies);
-    console.log('newprofs :' + newprofs);
+    
     modalframe.close();
   }
 
   //Debug Methods
   function runDebug(event) {
     console.log('--    Debug    --');
-    /*fetch(`/subclasses/index`)
+    fetch(`/subraces/index`)
       .then((response) => response.json())
       .then((data) => debugData(data));
-      */
-    console.log(pclass);
+  
   }
 
   function debugData(data) {
@@ -544,8 +556,9 @@ export default function App() {
             <p className="font-bold">Skill Proficiencies</p>
             {proficiency_data.map((pname, i) => (
               <Profpane
-                name={pname[0]}
                 key={i}
+                name={pname[0]}
+                index={i} //index within proficiencies state
                 profmod={Math.ceil(level * 0.25) + 1}
                 statmod={getMod(
                   stats[pname[1]] +
@@ -553,7 +566,10 @@ export default function App() {
                     rasi[pname[1]] +
                     srasi[pname[1]]
                 )}
-                proficient={proficiencies[i]}
+                bprof = {proficiencies}
+                rprof = {raceproficiencies}
+                cprof = {classproficiencies}
+                bgprof = {bgproficiencies}
               />
             ))}
           </div>
@@ -767,7 +783,6 @@ export default function App() {
       <Classfeatures
         pclass={pclass}
         subclass={subclass}
-        proficiencies={proficiencies}
         submitFunc={handleClassFeatures}
       />
     </section>

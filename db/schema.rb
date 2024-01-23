@@ -193,7 +193,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_194224) do
     t.string "features", default: [], array: true
     t.text "extra_spells", default: "{}"
     t.text "specific_spells", default: "{}"
-    t.text "custom_mods", default: "{}"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -224,7 +223,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_194224) do
     t.text "custom_mods", default: "{}"
     t.text "specific_spells", default: "{}"
     t.text "equipment_choices", default: "{}"
-    t.string "skills", default: [], array: true
     t.string "weapons", default: [], array: true
     t.string "armor", default: [], array: true
     t.string "tools", default: [], array: true
@@ -244,7 +242,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_194224) do
     t.string "weapons", default: [], array: true
     t.string "armor", default: [], array: true
     t.string "tools", default: [], array: true
-    t.string "skills", default: [], array: true
     t.string "features", default: [], array: true
     t.text "extra_spells", default: "{}"
     t.text "specific_spells", default: "{}"

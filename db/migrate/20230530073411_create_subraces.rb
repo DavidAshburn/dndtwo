@@ -9,7 +9,6 @@ class CreateSubraces < ActiveRecord::Migration[7.0]
       t.string :weapons, array: true, default: []
       t.string :armor, array: true, default: []
       t.string :tools, array: true, default: []
-      t.string :skills, array: true, default: []
       t.string :features, array: true, default: []
       t.text :extra_spells, default: "{}"
       t.text :specific_spells, default: "{}"

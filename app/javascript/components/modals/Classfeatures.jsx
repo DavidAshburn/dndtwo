@@ -4,7 +4,6 @@ import ClassSkills from './selects/ClassSkills';
 export default function Classfeatures({
   pclass,
   subclass,
-  proficiencies,
   submitFunc,
 }) {
   return (
