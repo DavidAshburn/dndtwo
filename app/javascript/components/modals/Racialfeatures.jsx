@@ -1,5 +1,6 @@
 import React from 'react';
-import Expanditem from './Expanditem';
+import RaceLanguage from './selects/RaceLanguage.jsx';
+import RaceTools from './selects/RaceTools.jsx';
 
 function mergeArrays(arr, arrtwo) {
   if (arr == null) return [];
@@ -31,75 +32,12 @@ function subtractArrays(arr, arrtwo) {
   return output;
 }
 
-function languageSelects(count, rlangs, srlangs) {
-  let allLanguages = [
-    'Common',
-    'Dwarvish',
-    'Elvish',
-    'Giant',
-    'Gnomish',
-    'Goblin',
-    'Halfling',
-    'Orc',
-    'Abyssal',
-    'Celestial',
-    'Draconic',
-    'Deep Speech',
-    'Infernal',
-    'Primordial',
-    'Sylvan',
-    'Tabaxi',
-    'Undercommon',
-  ];
-
-  let racialLanguages = mergeArrays(rlangs, srlangs);
-
-  let counter = [];
-  for (let i = 0; i < count; i++) {
-    counter.push(1);
-  }
-
-  return counter.map((x, i) => (
-    <select key={i}>
-      {subtractArrays(allLanguages, racialLanguages).map(
-        (lang, j) => (
-          <option value={lang} key={j}>
-            {lang}
-          </option>
-        )
-      )}
-    </select>
-  ));
-}
-
-function toolSelects(choices, takentools) {
-  let options = subtractArrays(choices, takentools);
-  let counter = [];
-  if (choices[0]) {
-    return (
-      <select>
-        {options.map((tool, j) => (
-          <option value={tool} key={j}>
-            {tool}
-          </option>
-        ))}
-      </select>
-    );
-  } else {
-    return null;
-  }
-}
-
 function asiSelects(extra_asi) {
   let statnames = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
 
-  let counter = [];
+  let select_boxes = [];
   for (let i = 0; i < extra_asi; i++) {
-    counter.push(1);
-  }
-
-  if (extra_asi > 0) {
-    return counter.map((x, i) => (
+    select_boxes.push(
       <select key={i} defaultValue={i}>
         {statnames.map((name, j) => (
           <option value={j} key={j}>
@@ -107,15 +45,12 @@ function asiSelects(extra_asi) {
           </option>
         ))}
       </select>
-    ));
-  } else {
-    return null;
+    );
   }
+  return select_boxes;
 }
 
 function skillSelects(extra_skills) {
-  if (extra_skills < 1) return null;
-
   let profnames = [
     'Acrobatics',
     'Animal Handling',
@@ -137,20 +72,19 @@ function skillSelects(extra_skills) {
     'Survival',
   ];
 
-  let counter = [];
+  let select_boxes = [];
   for (let i = 0; i < extra_skills; i++) {
-    counter.push(1);
+    select_boxes.push(
+      <select key={i}>
+        {profnames.map((name, j) => (
+          <option value={j} key={j}>
+            {name}
+          </option>
+        ))}
+      </select>
+    );
   }
-
-  return counter.map((x, i) => (
-    <select key={i}>
-      {profnames.map((name, j) => (
-        <option value={j} key={j}>
-          {name}
-        </option>
-      ))}
-    </select>
-  ));
+  return select_boxes;
 }
 
 function debugFunc() {
@@ -165,8 +99,6 @@ export default function Racialfeatures({
   background,
   submitFunc,
 }) {
-  let extralangs = race.extra_languages + subrace.extra_languages;
-
   let toolsets = [
     race.tools,
     subrace.tools,
@@ -176,49 +108,35 @@ export default function Racialfeatures({
   ];
 
   let takentools = sumArrays(toolsets);
-  let choices = race.tool_choice || [];
-
-  let extra_asi = race.extra_asi;
-  let extra_skills = race.extra_skills;
-
   return (
     <dialog
       className="p-8 bg-gray-300 border border-black rounded-md"
       id="racialfeatures"
     >
       <div className="grid" id="rfmodalmain">
-        <div
-          className="grid grid-cols-3 p-2 gap-2"
-          id="raciallanguageselectframe"
-        >
-          {extralangs ? <p>Extra Languages:</p> : <></>}
-          {languageSelects(
-            extralangs,
-            race.languages,
-            subrace.languages
-          )}
-        </div>
+        <RaceLanguage
+          racelang={race.languages}
+          sracelang={subrace.languages}
+          extracount={race.extra_languages + subrace.extra_languages}
+        />
+        <RaceTools
+          toolchoices={race.tool_choice}
+          toolsets={toolsets}
+        />
 
-        <div
-          className="grid grid-cols-3 p-2 gap-2"
-          id="racialtoolselectframe"
-        >
-          {choices.length > 0 ? <p>Extra Tools:</p> : <></>}
-          {toolSelects(choices, takentools)}
-        </div>
         <div
           className="grid grid-cols-3 p-2 gap-2"
           id="racialasiselectframe"
         >
-          {extra_asi ? <p>+1 to Stats:</p> : <></>}
-          {asiSelects(extra_asi)}
+          {race.extra_asi && <p>+1 to Stats:</p>}
+          {asiSelects(race.extra_asi)}
         </div>
         <div
           className="grid grid-cols-3 p-2 gap-2"
           id="racialskillselectframe"
         >
-          {extra_skills ? <p>Extra Skills:</p> : <></>}
-          {skillSelects(extra_skills)}
+          {race.extra_skills && <p>Extra Skills:</p>}
+          {skillSelects(race.extra_skills)}
         </div>
       </div>
 

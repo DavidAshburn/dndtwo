@@ -5,8 +5,9 @@ import Rollstats from './Rollstats';
 import Profpane from './Profpane';
 import Features from './Features';
 import Collectstatics from './Collectstatics';
-import Racialfeatures from './Racialfeatures';
-import Classfeatures from './Classfeatures';
+import Racialfeatures from './modals/Racialfeatures';
+import Classfeatures from './modals/Classfeatures';
+import TestComponent from './TestComponent';
 
 function getMod(stat) {
   return Math.floor(stat / 2) - 5;

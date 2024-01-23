@@ -23,23 +23,21 @@ function classSkillSelects(extra_skills, skill_list) {
     'Stealth',
     'Survival',
   ];
-
   let skill_map = skill_list.map((x) => [x, profnames.indexOf(x)]);
 
-  let counter = [];
+  let select_boxes = [];
   for (let i = 0; i < extra_skills; i++) {
-    counter.push(1);
+    select_boxes.push(
+      <select key={i} defaultValue={skill_map[i][1]}>
+        {skill_map.map((item, j) => (
+          <option value={item[1]} key={j}>
+            {item[0]}
+          </option>
+        ))}
+      </select>
+    );
   }
-
-  return counter.map((x, i) => (
-    <select key={i}>
-      {skill_map.map((item, j) => (
-        <option value={item[1]} key={j}>
-          {item[0]}
-        </option>
-      ))}
-    </select>
-  ));
+  return select_boxes;
 }
 
 export default function Classfeatures({
@@ -62,7 +60,6 @@ export default function Classfeatures({
           {classSkillSelects(pclass.num_skills, pclass.skill_choices)}
         </div>
       </div>
-
       <button
         className="font-bold bg-white border-2 border-blue-600 rounded-md"
         onClick={submitFunc}
