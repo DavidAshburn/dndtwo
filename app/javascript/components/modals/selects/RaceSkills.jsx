@@ -40,9 +40,7 @@ function skillSelects(extra_skills) {
 export default function RaceSkills({ extra_skills }) {
   return (
     <div
-      className={
-        extra_skills > 0 ? 'grid grid-cols-3 p-2 gap-2' : 'h-0'
-      }
+      className={extra_skills > 0 ? 'selectframe' : 'emptyselect'}
       id="racialskillselectframe"
     >
       {extra_skills && <p>Extra Skills:</p>}

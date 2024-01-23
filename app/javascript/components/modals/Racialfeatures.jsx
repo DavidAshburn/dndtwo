@@ -58,7 +58,6 @@ export default function Racialfeatures({
           toolchoices={race.tool_choice || []}
           takentools={takentools}
         />
-
         <RaceASI extra_asi={race.extra_asi} />
         <RaceSkills extra_skills={race.extra_skills} />
       </div>
@@ -72,8 +71,3 @@ export default function Racialfeatures({
     </dialog>
   );
 }
-
-//reworked modstats, racial asi not preserved when rerolling,
-//though asi racial selections are preserved
-//i think i need some function to collect all statmods together and
-//run it when stats are recalculated for any reason

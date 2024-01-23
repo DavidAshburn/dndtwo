@@ -25,7 +25,7 @@ export default function RaceTools({ toolchoices, takentools }) {
   return (
     <div
       className={
-        toolchoices.length > 0 ? 'grid grid-cols-3 p-2 gap-2' : 'h-0'
+        toolchoices.length > 0 ? 'selectframe' : 'emptyselect'
       }
       id="racialtoolselectframe"
     >

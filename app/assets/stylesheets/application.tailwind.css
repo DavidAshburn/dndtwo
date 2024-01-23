@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .selectframe {
+    @apply grid grid-cols-3 p-2 gap-2
+  }
+
+  .emptyselect {
+    @apply h-0
+  }
+ }

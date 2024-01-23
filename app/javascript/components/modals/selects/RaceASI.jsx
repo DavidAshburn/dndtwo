@@ -21,7 +21,7 @@ function asiSelects(extra_asi) {
 export default function RaceASI({ extra_asi }) {
   return (
     <div
-      className={extra_asi ? 'grid grid-cols-3 p-2 gap-2' : 'h-0'}
+      className={extra_asi ? 'selectframe' : 'emptyselect'}
       id="racialasiselectframe"
     >
       {extra_asi && <p>+1 to Stats:</p>}

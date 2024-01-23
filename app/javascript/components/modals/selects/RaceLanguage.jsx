@@ -63,9 +63,7 @@ export default function RaceLanguage({ rlang, srlang, extracount }) {
 
   return (
     <div
-      className={
-        extracount > 0 ? 'grid grid-cols-3 p-2 gap-2' : 'h-0'
-      }
+      className={extracount > 0 ? 'selectframe' : 'emptyselect'}
       id="raciallanguageselectframe"
     >
       {extracount > 0 && <p>Extra Languages:</p>}
