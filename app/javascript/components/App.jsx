@@ -314,15 +314,29 @@ export default function App() {
 
   function handleClassFeatures(event) {
     let modalframe = document.getElementById('classfeatures');
-    //languages
+    let i = 0;
+
+    console.log('submit cfeatures');
+
+    //class skills
     let skillframe = document.getElementById('classskillselectframe');
     let takenskills = [];
-    let i = 0;
-    for (let item of langframe.children) {
-      if (i > 0) takenlangs.push(item.value);
+    i = 0;
+    for (let item of skillframe.children) {
+      if (i > 0) takenskills.push(item.value);
       i++;
     }
-    setClassSkills(takenskills);
+    let newprofs = proficiencies;
+    for (let val of takenskills) {
+      if (newprofs[val] == 0) newprofs[val]++;
+    }
+    console.log('old profs : ' + proficiencies);
+    setProficiencies(newprofs);
+
+    console.log('takenskills: ' + takenskills);
+    console.log('profs : ' + proficiencies);
+    console.log('newprofs :' + newprofs);
+    modalframe.close();
   }
 
   //Debug Methods

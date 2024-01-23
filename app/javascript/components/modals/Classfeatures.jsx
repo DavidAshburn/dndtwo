@@ -1,44 +1,5 @@
 import React, { useState } from 'react';
-
-function classSkillSelects(extra_skills, skill_list) {
-  if (!extra_skills || extra_skills < 1) return null;
-
-  let profnames = [
-    'Acrobatics',
-    'Animal Handling',
-    'Arcana',
-    'Athletics',
-    'Deception',
-    'History',
-    'Insight',
-    'Intimidation',
-    'Investigation',
-    'Medicine',
-    'Nature',
-    'Perception',
-    'Performance',
-    'Persuasion',
-    'Religion',
-    'Sleight of Hand',
-    'Stealth',
-    'Survival',
-  ];
-  let skill_map = skill_list.map((x) => [x, profnames.indexOf(x)]);
-
-  let select_boxes = [];
-  for (let i = 0; i < extra_skills; i++) {
-    select_boxes.push(
-      <select key={i} defaultValue={skill_map[i][1]}>
-        {skill_map.map((item, j) => (
-          <option value={item[1]} key={j}>
-            {item[0]}
-          </option>
-        ))}
-      </select>
-    );
-  }
-  return select_boxes;
-}
+import ClassSkills from './selects/ClassSkills';
 
 export default function Classfeatures({
   pclass,
@@ -52,13 +13,10 @@ export default function Classfeatures({
       id="classfeatures"
     >
       <div className="grid" id="cfmodalmain">
-        <div
-          className="grid grid-cols-3 p-2 gap-2"
-          id="classskillselectframe"
-        >
-          {pclass.num_skills > 0 ? <p>Class Skills:</p> : <></>}
-          {classSkillSelects(pclass.num_skills, pclass.skill_choices)}
-        </div>
+        <ClassSkills
+          num_skills={pclass.num_skills || 0}
+          skill_choices={pclass.skill_choices || []}
+        />
       </div>
       <button
         className="font-bold bg-white border-2 border-blue-600 rounded-md"
@@ -69,3 +27,6 @@ export default function Classfeatures({
     </dialog>
   );
 }
+
+//this is more involved than RaceSkills because theres a given array of skills to choose from
+//inside the PlayerClass along with a number the user may choose
