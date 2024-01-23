@@ -1,13 +1,5 @@
 import React from 'react';
 
-function sumArrays(arr) {
-  let first = arr.shift();
-
-  while (arr.length > 0) {
-    first = mergeArrays(first, arr.shift());
-  }
-  return first;
-}
 function subtractArrays(arr, arrtwo) {
   if (arr == null) return [];
   if (arrtwo == null) return arr;
@@ -15,11 +7,9 @@ function subtractArrays(arr, arrtwo) {
   return output;
 }
 
-export default function RaceTools({ toolchoices, toolsets }) {
-  let takentools = sumArrays(toolsets);
-
+export default function RaceTools({ toolchoices, takentools }) {
   function toolSelect() {
-    let options = subtractArrays(toolchoices, sumArrays(toolsets));
+    let options = subtractArrays(toolchoices, takentools);
 
     return (
       <select>
@@ -34,11 +24,13 @@ export default function RaceTools({ toolchoices, toolsets }) {
 
   return (
     <div
-      className={toolchoices ? 'grid grid-cols-3 p-2 gap-2' : 'h-0'}
+      className={
+        toolchoices.length > 0 ? 'grid grid-cols-3 p-2 gap-2' : 'h-0'
+      }
       id="racialtoolselectframe"
     >
-      {toolchoices && toolchoices.length > 0 && <p>Extra Tools:</p>}
-      {toolchoices && toolSelect()}
+      {toolchoices.length > 0 && <p>Extra Tools:</p>}
+      {toolchoices.length > 0 && toolSelect()}
     </div>
   );
 }

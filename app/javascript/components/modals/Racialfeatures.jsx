@@ -1,6 +1,8 @@
 import React from 'react';
 import RaceLanguage from './selects/RaceLanguage.jsx';
 import RaceTools from './selects/RaceTools.jsx';
+import RaceASI from './selects/RaceASI.jsx';
+import RaceSkills from './selects/RaceSkills.jsx';
 
 function mergeArrays(arr, arrtwo) {
   if (arr == null) return [];
@@ -15,7 +17,7 @@ function mergeArrays(arr, arrtwo) {
   }
   return Object.keys(obj);
 }
-
+// sums an array of arrays and eliminates duplicates
 function sumArrays(arr) {
   let first = arr.shift();
 
@@ -23,72 +25,6 @@ function sumArrays(arr) {
     first = mergeArrays(first, arr.shift());
   }
   return first;
-}
-
-function subtractArrays(arr, arrtwo) {
-  if (arr == null) return [];
-  if (arrtwo == null) return arr;
-  let output = arr.filter((x) => !arrtwo.includes(x));
-  return output;
-}
-
-function asiSelects(extra_asi) {
-  let statnames = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
-
-  let select_boxes = [];
-  for (let i = 0; i < extra_asi; i++) {
-    select_boxes.push(
-      <select key={i} defaultValue={i}>
-        {statnames.map((name, j) => (
-          <option value={j} key={j}>
-            {name}
-          </option>
-        ))}
-      </select>
-    );
-  }
-  return select_boxes;
-}
-
-function skillSelects(extra_skills) {
-  let profnames = [
-    'Acrobatics',
-    'Animal Handling',
-    'Arcana',
-    'Athletics',
-    'Deception',
-    'History',
-    'Insight',
-    'Intimidation',
-    'Investigation',
-    'Medicine',
-    'Nature',
-    'Perception',
-    'Performance',
-    'Persuasion',
-    'Religion',
-    'Sleight of Hand',
-    'Stealth',
-    'Survival',
-  ];
-
-  let select_boxes = [];
-  for (let i = 0; i < extra_skills; i++) {
-    select_boxes.push(
-      <select key={i}>
-        {profnames.map((name, j) => (
-          <option value={j} key={j}>
-            {name}
-          </option>
-        ))}
-      </select>
-    );
-  }
-  return select_boxes;
-}
-
-function debugFunc() {
-  console.log('debug');
 }
 
 export default function Racialfeatures({
@@ -99,15 +35,14 @@ export default function Racialfeatures({
   background,
   submitFunc,
 }) {
-  let toolsets = [
+  let takentools = sumArrays([
     race.tools,
     subrace.tools,
     pclass.tools,
     subclass.tools,
     background.tools,
-  ];
+  ]);
 
-  let takentools = sumArrays(toolsets);
   return (
     <dialog
       className="p-8 bg-gray-300 border border-black rounded-md"
@@ -120,24 +55,12 @@ export default function Racialfeatures({
           extracount={race.extra_languages + subrace.extra_languages}
         />
         <RaceTools
-          toolchoices={race.tool_choice}
-          toolsets={toolsets}
+          toolchoices={race.tool_choice || []}
+          takentools={takentools}
         />
 
-        <div
-          className="grid grid-cols-3 p-2 gap-2"
-          id="racialasiselectframe"
-        >
-          {race.extra_asi && <p>+1 to Stats:</p>}
-          {asiSelects(race.extra_asi)}
-        </div>
-        <div
-          className="grid grid-cols-3 p-2 gap-2"
-          id="racialskillselectframe"
-        >
-          {race.extra_skills && <p>Extra Skills:</p>}
-          {skillSelects(race.extra_skills)}
-        </div>
+        <RaceASI extra_asi={race.extra_asi} />
+        <RaceSkills extra_skills={race.extra_skills} />
       </div>
 
       <button
