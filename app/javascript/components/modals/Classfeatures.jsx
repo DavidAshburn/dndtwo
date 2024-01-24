@@ -20,6 +20,7 @@ export default function Classfeatures({
         />
         <ClassLeveledChoice
           choiceobject={subclass.leveled_choice}
+          label={subclass.name}
           level={level}
         />
       </div>
