@@ -152,7 +152,7 @@ export default function App() {
         setClassProficiencies([
           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         ]);
-      })
+      });
   }
   function loadSubclass(name) {
     fetch(`/subclasses/` + name)
@@ -331,9 +331,7 @@ export default function App() {
     console.log('submit cfeatures');
 
     //class skills
-    let skillframe = document.getElementById(
-      'classskillselectframe'
-    );
+    let skillframe = document.getElementById('classskillselectframe');
     let takenskills = [];
     i = 0;
     for (let item of skillframe.children) {
@@ -348,7 +346,6 @@ export default function App() {
     }
     setClassProficiencies(newprofs);
 
-    
     modalframe.close();
   }
 
@@ -358,7 +355,6 @@ export default function App() {
     fetch(`/subraces/index`)
       .then((response) => response.json())
       .then((data) => debugData(data));
-  
   }
 
   function debugData(data) {
@@ -566,10 +562,10 @@ export default function App() {
                     rasi[pname[1]] +
                     srasi[pname[1]]
                 )}
-                bprof = {proficiencies}
-                rprof = {raceproficiencies}
-                cprof = {classproficiencies}
-                bgprof = {bgproficiencies}
+                bprof={proficiencies}
+                rprof={raceproficiencies}
+                cprof={classproficiencies}
+                bgprof={bgproficiencies}
               />
             ))}
           </div>
@@ -783,6 +779,7 @@ export default function App() {
       <Classfeatures
         pclass={pclass}
         subclass={subclass}
+        f
         submitFunc={handleClassFeatures}
       />
     </section>
