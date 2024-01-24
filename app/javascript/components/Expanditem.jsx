@@ -15,7 +15,7 @@ export default function Expanditem({ feature, style }) {
         {split[0]}{' '}
       </p>
       <button
-        className="h-6 w-6 rounded-full flex items-center text-center bg-gray-100"
+        className="h-6 w-6 rounded-full text-center bg-blue-100"
         onClick={toggleText}
       >
         +

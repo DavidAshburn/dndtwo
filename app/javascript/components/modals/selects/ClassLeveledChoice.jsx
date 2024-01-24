@@ -16,16 +16,23 @@ export default function ClassLeveledChoice({
   return (
     <div>
       {levelkeys.length > 0 ? <p>{label}:</p> : <></>}
-      <div id="classleveledchoiceframe" className="grid bg-green-200">
+      <div
+        id="classleveledchoiceframe"
+        className="grid bg-green-200 gap-2"
+      >
         {levelkeys.map((levelkey, i) => (
-          <div key={i}>
+          <div
+            key={i}
+            className="bg-blue-200 border-blue-700 border-2"
+          >
+            <p>Level {levelkey}</p>
             {choiceobject[levelkey].map((feature, j) => (
               <div
                 key={j}
-                className="grid grid-cols-8 border border-black"
+                className="grid grid-cols-8 border-t border-black"
               >
                 <div className="flex items-center justify-center">
-                  <input type="radio" name={j} className="h-4" />
+                  <input type="radio" name={i} className="h-4" />
                 </div>
 
                 <Expanditem
