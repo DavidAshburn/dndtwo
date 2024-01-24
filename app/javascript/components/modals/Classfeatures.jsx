@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import ClassSkills from './selects/ClassSkills';
+import ClassLeveledChoice from './selects/ClassLeveledChoice';
 
 export default function Classfeatures({
   pclass,
   subclass,
+  level,
   submitFunc,
 }) {
   return (
@@ -15,6 +17,10 @@ export default function Classfeatures({
         <ClassSkills
           num_skills={pclass.num_skills || 0}
           skill_choices={pclass.skill_choices || []}
+        />
+        <ClassLeveledChoice
+          choiceobject={subclass.leveled_choice}
+          level={level}
         />
       </div>
       <button

@@ -351,18 +351,21 @@ export default function App() {
 
   //Debug Methods
   function runDebug(event) {
-    console.log('--    Debug    --');
-    fetch(`/subraces/index`)
+    console.log('--    Debug 2   --');
+    console.log(subclass.leveled_choice);
+    /*
+    fetch(`/player_classes/index`)
       .then((response) => response.json())
       .then((data) => debugData(data));
+      */
   }
 
   function debugData(data) {
     let customs = [];
     for (let dat of data) {
-      customs.push([dat.name, dat.skills]);
+      customs.push([dat.name, dat.leveled_choice]);
     }
-    console.log('subclass skills');
+    console.log('leveled choices');
     for (let item of customs) {
       console.log(item[0]);
       console.log(item[1]);
@@ -779,7 +782,7 @@ export default function App() {
       <Classfeatures
         pclass={pclass}
         subclass={subclass}
-        f
+        level={level}
         submitFunc={handleClassFeatures}
       />
     </section>

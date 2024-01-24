@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'labels/initPC'
   get 'races/index'
   get 'subraces/index'
-  get 'playerclasses/index'
+  get 'player_classes/index'
   get 'subclasses/index'
   get 'backgrounds/index'
 

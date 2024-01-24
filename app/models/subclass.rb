@@ -1,5 +1,5 @@
 class Subclass < ApplicationRecord
-  serialize :custom, Hash
+  serialize :leveled_choice, Hash
   serialize :features, Hash
   serialize :extra_spells, Hash
   serialize :specific_spells, Hash

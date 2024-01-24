@@ -1,5 +1,11 @@
 import React from 'react';
 
+function getCodeLetter(code) {
+  if (parseInt(code) == 1) return 'P';
+  if (parseInt(code) == 2) return 'E';
+  return '-';
+}
+
 export default function Profpane({
   name,
   index,
@@ -10,12 +16,6 @@ export default function Profpane({
   cprof,
   bgprof,
 }) {
-  function getCodeLetter(code) {
-    if (parseInt(code) == 1) return 'P';
-    if (parseInt(code) == 2) return 'E';
-    return '-';
-  }
-
   function calcProficiency() {
     let output = 0;
     let checkarray = [
@@ -30,12 +30,10 @@ export default function Profpane({
     }
     return output;
   }
-
   let proficiencybonus = calcProficiency();
   let bonus =
     parseInt(statmod) + parseInt(profmod) * proficiencybonus;
 
-  console.log('render profpane');
   return (
     <div className="grid grid-cols-[2rem_1fr_2rem] text-center items-center border border-green-600">
       <p>{bonus}</p>
