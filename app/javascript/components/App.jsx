@@ -8,6 +8,7 @@ import Collectstatics from './Collectstatics';
 import Racialfeatures from './modals/Racialfeatures';
 import Classfeatures from './modals/Classfeatures';
 import TestComponent from './TestComponent';
+import CollatedEquipment from './modals/CollatedEquipment';
 
 function getMod(stat) {
   return Math.floor(stat / 2) - 5;
@@ -60,6 +61,9 @@ export default function App() {
   let [extratools, setExtraTools] = useState([]);
   let [classskills, setClassSkills] = useState([]);
   let [classleveledchoices, setClassLeveledChoices] = useState([]);
+
+  //equipment choices
+  let [allequipment, setAllEquipment] = useState([]);
 
   //data resources-----------------------------------------------------//
   const statnames = [
@@ -270,6 +274,9 @@ export default function App() {
   function openClassFeatures() {
     document.getElementById('classfeatures').showModal();
   }
+  function openCollatedEquipment() {
+    document.getElementById('collatedequipment').showModal();
+  }
 
   //Modal Submit Handlers
   function handleRacialFeatures(event) {
@@ -324,12 +331,9 @@ export default function App() {
 
     modalframe.close();
   }
-
   function handleClassFeatures(event) {
     let modalframe = document.getElementById('classfeatures');
     let i = 0;
-
-    console.log('submit cfeatures');
 
     //class skills
     let skillframe = document.getElementById('classskillselectframe');
@@ -359,11 +363,17 @@ export default function App() {
 
     modalframe.close();
   }
+  function handleCollatedEquipment(event) {
+    let modalframe = document.getElementById('collatedequipment');
+
+    console.log('submit collated equipment');
+    modalframe.close();
+  }
 
   //Debug Methods
   function runDebug(event) {
     console.log('--    Debug 2   --');
-    console.log(subclass.leveled_choice);
+    console.log(pclass);
     /*
     fetch(`/player_classes/index`)
       .then((response) => response.json())
@@ -520,6 +530,13 @@ export default function App() {
               className="font-bold text-white bg-emerald-600"
             >
               Class Features
+            </button>
+            <button
+              type="button"
+              onClick={openCollatedEquipment}
+              className="font-bold text-white bg-emerald-600"
+            >
+              Equipment
             </button>
           </div>
         </div>
@@ -797,6 +814,7 @@ export default function App() {
         level={level}
         submitFunc={handleClassFeatures}
       />
+      <CollatedEquipment submitFunc={handleCollatedEquipment} />
     </section>
   );
 }
