@@ -32,7 +32,12 @@ export default function ClassLeveledChoice({
                 className="grid grid-cols-8 border-t border-black"
               >
                 <div className="flex items-center justify-center">
-                  <input type="radio" name={i} className="h-4" />
+                  <input
+                    type="radio"
+                    name={levelkey}
+                    className="h-4"
+                    data-return={feature}
+                  />
                 </div>
 
                 <Expanditem

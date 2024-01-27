@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import Expanditem from './Expanditem';
 
-export default function Features(props) {
+export default function Features({
+  race,
+  subrace,
+  pclass,
+  subclass,
+  background,
+  classleveledchoices,
+  level,
+}) {
   //class features only
   function getLeveledFeatures(features, level) {
     let levelfeats = [];
@@ -52,8 +60,8 @@ export default function Features(props) {
     <div className="grid gap-2 p-2 text-start">
       <p className="row-span-2 font-bold">Racial Features:</p>
       <div className="grid gap-2 pl-2">
-        {props.race.features &&
-          props.race.features.map((feat, i) => (
+        {race.features &&
+          race.features.map((feat, i) => (
             <Expanditem
               feature={feat}
               style="grid grid-cols-[6fr_1fr]"
@@ -63,8 +71,8 @@ export default function Features(props) {
       </div>
       <p className="row-span-2 font-bold">Subrace Features:</p>
       <div className="grid gap-2 pl-2">
-        {props.subrace.features &&
-          props.subrace.features.map((feat, i) => (
+        {subrace.features &&
+          subrace.features.map((feat, i) => (
             <Expanditem
               feature={feat}
               style="grid grid-cols-[6fr_1fr]"
@@ -74,8 +82,33 @@ export default function Features(props) {
       </div>
       <p className="row-span-2 font-bold">Class Features:</p>
       <div className="grid gap-2 pl-2">
-        {props.pclass.features &&
-          getLeveledFeatures(props.pclass.features, props.level).map(
+        {pclass.features &&
+          getLeveledFeatures(pclass.features, level).map(
+            (feat, i) => (
+              <Expanditem
+                feature={feat}
+                style="grid grid-cols-[6fr_1fr]"
+                key={i}
+              />
+            )
+          )}
+        {classleveledchoices &&
+          classleveledchoices.map((feat, i) => (
+            <Expanditem
+              feature={feat}
+              style="grid grid-cols-[6fr_1fr]"
+              key={i}
+            />
+          ))}
+      </div>
+      <div className="grid gap-2 pl-2">
+        {race.asi &&
+          getASI(race.asi).map((x, i) => <p key={i}>{x}</p>)}
+      </div>
+      <p className="row-span-2 font-bold">Subclass Features:</p>
+      <div className="grid gap-2 pl-2">
+        {subclass.features &&
+          getLeveledFeatures(subclass.features, level).map(
             (feat, i) => (
               <Expanditem
                 feature={feat}
@@ -85,28 +118,10 @@ export default function Features(props) {
             )
           )}
       </div>
-      <div className="grid gap-2 pl-2">
-        {props.race.asi &&
-          getASI(props.race.asi).map((x, i) => <p key={i}>{x}</p>)}
-      </div>
-      <p className="row-span-2 font-bold">Subclass Features:</p>
-      <div className="grid gap-2 pl-2">
-        {props.subclass.features &&
-          getLeveledFeatures(
-            props.subclass.features,
-            props.level
-          ).map((feat, i) => (
-            <Expanditem
-              feature={feat}
-              style="grid grid-cols-[6fr_1fr]"
-              key={i}
-            />
-          ))}
-      </div>
       <p className="row-span-2 font-bold">Background Features:</p>
       <div className="grid gap-2 pl-2">
-        {props.background.features &&
-          props.background.features.map((feat, i) => (
+        {background.features &&
+          background.features.map((feat, i) => (
             <Expanditem
               feature={feat}
               style="grid grid-cols-[6fr_1fr]"

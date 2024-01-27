@@ -59,6 +59,7 @@ export default function App() {
   let [extralanguages, setExtraLanguages] = useState([]);
   let [extratools, setExtraTools] = useState([]);
   let [classskills, setClassSkills] = useState([]);
+  let [classleveledchoices, setClassLeveledChoices] = useState([]);
 
   //data resources-----------------------------------------------------//
   const statnames = [
@@ -345,6 +346,16 @@ export default function App() {
       if (newprofs[val] == 0) newprofs[val]++;
     }
     setClassProficiencies(newprofs);
+
+    let leveledchoices = document
+      .getElementById('classleveledchoiceframe')
+      ?.getElementsByTagName('input');
+
+    let selectedchoices = [];
+    for (let input of leveledchoices) {
+      if (input.checked) selectedchoices.push(input.dataset.return);
+    }
+    setClassLeveledChoices(selectedchoices);
 
     modalframe.close();
   }
@@ -741,6 +752,7 @@ export default function App() {
             subclass={subclass}
             subrace={subrace}
             background={background}
+            classleveledchoices={classleveledchoices}
             level={level}
           />
         </div>
