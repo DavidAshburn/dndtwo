@@ -1759,7 +1759,7 @@ Fighter = PlayerClass.create(
     'choices'=> [
       ['Chain Mail#1',['Leather Armor#1','Longbow#1','Arrows#1']],
       [['martial#1','Round Shield#1'],'martial#2'],
-      [['Light Crossbow#1','Bolts#1'],'Handaxe#2'],
+      [['Light Crossbow#1','Bolts#10'],'Handaxe#2'],
       ['Dungeoneer\'s Pack#1','Explorer\'s Pack#1'],
     ],
     'default'=> [],
@@ -11745,6 +11745,7 @@ Tool.create(
 
 Tool.create(
   name: "Thief's Tools",
+  tool_tyoe: 'generic',
   cost_cp: 500,
   weight: 2,
 )
@@ -11757,13 +11758,11 @@ Tool.create(
 )
 Tool.create(
   name: "Forgery Kit",
-  tool_type: 'generic',
   cost_cp: 1500,
   weight: 5,
 )
 Tool.create(
   name: "Herbalism Kit",
-  tool_type: 'generic',
   cost_cp: 500,
   weight: 3,
 )

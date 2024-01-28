@@ -386,8 +386,18 @@ export default function App() {
   }
   function handleCollatedEquipment(event) {
     let modalframe = document.getElementById('collatedequipment');
+    let equipselects = document.getElementById(
+      'collatedequipmentselects'
+    );
+    let selects = equipselects.getElementsByTagName('select');
 
-    console.log('submit collated equipment');
+    console.log(selects);
+
+    let output = [];
+    for (let item of selects) {
+      output.push(item.value);
+    }
+    console.log(output);
     modalframe.close();
   }
 
