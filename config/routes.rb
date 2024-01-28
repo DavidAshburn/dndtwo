@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root 'home#index'
   get 'labels/dropdowns'
   get 'labels/initPC'
@@ -7,6 +8,8 @@ Rails.application.routes.draw do
   get 'player_classes/index'
   get 'subclasses/index'
   get 'backgrounds/index'
+  get 'datasets/spells'
+  get 'datasets/equipables'
 
   resources :characters
   resources :races, param: :name, only: [ :show ]

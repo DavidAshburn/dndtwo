@@ -29,6 +29,10 @@ export default function App() {
   let [subclassLabels, setSubclassLabels] = useState(null);
   let [subraceLabels, setSubraceLabels] = useState(null);
 
+  //preloaded data
+  let [equipables, setEquipables] = useState({});
+  let [allspells, setAllSpells] = useState([]);
+
   //set by stat methods
   let [stats, setStats] = useState([8, 8, 8, 8, 8, 8]);
   let [rasi, setRASI] = useState([0, 0, 0, 0, 0, 0]);
@@ -63,7 +67,9 @@ export default function App() {
   let [classleveledchoices, setClassLeveledChoices] = useState([]);
 
   //equipment choices
-  let [allequipment, setAllEquipment] = useState([]);
+  let [classequipment, setClassEquipment] = useState([]);
+  let [subclassequipment, setSubclassEquipment] = useState([]);
+  let [backgroundequipment, setBackgroundEquipment] = useState([]);
 
   //data resources-----------------------------------------------------//
   const statnames = [
@@ -126,9 +132,24 @@ export default function App() {
       initPC();
     }
 
+    function loadAllSpells(data) {
+      setAllSpells(data);
+    }
+    function loadEquipables(data) {
+      setEquipables(data);
+    }
+
     fetch(`/labels/dropdowns`)
       .then((response) => response.json())
       .then((data) => loadDropdownLabels(data));
+
+    fetch(`/datasets/equipables`)
+      .then((response) => response.json())
+      .then((data) => loadEquipables(data));
+
+    fetch(`/datasets/spells`)
+      .then((response) => response.json())
+      .then((data) => loadAllSpells(data));
   }, []);
 
   //once labels are pulled we initialize the character with load functions to capture modifications
@@ -814,7 +835,11 @@ export default function App() {
         level={level}
         submitFunc={handleClassFeatures}
       />
-      <CollatedEquipment submitFunc={handleCollatedEquipment} />
+      <CollatedEquipment
+        equipables={equipables}
+        cequip={pclass.equipment_choices}
+        submitFunc={handleCollatedEquipment}
+      />
     </section>
   );
 }
